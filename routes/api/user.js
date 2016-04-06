@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var User = models.User;
 var bcrypt = require('bcrypt-then');
-const saltRounds = 10;
 var passport = require('../../controller/passport');
 /*
 * /api/user
