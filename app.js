@@ -11,6 +11,8 @@ var routes = require('./routes/index');
 var user = require('./routes/api/user');
 
 var app = express();
+var passport = require('passport');
+var session = require('express-session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +25,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret : "alldoor",
+  resave : true,
+  saveUninitialized: true
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/api/user',user);

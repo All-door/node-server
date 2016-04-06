@@ -1,15 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../models/models.js').User;
+var User = models.User;
 var bcrypt = require('bcrypt-then');
 const saltRounds = 10;
-
+var passport = require('../../controller/passport');
 /*
 * /api/user
 */
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/',function(req, res, next) {
+  if(req.isAuthenticated()){
+    res.json({
+      "status" : 200,
+      "data" : req.user
+    }).status(200);
+  }else{
+    res.json({
+      "status" : 401,
+      "message" : "인증되지 않은 접근입니다"
+    }).status(401);
+  }
 });
 
 router.put('/',function(req, res, next) {
@@ -26,6 +36,7 @@ router.delete('/',function(req, res, next) {
 router.post('/signup',function(req, res, next) {
   var body = req.body;
   var email = body.email;
+
   if( !body.email || !body.name || !body.password){
     res.json({
       "status" : 400,
@@ -67,8 +78,29 @@ router.post('/signup',function(req, res, next) {
 /*
 * /api/user/login
 */
-router.post('/login',function(req, res, next) {
+router.post('/login',passport.authenticate('local'),function(req,res,next){
+  res.json({
+    "status" : 200,
+    "message" : "로그인에 성공했습니다."
+  }).status(200).end();
+});
 
+/*
+* /api/user/logout
+*/
+router.get('/logout',function(req,res,next){
+  if(req.isAuthenticated()){
+    req.logout();
+    res.json({
+      "status" : 200,
+      "message" : "로그아웃에 성공했습니다."
+    }).status(200).end();
+  }else{
+    res.json({
+      "status" : 401,
+      "message" : "인증되지 않은 접근입니다"
+    }).status(401);
+  }
 });
 
 /*
