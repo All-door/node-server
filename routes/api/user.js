@@ -40,7 +40,7 @@ router.post('/signup',function(req, res, next) {
   if( !body.email || !body.name || !body.password){
     res.json({
       "status" : 400,
-      "message" : "Error : 입력된 데이터를 확인해주세요."
+      "message" : "입력된 데이터를 확인해주세요."
     }).status(400).end();
     return;
   }
@@ -63,14 +63,14 @@ router.post('/signup',function(req, res, next) {
       throw new Error("회원가입에 실패했습니다");
     }else{
       res.json({
-        status : 200,
+        "status" : 200,
         "message" : "회원가입에 성공했습니다."
       }).status(200).end();
     }
   }).catch(function(err){
     res.json({
       "status" : 400,
-      "message" : err.toString()
+      "message" : err.message
     }).status(400).end();
   });
 });
