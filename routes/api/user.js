@@ -29,7 +29,21 @@ router.put('/',function(req, res, next) {
 });
 
 router.delete('/',function(req, res, next) {
-
+  User.CheckSession(req, function(result, user){
+    if(result == true){
+      User.RemoveUser(user.userid);
+      User.LogOut(req);
+      res.json({
+        "status" : 200,
+        "message" : "회원 탈퇴가 완료되었습니다."
+      }).status(200);
+    }else{
+      res.json({
+        "status" : 401,
+        "message" : "인증되지 않은 접근입니다."
+      }).status(401);
+    }
+  });
 });
 
 /*
@@ -65,7 +79,7 @@ router.post('/signup',function(req, res, next) {
 * /api/user/login
 */
 router.post('/login',passport.authenticate('local'),function(req,res,next){
-  User.ChangeLoginAt(req.user.userid, function(){});
+  User.ChangeLoginAt(req.user.userid);
   res.json({
     "status" : 200,
     "message" : "로그인에 성공했습니다."
