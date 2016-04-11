@@ -6,4 +6,7 @@ var models = {};
 var UserSchema = require('./user.js');
 models.User = mongoose.model('user',UserSchema);
 
+/* Room DB */
+var RoomSchema = require('./room.js');
+models.Room = mongoose.model('room',RoomSchema);
 module.exports = models;
