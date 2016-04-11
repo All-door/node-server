@@ -3,6 +3,8 @@ var User = models.User;
 
 module.exports = {
   'CheckSession' : function(req, callback){
+    callback = callback || function(){};
+
     if(req.isAuthenticated()){
       callback(true,req.user);
     }else{
@@ -11,6 +13,8 @@ module.exports = {
   },
 
   'SignUp' : function(name, email, password, callback){
+    callback = callback || function(){};
+
     //이메일 중복 확인
     User.findOne({ email : email }).then(function(doc){
       if( doc == null){
@@ -41,16 +45,30 @@ module.exports = {
   },
 
   'ChangeLoginAt' : function(userid, callback){
+    callback = callback || function(){};
+
     var now = new Date()
     User.update({ _id : userid }, { loginAt : now }, callback);
   },
 
   'LogOut' : function(req, callback){
+    callback = callback || function(){};
+
     if(req.isAuthenticated()){
       req.logout();
       callback(true);
     }else{
       callback(false);
     }
+  },
+
+  'UpdateUser' : function(password, callback){
+    callback = callback || function(){};
+
+  },
+
+  'RemoveUser' : function(userid, callback){
+    callback = callback || function(){};
+    User.update({ _id : userid }, { disable : true },callback);
   }
 };
