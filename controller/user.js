@@ -9,7 +9,7 @@ module.exports = {
       callback(false,null);
     }
   },
-  
+
   'SignUp' : function(name, email, password, callback){
     //이메일 중복 확인
     User.findOne({ email : email }).then(function(doc){
@@ -41,6 +41,8 @@ module.exports = {
   },
 
   'ChangeLoginAt' : function(userid, callback){
+    var now = new Date()
+    User.update({ _id : userid }, { loginAt : now }, callback);
   },
 
   'LogOut' : function(req, callback){

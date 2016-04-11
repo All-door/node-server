@@ -65,6 +65,7 @@ router.post('/signup',function(req, res, next) {
 * /api/user/login
 */
 router.post('/login',passport.authenticate('local'),function(req,res,next){
+  User.ChangeLoginAt(req.user.userid, function(){});
   res.json({
     "status" : 200,
     "message" : "로그인에 성공했습니다."
