@@ -7,7 +7,6 @@ passport.use(new LocalStrategy({
   usernameField : 'email',
   passwordField : 'password'
 },function(userid,password,done){
-
   var user = {};
   User.findOne({ email : userid }).then(function(doc){
     if( doc == null){
@@ -30,13 +29,10 @@ passport.use(new LocalStrategy({
 }));
 
 passport.serializeUser(function(user, done) {
-    console.log("serializeUser");
-    console.log(user);
     done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-    console.log("deserializeUser");
     done(null, user);
 });
 
