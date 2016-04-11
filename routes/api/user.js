@@ -114,7 +114,8 @@ router.post('/login',passport.authenticate('local'),function(req,res,next){
   User.ChangeLoginAt(req.user.userid);
   res.json({
     "status" : 200,
-    "message" : "로그인에 성공했습니다."
+    "message" : "로그인에 성공했습니다.",
+    "user" : req.user
   }).status(200).end();
 });
 
