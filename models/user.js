@@ -12,7 +12,8 @@ var UserSchema = mongoose.Schema({
   facebook_token : String,
   isAdmin : Boolean,
   isSupply : Boolean,
-  favorite_rooms : Array
+  favorite_rooms : Array,
+  disable : { type : Boolean, default : false }
 });
 
 module.exports = UserSchema;
