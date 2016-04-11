@@ -25,7 +25,39 @@ router.get('/',function(req, res, next) {
 });
 
 router.put('/',function(req, res, next) {
+  if( !req.body.origin_password || !req.body.change_password){
+    res.json({
+      "status" : 400,
+      "message" : "입력된 데이터를 확인해주세요."
+    }).status(400).end();
+    return;
+  }
 
+  User.CheckSession(req, function(result, user){
+    if(result == true){
+      var origin_password = req.body.origin_password;
+      var change_password = req.body.change_password;
+      User.ChangeUserPassword(req.user.userid,origin_password,change_password,function(err, doc){
+        if(err){
+          res.json({
+            "status" : 400,
+            "message" : err
+          }).status(400);
+        }else{
+          res.json({
+            "status" : 200,
+            "message" : "비밀번호 변경이 완료되었습니다."
+          }).status(200);
+        }
+      });
+
+    }else{
+      res.json({
+        "status" : 401,
+        "message" : "인증되지 않은 접근입니다."
+      }).status(401);
+    }
+  });
 });
 
 router.delete('/',function(req, res, next) {

@@ -51,6 +51,13 @@ module.exports = {
     User.update({ _id : userid }, { loginAt : now }, callback);
   },
 
+  'ChangeUpdateAt' : function(userid, callback){
+    callback = callback || function(){};
+
+    var now = new Date()
+    User.update({ _id : userid }, { updatedAt : now }, callback);
+  },
+
   'LogOut' : function(req, callback){
     callback = callback || function(){};
 
@@ -62,9 +69,25 @@ module.exports = {
     }
   },
 
-  'UpdateUser' : function(password, callback){
+  'ChangeUserPassword' : function(userid, origin_password, change_password, callback){
     callback = callback || function(){};
 
+    this.ChangeUpdateAt(userid);
+    User.findOne({ _id : userid, disable : false }).then(function(doc){
+      return bcrypt.compare(origin_password, doc.password);
+    }).then(function(result){
+      if(result == true){
+        return bcrypt.hash(change_password, 10);
+      }else{
+        throw new Error("잘못된 암호입니다.")
+      }
+    }).then(function(password_token){
+      return User.update({ _id : userid }, { password : password_token });
+    }).then(function(doc){
+      callback(null, doc);
+    }).catch(function(err) {
+      callback(err.message, false);
+    });
   },
 
   'RemoveUser' : function(userid, callback){
