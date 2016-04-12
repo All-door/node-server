@@ -1,8 +1,39 @@
 var Room = models.Room;
 
 module.exports = {
-  'InsertRoom' : function(callback){
+  'InsertRoom' : function(room,callback){
     callback = callback || function(){};
+
+    if(!room.title || !room.detail || !room.type
+    || !room.tag || !room.day_enable){
+      callback("데이터 정보를 확인해주세요",null);
+      return;
+    }
+
+    if( room.type != '숙박' &&
+    (!room.enable_start_time || !room.enable_end_time)){
+      callback("가능한 시작시간과 종료시간을 입력주세요",null);
+      return;
+    }
+    var room = new Room({
+      user_id : room.user_id,
+      device_id : room.device_id,
+      title : room.title,
+      detail : room.detail,
+      type : room.type,
+      tag : room.tag,
+      day_enable : room.day_enable || ['월','화','수','목','금','토','일'],
+      enable_start_time : room.enable_start_time || "00:00",
+      enable_end_time : room.enable_end_time || "00:00"
+    });
+
+    room.save(function(err,doc){
+      if(err){
+        callback(err.message,null);
+      }else{
+        callback(null,doc);
+      }
+    });
   },
   'UpdateRoom' : function(callback) {
     callback = callback || function(){};
@@ -13,7 +44,7 @@ module.exports = {
   'GetRooms' : function(offset,limit,callback){
     callback = callback || function(){};
   },
-  'GetRoomsByUserId' : function(callback){
+  'GetRoomsByUserId' : function(userid, callback){
     callback = callback || function(){};
   },
   'GetRoomByRoomId' : function(callback){
