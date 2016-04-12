@@ -15,7 +15,7 @@ var RoomSchema = mongoose.Schema({
   detail : { type : String, required : [ true , "세부사항 정보가 필요합니다."]},
   type : { type : String, enum : ['숙박','회의실','공부방','창고','강당']},
   tag : { type : String, enum : ['선릉역','신림역','길음역','강남역','역삼역','왕십리역']},
-  address : { type : String, required : [ true , "주소 정보가 필요합니다."]},
+/*  address : { type : String, required : [ true , "주소 정보가 필요합니다."]}, */
   room_images : Array,
   day_enable : [{ type : String, enum : ['월','화','수','목','금','토','일']}],
   enable_start_time : { type : String, validate : {
