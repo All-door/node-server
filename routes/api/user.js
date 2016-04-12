@@ -138,20 +138,6 @@ router.get('/logout',function(req,res,next){
   });
 });
 
-/*
-* /api/user/favorites
-*/
 
-router.get('/favorites',function(req, res, next) {
-
-});
-
-router.post('/favorites',function(req, res, next) {
-
-});
-
-router.delete('/favorites',function(req, res, next) {
-
-});
 
 module.exports = router;

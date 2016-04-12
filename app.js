@@ -9,6 +9,10 @@ global.models = require('./models/models.js');
 
 var routes = require('./routes/index');
 var user = require('./routes/api/user');
+var user_room = require('./routes/api/user/room');
+var user_favorites = require('./routes/api/user/favorites');
+
+var room = require('./routes/api/room');
 
 var app = express();
 var passport = require('passport');
@@ -36,6 +40,10 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/api/user',user);
+app.use('/api/user/favorites',user_favorites);
+app.use('/api/user/room',user_room);
+
+app.use('/api/room',user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
