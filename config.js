@@ -1,5 +1,6 @@
 var config = {
-  MongoDB : 'mongodb://localhost/alldoor'
+  MongoDB : 'mongodb://localhost/alldoor',
+  ImagePath : '/tmp'
 };
 
 module.exports = config;
