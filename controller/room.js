@@ -68,18 +68,20 @@ module.exports = {
     callback = callback || function(){};
     Room.findOneAndUpdate({ _id : room_id },{ $inc : { view_count : 1 }},callback);
   },
-  'GetRoomsByTag' : function(tag,offset,limit,callback){
+  'GetRoomsByTag' : function(tag,offset,limit,sort,callback){
     callback = callback || function(){};
     offset = offset || 0;
     limit = limit || 30;
-    Room.find({ tag : tag }).skip(offset).limit(limit)
+    sort = sort || {};
+    Room.find({ tag : tag }).sort(sort).skip(offset).limit(limit)
         .exec(callback);
   },
-  'GetRoomsByType' : function(type,offset,limit,callback) {
+  'GetRoomsByType' : function(type,offset,limit,sort,callback) {
     callback = callback || function(){};
     offset = offset || 0;
     limit = limit || 30;
-    Room.find({ type : type }).skip(offset).limit(limit)
+    sort = sort || {};
+    Room.find({ type : type }).sort(sort).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomsByView' : function(offset,limit,callback){
@@ -89,14 +91,19 @@ module.exports = {
     Room.find({}).sort({ view_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
   },
-  'GetRoomsByReservation' : function(callback){
+  'GetRoomsByReservation' : function(offset,limit,callback){
     callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+    Room.find({}).sort({ reservation_count : -1 }).skip(offset).limit(limit)
+        .exec(callback);
   },
-  'GetRoomsByFavorite' : function(callback){
+  'GetRoomsByFavorite' : function(offset,limit,callback){
     callback = callback || function(){};
-  },
-  'IncrementView' : function(callback){
-    callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+    Room.find({}).sort({ favorite_count : -1 }).skip(offset).limit(limit)
+        .exec(callback);
   },
   'IncrementFavorites' : function(callback){
     callback = callback || function(){};
