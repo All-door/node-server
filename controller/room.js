@@ -62,5 +62,14 @@ module.exports = {
   },
   'GetRoomsByFavorite' : function(callback){
     callback = callback || function(){};
+  },
+  'IncrementView' : function(callback){
+    callback = callback || function(){};
+  },
+  'IncrementFavorites' : function(callback){
+    callback = callback || function(){};
+  },
+  'DecrementFavorites' : function(callback){
+    callback = callback || function(){};
   }
 };
