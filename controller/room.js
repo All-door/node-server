@@ -66,7 +66,7 @@ module.exports = {
   },
   'GetRoomByRoomId' : function(room_id,callback){
     callback = callback || function(){};
-    Room.findOne({ _id : room_id }, callback);
+    Room.findOneAndUpdate({ _id : room_id },{ $inc : { view_count : 1 }},callback);
   },
   'GetRoomsByTag' : function(tag,offset,limit,callback){
     callback = callback || function(){};
@@ -82,8 +82,12 @@ module.exports = {
     Room.find({ type : type }).skip(offset).limit(limit)
         .exec(callback);
   },
-  'GetRoomsByView' : function(callback){
+  'GetRoomsByView' : function(offset,limit,callback){
     callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+    Room.find({}).sort({ view_count : -1 }).skip(offset).limit(limit)
+        .exec(callback);
   },
   'GetRoomsByReservation' : function(callback){
     callback = callback || function(){};

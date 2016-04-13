@@ -69,4 +69,19 @@ router.get('/type/:type', function(req,res,next){
   });
 });
 
+router.get('/sort/view', function(req,res,next){
+  Room.GetRoomsByView(req.query.offset,req.query.limit,function(err,doc){
+    if(err){
+      res.json({
+        "status" : 500,
+        "message" : err
+      }).status(500);
+    }else{
+      res.json({
+        "status" : 200,
+        "data" : doc
+      }).status(200);
+    }
+  });
+});
 module.exports = router;
