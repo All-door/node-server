@@ -51,6 +51,11 @@ module.exports = {
   },
   'GetRooms' : function(offset,limit,callback){
     callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+
+    Room.find({}).skip(offset).limit(limit)
+        .exec(callback);
   },
   'GetRoomsByUserId' : function(user_id,offset,limit, callback){
     callback = callback || function(){};
@@ -63,8 +68,12 @@ module.exports = {
     callback = callback || function(){};
     Room.findOne({ _id : room_id }, callback);
   },
-  'GetRoomsByTag' : function(callback){
+  'GetRoomsByTag' : function(tag,offset,limit,callback){
     callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+    Room.find({ tag : tag }).skip(offset).limit(limit)
+        .exec(callback);
   },
   'GetRoomsByView' : function(callback){
     callback = callback || function(){};
@@ -75,7 +84,7 @@ module.exports = {
   'GetRoomsByFavorite' : function(callback){
     callback = callback || function(){};
   },
-  'IncrementView' : function(callback){
+  'IncrementView' : function(callback){q
     callback = callback || function(){};
   },
   'IncrementFavorites' : function(callback){
