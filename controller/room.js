@@ -75,6 +75,13 @@ module.exports = {
     Room.find({ tag : tag }).skip(offset).limit(limit)
         .exec(callback);
   },
+  'GetRoomsByType' : function(type,offset,limit,callback) {
+    callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+    Room.find({ type : type }).skip(offset).limit(limit)
+        .exec(callback);
+  },
   'GetRoomsByView' : function(callback){
     callback = callback || function(){};
   },

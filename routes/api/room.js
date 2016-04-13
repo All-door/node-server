@@ -52,4 +52,21 @@ router.get('/tag/:tag', function(req,res,next){
   });
 });
 
+router.get('/type/:type', function(req,res,next){
+  var type = req.params.type;
+  Room.GetRoomsByType(type,req.query.offset,req.query.limit,function(err,doc){
+    if(err){
+      res.json({
+        "status" : 500,
+        "message" : err
+      }).status(500);
+    }else{
+      res.json({
+        "status" : 200,
+        "data" : doc
+      }).status(200);
+    }
+  });
+});
+
 module.exports = router;
