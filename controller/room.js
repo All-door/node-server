@@ -95,7 +95,7 @@ module.exports = {
   'GetRoomsByFavorite' : function(callback){
     callback = callback || function(){};
   },
-  'IncrementView' : function(callback){q
+  'IncrementView' : function(callback){
     callback = callback || function(){};
   },
   'IncrementFavorites' : function(callback){
