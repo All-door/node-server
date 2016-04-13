@@ -24,12 +24,13 @@ module.exports = {
       tag : room.tag,
       day_enable : room.day_enable || ['월','화','수','목','금','토','일'],
       enable_start_time : room.enable_start_time || "00:00",
-      enable_end_time : room.enable_end_time || "00:00"
+      enable_end_time : room.enable_end_time || "00:00",
+      room_images : room.room_images
     });
 
     room.save(function(err,doc){
       if(err){
-        callback(err.message,null);
+        callback(err.errors,null);
       }else{
         callback(null,doc);
       }

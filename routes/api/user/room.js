@@ -4,12 +4,14 @@ var Room = require('../../../controller/room');
 var User = require('../../../controller/user');
 var config = require('../../../config');
 var multer = require('multer');
+var shortid = require('shortid');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, config.ImagePath)
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, file.fieldname + '-'+ shortid() + '-' + Date.now())
   }
 });
 var upload = multer({ storage : storage });
@@ -23,15 +25,20 @@ router.get('/',function(req, res, next) {
 });
 
 router.post('/',upload.array('room_image', 5),function(req, res, next) {
-  console.log(req.files);
+  var files = [];
+  for(var i=0; i< req.files.length;i++){
+    files.push(req.files[i].filename);
+  }
+
   User.CheckSession(req,function(result, user){
     if(result == true){
       if(!req.body.title || !req.body.detail || !req.body.type ||
-      !req.body.tag || !req.body.day_enable){
+      !req.body.tag || !req.body.day_enable || !files.length){
         res.json({
           "status" : 400,
           "message" : "입력 데이터를 확인해주세요"
         }).status(400);
+        return;
       }
       var room = {
         user_id : user.userid,
@@ -40,20 +47,19 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
         detail : req.body.detail,
         type : req.body.type,
         tag : req.body.tag,
-        day_enable : JSON.parse(req.body.day_enable)
+        day_enable : JSON.parse(req.body.day_enable),
+        enable_start_time : req.body.enable_start_time,
+        enable_end_time : req.body.enable_end_time,
+        room_images : files
       };
-
-      console.log(room);
 
       Room.InsertRoom(room,function(err,doc) {
         if(err){
-          console.log(err);
           res.json({
             "status" : 400,
             "message" : err
           }).status(400);
         }else{
-          console.log(doc);
           res.json({
             "status" : 200,
             "message" : "공간 등록이 완료되었습니다"
@@ -66,6 +72,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
         "status" : 401,
         "message" : "인증되지 않은 접근입니다."
       }).status(401);
+      return;
     }
   });
 });
