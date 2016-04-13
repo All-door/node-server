@@ -59,8 +59,9 @@ module.exports = {
     Room.find({ user_id : user_id }).skip(offset).limit(limit)
         .exec(callback);
   },
-  'GetRoomByRoomId' : function(callback){
+  'GetRoomByRoomId' : function(room_id,callback){
     callback = callback || function(){};
+    Room.findOne({ _id : room_id }, callback);
   },
   'GetRoomsByTag' : function(callback){
     callback = callback || function(){};

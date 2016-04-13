@@ -43,7 +43,7 @@ app.use('/api/user',user);
 app.use('/api/user/favorites',user_favorites);
 app.use('/api/user/room',user_room);
 
-app.use('/api/room',user);
+app.use('/api/room',room);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
