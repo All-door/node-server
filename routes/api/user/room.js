@@ -10,7 +10,29 @@ var upload = require('../../../controller/multer')
 */
 
 router.get('/',function(req, res, next) {
-  res.send("room");
+  User.CheckSession(req, function(result,user){
+    if(result == true){
+      Room.GetRoomsByUserId(user.userid,req.query.offset,req.query.limit,function(err,docs) {
+        if(err){
+          res.json({
+            "status" : 500,
+            "message" : err
+          }).status(500);
+        }else{
+          res.json({
+            "status": 200,
+            "data" : docs
+          }).status(200);
+        }
+      });
+    }else{
+      res.json({
+        "status" : 401,
+        "message" : "인증되지 않은 접근입니다."
+      }).status(401);
+      return;
+    }
+  });
 });
 
 router.post('/',upload.array('room_image', 5),function(req, res, next) {

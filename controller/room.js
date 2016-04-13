@@ -52,8 +52,12 @@ module.exports = {
   'GetRooms' : function(offset,limit,callback){
     callback = callback || function(){};
   },
-  'GetRoomsByUserId' : function(userid, callback){
+  'GetRoomsByUserId' : function(user_id,offset,limit, callback){
     callback = callback || function(){};
+    offset = offset || 0;
+    limit = limit || 30;
+    Room.find({ user_id : user_id }).skip(offset).limit(limit)
+        .exec(callback);
   },
   'GetRoomByRoomId' : function(callback){
     callback = callback || function(){};
