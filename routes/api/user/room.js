@@ -5,7 +5,6 @@ var User = require('../../../controller/user');
 var config = require('../../../config');
 var multer = require('multer');
 var shortid = require('shortid');
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, config.ImagePath)
@@ -32,14 +31,21 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
 
   User.CheckSession(req,function(result, user){
     if(result == true){
+      var day_enable;
+      try {
+        day_enable = JSON.parse(req.body.day_enable);
+      } catch (e) {
+
+      }
       if(!req.body.title || !req.body.detail || !req.body.type ||
-      !req.body.tag || !req.body.day_enable || !files.length){
+      !req.body.tag || !req.body.day_enable || !files.length || !Array.isArray(day_enable)){
         res.json({
           "status" : 400,
           "message" : "입력 데이터를 확인해주세요"
         }).status(400);
         return;
       }
+
       var room = {
         user_id : user.userid,
         device_id : req.body.device_id,
@@ -47,7 +53,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
         detail : req.body.detail,
         type : req.body.type,
         tag : req.body.tag,
-        day_enable : JSON.parse(req.body.day_enable),
+        day_enable : day_enable,
         enable_start_time : req.body.enable_start_time,
         enable_end_time : req.body.enable_end_time,
         room_images : files
