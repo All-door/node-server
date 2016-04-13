@@ -3,17 +3,7 @@ var router = express.Router();
 var Room = require('../../../controller/room');
 var User = require('../../../controller/user');
 var config = require('../../../config');
-var multer = require('multer');
-var shortid = require('shortid');
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, config.ImagePath)
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-'+ shortid() + '-' + Date.now())
-  }
-});
-var upload = multer({ storage : storage });
+var upload = require('../../../controller/multer')
 
 /*
 * /api/user/room
