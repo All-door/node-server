@@ -104,10 +104,12 @@ module.exports = {
     Room.find({}).sort({ favorite_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
   },
-  'IncrementFavorites' : function(callback){
+  'IncrementFavorites' : function(room_id, callback){
     callback = callback || function(){};
+    Room.findOneAndUpdate({ _id : room_id },{ $inc : { favorite_count : 1 }},callback);
   },
-  'DecrementFavorites' : function(callback){
+  'DecrementFavorites' : function(room_id, callback){
     callback = callback || function(){};
+    Room.findOneAndUpdate({ _id : room_id },{ $dec : { favorite_count : 1 }},callback);
   }
 };
