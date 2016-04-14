@@ -1,48 +1,46 @@
 var Room = models.Room;
+var enumType = ['숙박','회의실','공부방','창고','강당'];
+var enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
 
 module.exports = {
-  'InsertRoom' : function(room,callback){
-    var _room = room;
+  'InsertRoom' : function(user_id, device_id, title, detail, type, tag, day_enable, enable_start_time, enable_end_time, room_images, address,callback){
     callback = callback || function(){};
 
-    if(!room.title || !room.detail || !room.type
-    || !room.tag || !room.day_enable){
-      callback("데이터 정보를 확인해주세요",null);
+    if( !user_id || !device_id || !title || !detail || !type || !tag || !room_images || !address || enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
+      callback("데이터 정보를 확인해주세요.",null);
+      return;
+    }
+    if( type == '숙박' ){
+       day_enable = ['월','화','수','목','금','토','일'];
+       enable_start_time = "00:00";
+       enable_end_time = "00:00";
+    }
+
+    if( type != '숙박' && ( !day_enable || !enable_start_time || !enable_end_time || enable_start_time > enable_end_time)){
+      callback("데이터 정보를 확인해주세요.",null);
       return;
     }
 
-    if( room.type != '숙박' &&
-    (!room.enable_start_time || !room.enable_end_time)){
-      callback("가능한 시작시간과 종료시간을 입력주세요",null);
-      return;
-    }
-    Room.findOne({ device_id : room.device_id },function(err,doc){
+    Room.findOne({ device_id : device_id}).then(function(doc){
       if(doc == null){
-        var data = new Room({
-          user_id : _room.user_id,
-          device_id : _room.device_id,
-          title : _room.title,
-          detail : _room.detail,
-          type : _room.type,
-          tag : _room.tag,
-          day_enable : _room.day_enable || ['월','화','수','목','금','토','일'],
-          enable_start_time : _room.enable_start_time || "00:00",
-          enable_end_time : _room.enable_end_time || "00:00",
-          room_images : _room.room_images,
-          address : _room.address
-        });
-
-        data.save(function(err,doc){
-          if(err){
-            callback(err.errors,null);
-          }else{
+        return new Room({
+          user_id : user_id,
+          device_id : device_id,
+          title : title,
+          detail : detail,
+          type : type,
+          tag : tag,
+          day_enable : day_enable,
+          enable_start_time : enable_start_time,
+          enable_end_time : enable_end_time,
+          room_images : room_images,
+          address : address}).save().then(function(doc){
             callback(null,doc);
-          }
-        });
+          });
       }else{
-        callback("이미 등록된 디바이스입니다.",null);
+        callback("중복된 디바이스 아이디 입니다.",null);
       }
-    });
+    })
   },
   'UpdateRoom' : function(callback) {
     callback = callback || function(){};

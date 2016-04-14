@@ -36,43 +36,30 @@ router.get('/',function(req, res, next) {
 });
 
 router.post('/',upload.array('room_image', 5),function(req, res, next) {
-  var files = [];
+  var room_images = [];
   for(var i=0; i< req.files.length;i++){
-    files.push(req.files[i].filename);
+    room_images.push(req.files[i].filename);
   }
 
   User.CheckSession(req,function(result, user){
     if(result == true){
+      var user_id = req.body.user_id;
+      var device_id = req.body.device_id;
+      var title = req.body.title;
+      var detail = req.body.detail;
+      var type = req.body.type;
+      var tag = req.body.tag;
       var day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);
       } catch (e) {
 
       }
-      if(!req.body.title || !req.body.detail || !req.body.type ||
-      !req.body.tag || !req.body.day_enable || !files.length || !Array.isArray(day_enable) || !req.body.address){
-        res.json({
-          "status" : 400,
-          "message" : "입력 데이터를 확인해주세요"
-        }).status(400);
-        return;
-      }
+      var enable_start_time = req.body.enable_start_time;
+      var enable_end_time = req.body.enable_end_time;
+      var address = req.body.address;
 
-      var room = {
-        user_id : user.userid,
-        device_id : req.body.device_id,
-        title : req.body.title,
-        detail : req.body.detail,
-        type : req.body.type,
-        tag : req.body.tag,
-        day_enable : day_enable,
-        enable_start_time : req.body.enable_start_time,
-        enable_end_time : req.body.enable_end_time,
-        room_images : files,
-        address : req.body.address
-      };
-
-      Room.InsertRoom(room,function(err,doc) {
+      Room.InsertRoom(user.userid, device_id, title, detail, type, tag, day_enable, enable_start_time, enable_end_time, room_images, address,function(err,doc) {
         if(err){
           res.json({
             "status" : 400,
