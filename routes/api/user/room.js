@@ -50,7 +50,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
 
       }
       if(!req.body.title || !req.body.detail || !req.body.type ||
-      !req.body.tag || !req.body.day_enable || !files.length || !Array.isArray(day_enable)){
+      !req.body.tag || !req.body.day_enable || !files.length || !Array.isArray(day_enable) || !req.body.address){
         res.json({
           "status" : 400,
           "message" : "입력 데이터를 확인해주세요"
@@ -68,7 +68,8 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
         day_enable : day_enable,
         enable_start_time : req.body.enable_start_time,
         enable_end_time : req.body.enable_end_time,
-        room_images : files
+        room_images : files,
+        address : req.body.address
       };
 
       Room.InsertRoom(room,function(err,doc) {

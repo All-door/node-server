@@ -34,7 +34,7 @@ var RoomSchema = mongoose.Schema({
     validator : TagValidator,
     message : '태그 정보가 잘못되었습니다.'
   }},
-/*  address : { type : String, required : [ true , "주소 정보가 필요합니다."]}, */
+  address : { type : String, required : [ true , "주소 정보가 필요합니다."]},
   room_images : Array,
   day_enable : [{ type : String, enum : ['월','화','수','목','금','토','일']}],
   enable_start_time : { type : String, validate : {

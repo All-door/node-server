@@ -28,7 +28,8 @@ module.exports = {
           day_enable : _room.day_enable || ['월','화','수','목','금','토','일'],
           enable_start_time : _room.enable_start_time || "00:00",
           enable_end_time : _room.enable_end_time || "00:00",
-          room_images : _room.room_images
+          room_images : _room.room_images,
+          address : _room.address
         });
 
         data.save(function(err,doc){
