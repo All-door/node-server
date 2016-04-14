@@ -3,8 +3,19 @@ var enumType = ['숙박','회의실','공부방','창고','강당'];
 var enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
 
 module.exports = {
-  'InsertRoom' : function(user_id, device_id, title, detail, type, tag, day_enable, enable_start_time, enable_end_time, room_images, address,callback){
+  'InsertRoom' : function(room, callback){
     callback = callback || function(){};
+    var user_id = room.user_id;
+    var device_id = room.device_id;
+    var title = room.title;
+    var detail = room.detail;
+    var type = room.type;
+    var tag = room.tag;
+    var day_enable = room.day_enable;
+    var enable_start_time = room.enable_start_time;
+    var enable_end_time = room.enable_end_time;
+    var room_images = room.room_images;
+    var address = room.address;
 
     if( !user_id || !device_id || !title || !detail || !type || !tag || !room_images || !address || enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
       callback("데이터 정보를 확인해주세요.",null);

@@ -43,7 +43,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
 
   User.CheckSession(req,function(result, user){
     if(result == true){
-      var user_id = req.body.user_id;
+      var user_id = user.userid;
       var device_id = req.body.device_id;
       var title = req.body.title;
       var detail = req.body.detail;
@@ -59,7 +59,21 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
       var enable_end_time = req.body.enable_end_time;
       var address = req.body.address;
 
-      Room.InsertRoom(user.userid, device_id, title, detail, type, tag, day_enable, enable_start_time, enable_end_time, room_images, address,function(err,doc) {
+      var room = {
+        user_id : user_id,
+        device_id : device_id,
+        title : title,
+        detail : detail,
+        type : type,
+        tag : tag,
+        day_enable : day_enable,
+        enable_start_time : enable_start_time,
+        enable_end_time : enable_end_time,
+        room_images : room_images,
+        address : address
+      };
+
+      Room.InsertRoom(room,function(err,doc) {
         if(err){
           res.json({
             "status" : 400,
