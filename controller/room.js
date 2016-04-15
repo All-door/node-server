@@ -53,11 +53,42 @@ module.exports = {
       }
     })
   },
-  'UpdateRoom' : function(callback) {
+  'UpdateRoom' : function(room, callback) {
     callback = callback || function(){};
+    var room_id = room.room_id;
+    var user_id = room.user_id;
+    var device_id = room.device_id;
+    var title = room.title;
+    var detail = room.detail;
+    var type = room.type;
+    var tag = room.tag;
+    var day_enable = room.day_enable;
+    var enable_start_time = room.enable_start_time;
+    var enable_end_time = room.enable_end_time;
+    var room_images = room.room_images;
+    var address = room.address;
+
+    if( !room_id, !user_id){
+      callback("데이터 정보를 확인해주세요",null);
+      return;
+    }
+
+    Room.update({ _id : room_id },{
+      device_id : device_id,
+      title : title,
+      detail : detail,
+      type : type,
+      tag : tag,
+      day_enable : day_enable,
+      enable_start_time : enable_start_time,
+      enable_end_time : enable_end_time,
+      room_images : room_images,
+      address : address
+    },callback);
   },
-  'RemoveRoom' : function(callback) {
+  'RemoveRoom' : function(room_id, callback) {
     callback = callback || function(){};
+    Room.find({ _id : room_id }).remove().exec(callback);
   },
   'GetRooms' : function(offset,limit,callback){
     callback = callback || function(){};
