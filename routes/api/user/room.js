@@ -97,7 +97,80 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
   });
 });
 
-router.put('/',function(req, res, next) {
+router.put('/',upload.array('add_image', 5),function(req, res, next) {
+  var add_image = [];
+  for(var i=0; i< req.files.length;i++){
+    add_image.push(req.files[i].filename);
+  }
+
+  User.CheckSession(req,function(result, user){
+    if(result == true){
+      var user_id = user.userid;
+      var room_id = req.body.room_id;
+      var device_id = req.body.device_id;
+      var title = req.body.title;
+      var detail = req.body.detail;
+      var type = req.body.type;
+      var tag = req.body.tag;
+      var day_enable;
+      try {
+        day_enable = JSON.parse(req.body.day_enable);
+      } catch (e) {
+      }
+      var enable_start_time = req.body.enable_start_time;
+      var enable_end_time = req.body.enable_end_time;
+      var address = req.body.address;
+      var add_images = add_image;
+      var delete_images;
+      try{
+        delete_images = JSON.parse(req.body.delete_images);
+      }catch(e){
+      }
+      var room = {
+        user_id : user_id,
+        room_id : room_id,
+        device_id : device_id,
+        title : title,
+        detail : detail,
+        type : type,
+        tag : tag,
+        day_enable : day_enable,
+        enable_start_time : enable_start_time,
+        enable_end_time : enable_end_time,
+        add_images : add_image,
+        delete_images : delete_images,
+        address : address
+      };
+
+      Room.UpdateRoom(room,function(err,doc){
+        if(err){
+          res.json({
+            "status" : 400,
+            "message" : err.message
+          }).status(400);
+        }else{
+          res.json({
+            "status" : 200,
+            "message" : doc
+          }).status(200);
+        }
+      });
+      return;
+    }else{
+      res.json({
+        "status" : 401,
+        "message" : "인증되지 않은 접근입니다."
+      }).status(401);
+      return;
+    }
+  });
+});
+
+router.get('/:id',function(req, res, next){
+
+});
+
+router.get('/:id',function(req, res, next){
 
 });
 

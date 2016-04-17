@@ -57,34 +57,65 @@ module.exports = {
     callback = callback || function(){};
     var room_id = room.room_id;
     var user_id = room.user_id;
-    var device_id = room.device_id;
-    var title = room.title;
-    var detail = room.detail;
-    var type = room.type;
-    var tag = room.tag;
-    var day_enable = room.day_enable;
-    var enable_start_time = room.enable_start_time;
-    var enable_end_time = room.enable_end_time;
-    var room_images = room.room_images;
-    var address = room.address;
+    var add_images = room.add_images || [];
+    var delete_images = room.delete_images || [];
 
-    if( !room_id, !user_id){
+    if( !room_id, !user_id ){
       callback("데이터 정보를 확인해주세요",null);
       return;
     }
 
-    Room.update({ _id : room_id },{
-      device_id : device_id,
-      title : title,
-      detail : detail,
-      type : type,
-      tag : tag,
-      day_enable : day_enable,
-      enable_start_time : enable_start_time,
-      enable_end_time : enable_end_time,
-      room_images : room_images,
-      address : address
-    },callback);
+    Room.findOne({ _id : room_id, user_id : user_id }).then(function(doc){
+      if( doc == null){
+        callback("방 정보가 존재하지 않습니다.",null);
+      }else{
+        var device_id = room.device_id || doc.device_id;
+        var title = room.title || doc.title;
+        var detail = room.detail || doc.detail;
+        var type = room.type || doc.type;
+        var tag = room.tag || doc.tag;
+        var day_enable = room.day_enable || doc.day_enable;
+        var enable_start_time = room.enable_start_time || doc.enable_start_time;
+        var enable_end_time = room.enable_end_time || doc.enable_end_time;
+        var address = room.address || doc.address;
+
+        if( type == '숙박' ){
+           day_enable = ['월','화','수','목','금','토','일'];
+           enable_start_time = "00:00";
+           enable_end_time = "00:00";
+        }
+
+        if(enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
+          callback("데이터 정보를 확인해주세요",null);
+        }
+        
+        var room_images = doc.room_images;
+        for(var i =0; i<delete_images.length;i++){
+          if( room_images.indexOf(delete_images[i] != -1)){
+            room_images.splice(i,1);
+          }
+        }
+
+        for(var i=0; i<add_images.length;i++){
+          room_images.push(add_images[i]);
+        }
+
+        Room.update({ _id : room_id, user_id : user_id},{
+          device_id : device_id,
+          title : title,
+          detail : detail,
+          type : type,
+          tag : tag,
+          day_enable : day_enable,
+          enable_start_time : enable_start_time,
+          enable_end_time : enable_end_time,
+          room_images : room_images,
+          address : address
+        },callback)
+      }
+    }).catch(function(err) {
+      callback(err,null);
+    });
   },
   'RemoveRoom' : function(room_id, callback) {
     callback = callback || function(){};
@@ -102,7 +133,7 @@ module.exports = {
     callback = callback || function(){};
     offset = offset || 0;
     limit = limit || 30;
-    Room.find({ user_id : user_id }).skip(offset).limit(limit)
+    Room.find({ user_id : user_id }).skip(offset).limit(limi22t)
         .exec(callback);
   },
   'GetRoomByRoomId' : function(room_id,callback){
