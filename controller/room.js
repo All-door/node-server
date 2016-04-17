@@ -133,7 +133,7 @@ module.exports = {
     callback = callback || function(){};
     offset = offset || 0;
     limit = limit || 30;
-    Room.find({ user_id : user_id }).skip(offset).limit(limi22t)
+    Room.find({ user_id : user_id }).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomByRoomId' : function(room_id,callback){
