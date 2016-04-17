@@ -1,4 +1,4 @@
-var config = require('../config.js')
+var config = require('../config.js');
 var mongoose = require('mongoose').connect(config.MongoDB);
 var models = {};
 

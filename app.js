@@ -9,7 +9,7 @@ var config = require('./config');
 global.models = require('./models/models.js');
 
 var routes = require('./routes/index');
-var login = require('./routes/login')
+var login = require('./routes/login');
 
 var user = require('./routes/api/user');
 var user_room = require('./routes/api/user/room');
@@ -37,7 +37,7 @@ app.use(session({
   secret : config.Name,
   resave : true,
   saveUninitialized: true
-}))
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

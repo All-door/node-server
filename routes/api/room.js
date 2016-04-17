@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
         "data" : docs
       }).status(200);
     }
-  })
+  });
 });
 
 router.get('/sort/view', function(req,res,next){

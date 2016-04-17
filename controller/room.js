@@ -33,7 +33,7 @@ module.exports = {
     }
 
     Room.findOne({ device_id : device_id}).then(function(doc){
-      if(doc == null){
+      if(doc === null){
         return new Room({
           user_id : user_id,
           device_id : device_id,
@@ -51,7 +51,7 @@ module.exports = {
       }else{
         callback("중복된 디바이스 아이디 입니다.",null);
       }
-    })
+    });
   },
   'UpdateRoom' : function(room, callback) {
     callback = callback || function(){};
@@ -66,7 +66,7 @@ module.exports = {
     }
 
     Room.findOne({ _id : room_id, user_id : user_id }).then(function(doc){
-      if( doc == null){
+      if( doc === null){
         callback("방 정보가 존재하지 않습니다.",null);
       }else{
         var device_id = room.device_id || doc.device_id;
@@ -88,7 +88,7 @@ module.exports = {
         if(enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
           callback("데이터 정보를 확인해주세요",null);
         }
-        
+
         var room_images = doc.room_images;
         for(var i =0; i<delete_images.length;i++){
           if( room_images.indexOf(delete_images[i] != -1)){
@@ -96,8 +96,8 @@ module.exports = {
           }
         }
 
-        for(var i=0; i<add_images.length;i++){
-          room_images.push(add_images[i]);
+        for(var j=0; j<add_images.length;j++){
+          room_images.push(add_images[j]);
         }
 
         Room.update({ _id : room_id, user_id : user_id},{
@@ -111,7 +111,7 @@ module.exports = {
           enable_end_time : enable_end_time,
           room_images : room_images,
           address : address
-        },callback)
+        },callback);
       }
     }).catch(function(err) {
       callback(err,null);

@@ -3,7 +3,7 @@ var router = express.Router();
 var Room = require('../../../controller/room');
 var User = require('../../../controller/user');
 var config = require('../../../config');
-var upload = require('../../../controller/multer')
+var upload = require('../../../controller/multer');!
 
 /*
 * /api/user/room
@@ -12,7 +12,7 @@ var upload = require('../../../controller/multer')
 router.get('/',function(req, res, next) {
   User.CheckSession(req, function(result,user){
     if(result == true){
-      Room.GetRoomsByUserId(user.userid,req.query.offset,req.query.limit,function(err,docs) {
+      Room.GetRoomsByUserId(user.userid,req.query.offset,req.query.limit,function(err,docs){
         if(err){
           res.json({
             "status" : 500,
@@ -30,7 +30,6 @@ router.get('/',function(req, res, next) {
         "status" : 401,
         "message" : "인증되지 않은 접근입니다."
       }).status(401);
-      return;
     }
   });
 });
@@ -42,7 +41,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
   }
 
   User.CheckSession(req,function(result, user){
-    if(result == true){
+    if(result === true){
       var user_id = user.userid;
       var device_id = req.body.device_id;
       var title = req.body.title;
@@ -104,7 +103,7 @@ router.put('/',upload.array('add_image', 5),function(req, res, next) {
   }
 
   User.CheckSession(req,function(result, user){
-    if(result == true){
+    if(result === true){
       var user_id = user.userid;
       var room_id = req.body.room_id;
       var device_id = req.body.device_id;

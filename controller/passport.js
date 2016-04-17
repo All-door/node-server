@@ -9,18 +9,18 @@ passport.use(new LocalStrategy({
 },function(userid,password,done){
   var user = {};
   User.findOne({ email : userid, disable : false }).then(function(doc){
-    if( doc == null){
+    if( doc === null){
       done(null,false);
     }else{
       user = {
         userid : doc._id,
         name : doc.name,
         email : doc.email
-      }
+      };
       return bcrypt.compare(password,doc.password);
     }
   }).then(function(result){
-    if( result == true){
+    if( result === true){
       done(null,user);
     }else{
       done(null,false);

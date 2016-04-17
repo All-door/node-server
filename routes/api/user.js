@@ -10,7 +10,7 @@ var User = require('../../controller/user');
 
 router.get('/',function(req, res, next) {
   User.CheckSession(req, function(result, user){
-    if(result == true){
+    if(result === true){
       res.json({
         "status" : 200,
         "user" : user
@@ -34,7 +34,7 @@ router.put('/',function(req, res, next) {
   }
 
   User.CheckSession(req, function(result, user){
-    if(result == true){
+    if(result === true){
       var origin_password = req.body.origin_password;
       var change_password = req.body.change_password;
       User.ChangeUserPassword(req.user.userid,origin_password,change_password,function(err, doc){
@@ -62,7 +62,7 @@ router.put('/',function(req, res, next) {
 
 router.delete('/',function(req, res, next) {
   User.CheckSession(req, function(result, user){
-    if(result == true){
+    if(result === true){
       User.RemoveUser(user.userid);
       User.LogOut(req);
       res.json({
@@ -124,7 +124,7 @@ router.post('/login',passport.authenticate('local'),function(req,res,next){
 */
 router.get('/logout',function(req,res,next){
   User.LogOut(req, function(result){
-    if(result == true){
+    if(result === true){
       res.json({
         "status" : 200,
         "message" : "로그아웃에 성공했습니다."

@@ -6,15 +6,15 @@ var enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕�
 
 var TimeValidator = function(v){
   return timeRegex.test(v);
-}
+};
 
 var TypeValidator = function(v){
   return enumType.indexOf(v)!=-1 ? true : false;
-}
+};
 
 var TagValidator = function(v){
   return enumTag.indexOf(v)!=-1 ? true : false;
-}
+};
 
 var RoomSchema = mongoose.Schema({
   _id : { type: String, default : shortid.generate },

@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt-then');
+var bcrypt = require('bcrypt-then');
 var User = models.User;
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
 
     //이메일 중복 확인
     User.findOne({ email : email }).then(function(doc){
-      if( doc == null){
+      if( doc === null){
         // Password Salt
         return bcrypt.hash(password, 10);
       }else{
@@ -32,7 +32,7 @@ module.exports = {
       //유저정보 저장
       return user.save();
     }).then(function(doc){
-      if(doc == null){
+      if(doc === null){
         throw new Error("회원가입에 실패했습니다");
       }else{
         // 회원가입 완료
@@ -47,14 +47,14 @@ module.exports = {
   'ChangeLoginAt' : function(userid, callback){
     callback = callback || function(){};
 
-    var now = new Date()
+    var now = new Date();
     User.update({ _id : userid }, { loginAt : now }, callback);
   },
 
   'ChangeUpdateAt' : function(userid, callback){
     callback = callback || function(){};
 
-    var now = new Date()
+    var now = new Date();
     User.update({ _id : userid }, { updatedAt : now }, callback);
   },
 
@@ -76,10 +76,10 @@ module.exports = {
     User.findOne({ _id : userid, disable : false }).then(function(doc){
       return bcrypt.compare(origin_password, doc.password);
     }).then(function(result){
-      if(result == true){
+      if(result === true){
         return bcrypt.hash(change_password, 10);
       }else{
-        throw new Error("잘못된 암호입니다.")
+        throw new Error("잘못된 암호입니다.");
       }
     }).then(function(password_token){
       return User.update({ _id : userid }, { password : password_token });
