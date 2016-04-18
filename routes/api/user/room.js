@@ -145,7 +145,7 @@ router.put('/',upload.array('add_image', 5),function(req, res, next) {
         if(err){
           res.json({
             "status" : 400,
-            "message" : err.message
+            "message" : err
           }).status(400);
         }else{
           res.json({
@@ -165,6 +165,31 @@ router.put('/',upload.array('add_image', 5),function(req, res, next) {
   });
 });
 
+router.delete('/',function(req,res, next){
+  User.CheckSession(req,function(result,user) {
+    if(result == true){
+      Room.RemoveRoom(user.userid,req.body.room_id,function(err,doc){
+        if(err){
+          res.json({
+            "status" : 400,
+            "message" : err
+          }).status(400);
+        }else{
+          res.json({
+            "status" : 200,
+            "message" : "공간이 삭제되었습니다."
+          });
+        }
+      });
+    }else{
+      res.json({
+        "status" : 401,
+        "message" : "인증되지 않은 접근입니다."
+      }).status(401);
+      return;
+    }
+  });
+});
 router.get('/:id',function(req, res, next){
 
 });

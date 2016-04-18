@@ -117,9 +117,9 @@ module.exports = {
       callback(err,null);
     });
   },
-  'RemoveRoom' : function(room_id, callback) {
+  'RemoveRoom' : function(user_id,room_id,callback) {
     callback = callback || function(){};
-    Room.find({ _id : room_id }).remove().exec(callback);
+    Room.find({ _id : room_id, user_id : user_id}).remove().exec(callback);
   },
   'GetRooms' : function(offset,limit,callback){
     callback = callback || function(){};
