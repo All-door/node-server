@@ -114,12 +114,18 @@ module.exports = {
         },callback);
       }
     }).catch(function(err) {
-      callback(err,null);
+      callback(err.message,null);
     });
   },
   'RemoveRoom' : function(user_id,room_id,callback) {
     callback = callback || function(){};
-    Room.find({ _id : room_id, user_id : user_id}).remove().exec(callback);
+    Room.findOne({ _id : room_id, user_id : user_id}).then(function(doc){
+      if(doc == null){
+        callback("존재하지 않는 방입니다",null);
+      }else{
+        Room.findOne({ _id : room_id, user_id : user_id}).remove().exec(callback);
+      }
+    });
   },
   'GetRooms' : function(offset,limit,callback){
     callback = callback || function(){};
