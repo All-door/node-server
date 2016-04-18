@@ -96,7 +96,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
   });
 });
 
-router.put('/',upload.array('add_image', 5),function(req, res, next) {
+router.put('/:room_id',upload.array('add_image', 5),function(req, res, next) {
   var add_image = [];
   for(var i=0; i< req.files.length;i++){
     add_image.push(req.files[i].filename);
@@ -105,7 +105,7 @@ router.put('/',upload.array('add_image', 5),function(req, res, next) {
   User.CheckSession(req,function(result, user){
     if(result === true){
       var user_id = user.userid;
-      var room_id = req.body.room_id;
+      var room_id = req.params.room_id;
       var device_id = req.body.device_id;
       var title = req.body.title;
       var detail = req.body.detail;
@@ -165,10 +165,10 @@ router.put('/',upload.array('add_image', 5),function(req, res, next) {
   });
 });
 
-router.delete('/',function(req,res, next){
+router.delete('/:room_id',function(req,res, next){
   User.CheckSession(req,function(result,user) {
     if(result == true){
-      Room.RemoveRoom(user.userid,req.body.room_id,function(err,doc){
+      Room.RemoveRoom(user.userid,req.params.room_id,function(err,doc){
         if(err){
           res.json({
             "status" : 400,
@@ -189,17 +189,6 @@ router.delete('/',function(req,res, next){
       return;
     }
   });
-});
-router.get('/:id',function(req, res, next){
-
-});
-
-router.get('/:id',function(req, res, next){
-
-});
-
-router.get('/:id',function(req, res, next){
-
 });
 
 module.exports = router;
