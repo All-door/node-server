@@ -100,6 +100,7 @@ module.exports = {
           room_images.push(add_images[j]);
         }
 
+        var now = new Date();
         Room.update({ _id : room_id, user_id : user_id},{
           device_id : device_id,
           title : title,
@@ -110,7 +111,8 @@ module.exports = {
           enable_start_time : enable_start_time,
           enable_end_time : enable_end_time,
           room_images : room_images,
-          address : address
+          address : address,
+          updatedAt : now
         },callback);
       }
     }).catch(function(err) {
