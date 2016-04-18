@@ -15,6 +15,7 @@ var login = require('./routes/login');
 var user = require('./routes/api/user');
 var user_room = require('./routes/api/user/room');
 var user_favorites = require('./routes/api/user/favorites');
+var user_reserve = require('./routes/api/user/reserve');
 
 var room = require('./routes/api/room');
 
@@ -49,6 +50,8 @@ app.use('/login',login);
 app.use('/api/user',user);
 app.use('/api/user/favorites',user_favorites);
 app.use('/api/user/room',user_room);
+app.use('/api/user/reserve',user_reserve);
+
 app.use('/api/room',room);
 
 // catch 404 and forward to error handler
