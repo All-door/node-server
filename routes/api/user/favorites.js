@@ -1,18 +1,19 @@
-var express = require('express');
-var router = express.Router();
+'use strict'
+const express = require('express');
+const router = express.Router();
 
 /*
 * /api/user/favorites
 */
-router.get('/',function(req, res, next) {
+router.get('/',(req, res, next)=>{
   res.send("favorites");
 });
 
-router.post('/',function(req, res, next) {
+router.post('/',(req, res, next)=>{
 
 });
 
-router.delete('/',function(req, res, next) {
+router.delete('/',(req, res, next)=>{
 
 });
 

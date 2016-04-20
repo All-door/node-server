@@ -1,27 +1,28 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var multer = require('multer')();
+'use strict'
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let multer = require('multer')();
 
-var config = require('./config');
+let config = require('./config');
 global.models = require('./models/models.js');
 
-var routes = require('./routes/index');
-var login = require('./routes/login');
+let routes = require('./routes/index');
+let login = require('./routes/login');
 
-var user = require('./routes/api/user');
-var user_room = require('./routes/api/user/room');
-var user_favorites = require('./routes/api/user/favorites');
-var user_reserve = require('./routes/api/user/reserve');
+let user = require('./routes/api/user');
+let user_room = require('./routes/api/user/room');
+let user_favorites = require('./routes/api/user/favorites');
+let user_reserve = require('./routes/api/user/reserve');
 
-var room = require('./routes/api/room');
+let room = require('./routes/api/room');
 
-var app = express();
-var passport = require('passport');
-var session = require('express-session');
+let app = express();
+let passport = require('passport');
+let session = require('express-session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,8 +56,8 @@ app.use('/api/user/reserve',user_reserve);
 app.use('/api/room',room);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next)=>{
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -66,7 +67,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next)=>{
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -77,7 +78,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next)=>{
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

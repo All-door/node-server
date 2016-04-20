@@ -1,7 +1,8 @@
-var shortid = require('shortid');
-var mongoose = require('mongoose');
+'use strict'
+let shortid = require('shortid');
+let mongoose = require('mongoose');
 
-var UserSchema = mongoose.Schema({
+let UserSchema = mongoose.Schema({
   _id : { type: String, default : shortid.generate },
   createdAt : { type : Date, default : Date.now },
   updatedAt : { type : Date, default : Date.now },

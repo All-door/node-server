@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('../controller/passport');
+'user strict'
+const express = require('express');
+const router = express.Router();
+const passport = require('../controller/passport');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next)=>{
   res.render('page-login',{});
 });
 

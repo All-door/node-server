@@ -1,18 +1,19 @@
-var express = require('express');
-var router = express.Router();
-var Room = require('../../../controller/room');
-var User = require('../../../controller/user');
-var config = require('../../../config');
-var upload = require('../../../controller/multer');!
+'use strict'
+const express = require('express');
+const router = express.Router();
+const Room = require('../../../controller/room');
+const User = require('../../../controller/user');
+const config = require('../../../config');
+const upload = require('../../../controller/multer');!
 
 /*
 * /api/user/room
 */
 
-router.get('/',function(req, res, next) {
-  User.CheckSession(req, function(result,user){
+router.get('/',(req, res, next)=>{
+  User.CheckSession(req, (result,user)=>{
     if(result == true){
-      Room.GetRoomsByUserId(user.userid,req.query.offset,req.query.limit,function(err,docs){
+      Room.GetRoomsByUserId(user.userid,req.query.offset,req.query.limit,(err,docs)=>{
         if(err){
           res.json({
             "status" : 500,
@@ -34,31 +35,31 @@ router.get('/',function(req, res, next) {
   });
 });
 
-router.post('/',upload.array('room_image', 5),function(req, res, next) {
-  var room_images = [];
-  for(var i=0; i< req.files.length;i++){
+router.post('/',upload.array('room_image', 5),(req, res, next)=>{
+  let room_images = [];
+  for(let i=0,len = req.files.length; i<len;i++){
     room_images.push(req.files[i].filename);
   }
 
-  User.CheckSession(req,function(result, user){
+  User.CheckSession(req,(result, user)=>{
     if(result === true){
-      var user_id = user.userid;
-      var device_id = req.body.device_id;
-      var title = req.body.title;
-      var detail = req.body.detail;
-      var type = req.body.type;
-      var tag = req.body.tag;
-      var day_enable;
+      let user_id = user.userid;
+      let device_id = req.body.device_id;
+      let title = req.body.title;
+      let detail = req.body.detail;
+      let type = req.body.type;
+      let tag = req.body.tag;
+      let day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);
       } catch (e) {
 
       }
-      var enable_start_time = req.body.enable_start_time;
-      var enable_end_time = req.body.enable_end_time;
-      var address = req.body.address;
+      let enable_start_time = req.body.enable_start_time;
+      let enable_end_time = req.body.enable_end_time;
+      let address = req.body.address;
 
-      var room = {
+      let room = {
         user_id : user_id,
         device_id : device_id,
         title : title,
@@ -72,7 +73,7 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
         address : address
       };
 
-      Room.InsertRoom(room,function(err,doc) {
+      Room.InsertRoom(room,(err,doc)=>{
         if(err){
           res.json({
             "status" : 400,
@@ -96,36 +97,36 @@ router.post('/',upload.array('room_image', 5),function(req, res, next) {
   });
 });
 
-router.put('/:room_id',upload.array('add_image', 5),function(req, res, next) {
-  var add_image = [];
-  for(var i=0; i< req.files.length;i++){
+router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
+  let add_image = [];
+  for(let i=0,len = req.files.length; i< len;i++){
     add_image.push(req.files[i].filename);
   }
 
-  User.CheckSession(req,function(result, user){
+  User.CheckSession(req,(result, user)=>{
     if(result === true){
-      var user_id = user.userid;
-      var room_id = req.params.room_id;
-      var device_id = req.body.device_id;
-      var title = req.body.title;
-      var detail = req.body.detail;
-      var type = req.body.type;
-      var tag = req.body.tag;
-      var day_enable;
+      let user_id = user.userid;
+      let room_id = req.params.room_id;
+      let device_id = req.body.device_id;
+      let title = req.body.title;
+      let detail = req.body.detail;
+      let type = req.body.type;
+      let tag = req.body.tag;
+      let day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);
       } catch (e) {
       }
-      var enable_start_time = req.body.enable_start_time;
-      var enable_end_time = req.body.enable_end_time;
-      var address = req.body.address;
-      var add_images = add_image;
-      var delete_images;
+      let enable_start_time = req.body.enable_start_time;
+      let enable_end_time = req.body.enable_end_time;
+      let address = req.body.address;
+      let add_images = add_image;
+      let delete_images;
       try{
         delete_images = JSON.parse(req.body.delete_images);
       }catch(e){
       }
-      var room = {
+      let room = {
         user_id : user_id,
         room_id : room_id,
         device_id : device_id,
@@ -141,7 +142,7 @@ router.put('/:room_id',upload.array('add_image', 5),function(req, res, next) {
         address : address
       };
 
-      Room.UpdateRoom(room,function(err,doc){
+      Room.UpdateRoom(room,(err,doc)=>{
         if(err){
           res.json({
             "status" : 400,
@@ -165,10 +166,10 @@ router.put('/:room_id',upload.array('add_image', 5),function(req, res, next) {
   });
 });
 
-router.delete('/:room_id',function(req,res, next){
-  User.CheckSession(req,function(result,user) {
+router.delete('/:room_id',(req,res, next)=>{
+  User.CheckSession(req,(result,user)=>{
     if(result == true){
-      Room.RemoveRoom(user.userid,req.params.room_id,function(err,doc){
+      Room.RemoveRoom(user.userid,req.params.room_id,(err,doc)=>{
         if(err){
           res.json({
             "status" : 400,

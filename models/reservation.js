@@ -1,11 +1,12 @@
-var shortid = require('shortid');
-var mongoose = require('mongoose');
-var timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0][0]$/;
-var TimeValidator = function(v){
+'use strict'
+let shortid = require('shortid');
+let mongoose = require('mongoose');
+let timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0][0]$/;
+let TimeValidator = (v)=>{
   return timeRegex.test(v);
 };
 
-var ReservationSchema = mongoose.Schema({
+let ReservationSchema = mongoose.Schema({
   _id : { type: String, default : shortid.generate },
   createdAt : { type : Date, default : Date.now },
   updatedAt : { type : Date, default : Date.now },

@@ -1,4 +1,5 @@
-var config = {
+'use strict'
+const config = {
   Name : 'alldoor',
   MongoDB : 'mongodb://localhost/alldoor',
   ImagePath : '/tmp',

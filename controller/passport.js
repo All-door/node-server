@@ -1,14 +1,15 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-then');
-var User = models.User;
+'use strict'
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt-then');
+const User = models.User;
 
 passport.use(new LocalStrategy({
   usernameField : 'email',
   passwordField : 'password'
-},function(userid,password,done){
-  var user = {};
-  User.findOne({ email : userid, disable : false }).then(function(doc){
+},(userid,password,done)=>{
+  let user = {};
+  User.findOne({ email : userid, disable : false }).then((doc)=>{
     if( doc === null){
       done(null,false);
     }else{
@@ -19,7 +20,7 @@ passport.use(new LocalStrategy({
       };
       return bcrypt.compare(password,doc.password);
     }
-  }).then(function(result){
+  }).then((result)=>{
     if( result === true){
       done(null,user);
     }else{
@@ -28,11 +29,11 @@ passport.use(new LocalStrategy({
   });
 }));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done)=>{
     done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done)=>{
     done(null, user);
 });
 

@@ -1,15 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcrypt-then');
-var passport = require('../../controller/passport');
-var User = require('../../controller/user');
+'use strict'
+let express = require('express');
+let router = express.Router();
+let bcrypt = require('bcrypt-then');
+let passport = require('../../controller/passport');
+let User = require('../../controller/user');
 
 /*
 * /api/user
 */
 
-router.get('/',function(req, res, next) {
-  User.CheckSession(req, function(result, user){
+router.get('/',(req, res, next)=>{
+  User.CheckSession(req, (result, user)=>{
     if(result === true){
       res.json({
         "status" : 200,
@@ -24,7 +25,7 @@ router.get('/',function(req, res, next) {
   });
 });
 
-router.put('/',function(req, res, next) {
+router.put('/',(req, res, next)=>{
   if( !req.body.origin_password || !req.body.change_password){
     res.json({
       "status" : 400,
@@ -33,11 +34,11 @@ router.put('/',function(req, res, next) {
     return;
   }
 
-  User.CheckSession(req, function(result, user){
+  User.CheckSession(req, (result, user)=>{
     if(result === true){
-      var origin_password = req.body.origin_password;
-      var change_password = req.body.change_password;
-      User.ChangeUserPassword(req.user.userid,origin_password,change_password,function(err, doc){
+      let origin_password = req.body.origin_password;
+      let change_password = req.body.change_password;
+      User.ChangeUserPassword(req.user.userid,origin_password,change_password,(err, doc)=>{
         if(err){
           res.json({
             "status" : 400,
@@ -60,8 +61,8 @@ router.put('/',function(req, res, next) {
   });
 });
 
-router.delete('/',function(req, res, next) {
-  User.CheckSession(req, function(result, user){
+router.delete('/',(req, res, next)=>{
+  User.CheckSession(req, (result, user)=>{
     if(result === true){
       User.RemoveUser(user.userid);
       User.LogOut(req);
@@ -81,8 +82,8 @@ router.delete('/',function(req, res, next) {
 /*
 * /api/user/signup
 */
-router.post('/signup',function(req, res, next) {
-  var body = req.body;
+router.post('/signup',(req, res, next)=>{
+  let body = req.body;
 
   if( !body.email || !body.name || !body.password){
     res.json({
@@ -92,7 +93,7 @@ router.post('/signup',function(req, res, next) {
     return;
   }
 
-  User.SignUp(body.name, body.email, body.password, function(err, doc){
+  User.SignUp(body.name, body.email, body.password, (err, doc)=>{
     if(err){
       res.json({
         "status" : 400,
@@ -110,7 +111,7 @@ router.post('/signup',function(req, res, next) {
 /*
 * /api/user/login
 */
-router.post('/login',passport.authenticate('local'),function(req,res,next){
+router.post('/login',passport.authenticate('local'),(req,res,next)=>{
   User.ChangeLoginAt(req.user.userid);
   res.json({
     "status" : 200,
@@ -122,8 +123,8 @@ router.post('/login',passport.authenticate('local'),function(req,res,next){
 /*
 * /api/user/logout
 */
-router.get('/logout',function(req,res,next){
-  User.LogOut(req, function(result){
+router.get('/logout',(req,res,next)=>{
+  User.LogOut(req, (result)=>{
     if(result === true){
       res.json({
         "status" : 200,

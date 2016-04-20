@@ -1,9 +1,10 @@
-var bcrypt = require('bcrypt-then');
-var User = models.User;
+'use strict'
+const bcrypt = require('bcrypt-then');
+const User = models.User;
 
 module.exports = {
-  'CheckSession' : function(req, callback){
-    callback = callback || function(){};
+  'CheckSession' : (req, callback)=>{
+    callback = callback || ()=>{};
 
     if(req.isAuthenticated()){
       callback(true,req.user);
@@ -12,54 +13,54 @@ module.exports = {
     }
   },
 
-  'SignUp' : function(name, email, password, callback){
-    callback = callback || function(){};
+  'SignUp' : (name, email, password, callback)=>{
+    callback = callback || ()=>{};
 
     //이메일 중복 확인
-    User.findOne({ email : email }).then(function(doc){
+    User.findOne({ email : email }).then((doc)=>{
       if( doc === null){
         // Password Salt
         return bcrypt.hash(password, 10);
       }else{
         throw new Error("중복된 이메일 입니다.");
       }
-    }).then(function(password_token){
-      var user = new User({
+    }).then((password_token)=>{
+      let user = new User({
         name : name,
         email : email,
         password : password_token
       });
       //유저정보 저장
       return user.save();
-    }).then(function(doc){
+    }).then((doc)=>{
       if(doc === null){
         throw new Error("회원가입에 실패했습니다");
       }else{
         // 회원가입 완료
         callback(null,doc);
       }
-    }).catch(function(err){
+    }).catch((err)=>{
       // 에러처리
       callback(err.message,null);
     });
   },
 
-  'ChangeLoginAt' : function(userid, callback){
-    callback = callback || function(){};
+  'ChangeLoginAt' : (userid, callback)=>{
+    callback = callback || ()=>{};
 
-    var now = new Date();
+    let now = new Date();
     User.update({ _id : userid }, { loginAt : now }, callback);
   },
 
-  'ChangeUpdateAt' : function(userid, callback){
-    callback = callback || function(){};
+  'ChangeUpdateAt' : (userid, callback)=>{
+    callback = callback || ()=>{};
 
-    var now = new Date();
+    let now = new Date();
     User.update({ _id : userid }, { updatedAt : now }, callback);
   },
 
-  'LogOut' : function(req, callback){
-    callback = callback || function(){};
+  'LogOut' : (req, callback)=>{
+    callback = callback || ()=>{};
 
     if(req.isAuthenticated()){
       req.logout();
@@ -69,29 +70,29 @@ module.exports = {
     }
   },
 
-  'ChangeUserPassword' : function(userid, origin_password, change_password, callback){
-    callback = callback || function(){};
+  'ChangeUserPassword' : (userid, origin_password, change_password, callback)=>{
+    callback = callback || ()=>{};
 
     this.ChangeUpdateAt(userid);
-    User.findOne({ _id : userid, disable : false }).then(function(doc){
+    User.findOne({ _id : userid, disable : false }).then((doc)=>{
       return bcrypt.compare(origin_password, doc.password);
-    }).then(function(result){
+    }).then((result)=>{
       if(result === true){
         return bcrypt.hash(change_password, 10);
       }else{
         throw new Error("잘못된 암호입니다.");
       }
-    }).then(function(password_token){
+    }).then((password_token)=>{
       return User.update({ _id : userid }, { password : password_token });
-    }).then(function(doc){
+    }).then((doc)=>{
       callback(null, doc);
-    }).catch(function(err) {
+    }).catch((err)=>{
       callback(err.message, false);
     });
   },
 
-  'RemoveUser' : function(userid, callback){
-    callback = callback || function(){};
+  'RemoveUser' : (userid, callback)=>{
+    callback = callback || ()=>{};
     User.update({ _id : userid }, { disable : true },callback);
   }
 };

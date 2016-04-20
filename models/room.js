@@ -1,22 +1,23 @@
-var shortid = require('shortid');
-var mongoose = require('mongoose');
-var timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0][0]$/;
-var enumType = ['숙박','회의실','공부방','창고','강당'];
-var enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
+'use strict'
+let shortid = require('shortid');
+let mongoose = require('mongoose');
+let timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0][0]$/;
+let enumType = ['숙박','회의실','공부방','창고','강당'];
+let enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
 
-var TimeValidator = function(v){
+let TimeValidator = (v)=>{
   return timeRegex.test(v);
 };
 
-var TypeValidator = function(v){
+let TypeValidator = (v)=>{
   return enumType.indexOf(v)!=-1 ? true : false;
 };
 
-var TagValidator = function(v){
+let TagValidator = (v)=>{
   return enumTag.indexOf(v)!=-1 ? true : false;
 };
 
-var RoomSchema = mongoose.Schema({
+let RoomSchema = mongoose.Schema({
   _id : { type: String, default : shortid.generate },
   createdAt : { type : Date, default : Date.now },
   updatedAt : { type : Date, default : Date.now },
