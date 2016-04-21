@@ -15,22 +15,13 @@ router.get('/',(req, res, next)=>{
     if(result == true){
       Room.GetRoomsByUserId(user.userid,req.query.offset,req.query.limit,(err,docs)=>{
         if(err){
-          res.json({
-            "status" : 500,
-            "message" : err
-          }).status(500);
+          response.Error(res,err);
         }else{
-          res.json({
-            "status": 200,
-            "data" : docs
-          }).status(200);
+          response.Data(res,docs);
         }
       });
     }else{
-      res.json({
-        "status" : 401,
-        "message" : "인증되지 않은 접근입니다."
-      }).status(401);
+      response.AuthFail(res);
     }
   });
 });
@@ -72,26 +63,17 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
         room_images : room_images,
         address : address
       };
-
+      console.log(room);
       Room.InsertRoom(room,(err,doc)=>{
         if(err){
-          res.json({
-            "status" : 400,
-            "message" : err
-          }).status(400);
+          response.Error(res,err);
         }else{
-          res.json({
-            "status" : 200,
-            "message" : "공간 등록이 완료되었습니다"
-          }).status(200);
+          response.Message(res,"공간 등록이 완료되었습니다.");
         }
       });
 
     }else{
-      res.json({
-        "status" : 401,
-        "message" : "인증되지 않은 접근입니다."
-      }).status(401);
+      response.AuthFail(res);
       return;
     }
   });
@@ -144,23 +126,14 @@ router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
 
       Room.UpdateRoom(room,(err,doc)=>{
         if(err){
-          res.json({
-            "status" : 400,
-            "message" : err
-          }).status(400);
+          response.Error(res,err);
         }else{
-          res.json({
-            "status" : 200,
-            "message" : doc
-          }).status(200);
+          response.Message(res,"방 수정이 완료되었습니다");
         }
       });
       return;
     }else{
-      res.json({
-        "status" : 401,
-        "message" : "인증되지 않은 접근입니다."
-      }).status(401);
+      response.AuthFail(res);
       return;
     }
   });
@@ -171,22 +144,13 @@ router.delete('/:room_id',(req,res, next)=>{
     if(result == true){
       Room.RemoveRoom(user.userid,req.params.room_id,(err,doc)=>{
         if(err){
-          res.json({
-            "status" : 400,
-            "message" : err
-          }).status(400);
+          response.Error(res,err);
         }else{
-          res.json({
-            "status" : 200,
-            "message" : "공간이 삭제되었습니다."
-          });
+          response.Message(res,'공간이 삭제되었습니다.');
         }
       });
     }else{
-      res.json({
-        "status" : 401,
-        "message" : "인증되지 않은 접근입니다."
-      }).status(401);
+      response.AuthFail(res);
       return;
     }
   });

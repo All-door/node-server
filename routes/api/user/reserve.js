@@ -1,33 +1,79 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
-const Reserve = require('../../../controller/reserve');
+const Reservation = require('../../../controller/reserve');
 const User = require('../../../controller/user');
 
-router.get('/room',(req,res,next)=>{
+router.get('/',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
-      Reserve.GetResevationByUserId(req.query.offset,req.query.limit,user.userid,(err,docs)=>{
+      Reservation.GetResevationByUserId(req.query.offset,req.query.limit,user.userid,(err,docs)=>{
         if(err){
-          res.json({
-            "status" : 400,
-            "message" : err
-          }).status(400);
+          response.Error(res,err);
         }else{
-          res.json({
-            "status" : 200,
-            "data" : docs
-          }).status(200);
+          response.Data(res,docs);
         }
       });
     }else{
-      res.json({
-        "status" : 401,
-        "message" : "인증되지 않은 접근입니다."
-      }).status(401);
+      response.AuthFail(res);
     }
   });
 });
+
+router.get('/:reservation_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result == true){
+      Reservation.GetReservationByReservationId(user.userid,req.params.reservation_id,(err,doc)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Data(res,doc);
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+
+router.put('/:reservation_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result == true){
+      let reservation = {
+        reservation_id : req.params.reservation_id,
+        password : req.body.password,
+        user_id : user.userid
+      };
+
+      Reservation.UpdateReservation(reservation,(err,doc)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Message(res,"예약 정보를 수정했습니다.");
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+
+router.delete('/:reservation_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result == true){
+      Reservation.RemoveReservation(user.userid,req.params.reservation_id,(err,doc)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Message(res,"예약 정보를 삭제했습니다.");
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+
 
 router.post('/room/:room_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
@@ -42,24 +88,15 @@ router.post('/room/:room_id',(req,res,next)=>{
         end_time : body.end_time,
         password : body.password
       };
-      Reserve.ReserveRoom(reservation,(err,doc)=>{
+      Reservation.ReserveRoom(reservation,(err,doc)=>{
         if(err){
-          res.json({
-            "status" : 400,
-            "message" : err
-          }).status(400);
+          response.Error(res,err);
         }else{
-          res.json({
-            "status" : 200,
-            "message" : doc
-          }).stauts(200);
+          response.Data(res,doc);
         }
       });
     }else{
-      res.json({
-        "status" : 401,
-        "message" : "인증되지 않은 접근입니다."
-      }).status(401);
+      response.AuthFail(res);
     }
   })
 });

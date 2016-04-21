@@ -2,8 +2,8 @@
 const Reservation = models.Reservation;
 const Room = models.Room;
 const GetTodayDateString = ()=>{
-  let now = new Date();
-  let year = now.getFullYear();
+  const now = new Date();
+  const year = now.getFullYear();
   let month = now.getMonth() + 1;
   month = (month > 9)? month : '0' + month;
   let date = now.getDate();
@@ -12,7 +12,7 @@ const GetTodayDateString = ()=>{
 };
 
 const GetTodayTimeString = ()=>{
-  let now = new Date();
+  const now = new Date();
   let hour = now.getHours();
   hour = (hour > 9) ? hour : '0' + hour;
   let mintues = now.getMinutes();
@@ -21,8 +21,8 @@ const GetTodayTimeString = ()=>{
 };
 
 const GetTodayDayString = (date)=>{
-  let now = new Date(date);
-  let week = ['월','화','수','목','금','토','일'];
+  const now = new Date(date);
+  const week = ['일','월','화','수','목','금','토','일'];
   return week[now.getDay()];
 };
 
@@ -100,11 +100,32 @@ module.exports = {
       }
     });
   },
-  'UpdateReservation' : (room_id,reservation,callback)=>{
+  'UpdateReservation' : (reservation,callback)=>{
     callback = callback || ()=>{};
+
+    let reservation_id = reservation.reservation_id;
+    let user_id = reservation.user_id;
+    let password = reservation.password;
+
+    Reservation.findOne({ _id : reservation_id, user_id : user_id}).then((doc)=>{
+      if(doc == null){
+        callback("예약 정보가 존재하지 않습니다.",null);
+      }else{
+        let now = new Date();
+        Reservation.update({ _id : reservation_id, user_id : user_id},{ password : password, updatedAt : now}).exec(callback);
+      }
+    });
   },
-  'RemoveReservation' : (room_id,callback)=>{
+  'RemoveReservation' : (user_id,reservation_id,callback)=>{
     callback = callback || ()=>{};
+
+    Reservation.findOne({ _id : reservation_id, user_id : user_id}).then((doc)=>{
+      if(doc == null){
+        callback("예약 정보가 존재하지 않습니다.",null);
+      }else{
+        Reservation.findOne({ _id : reservation_id, user_id : user_id}).remove().exec(callback);
+      }
+    });
   },
   'GetResevationByUserId' : (offset,limit,user_id,callback)=>{
     callback = callback || ()=>{};
@@ -115,15 +136,13 @@ module.exports = {
     let time = GetTodayTimeString();
 
     Reservation.find({ user_id : user_id})
-              //  .where('start_day').gte(today)
-              //  .where('start_time').gte(time)
                .select({ password : 0 , user_id : 0})
-               .sort({ start_day : -1})
+               .sort({ start_day : - 1})
                .skip(offset)
                .limit(limit)
                .exec(callback)
   },
-  'GetResevationByRoomId' : (offset,limit,room_id,callback)=>{
+  'GetReservationByRoomId' : (offset,limit,room_id,callback)=>{
     callback = callback || ()=>{};
     offset = offset || 0;
     limit = limit || 30;
@@ -145,5 +164,17 @@ module.exports = {
                    });
       }
     });
+  },
+  'GetReservationByReservationId' : (user_id,reservation_id,callback)=>{
+    callback = callback || ()=>{};
+
+    Reservation.findOne({ _id : reservation_id, user_id : user_id })
+               .then((doc)=>{
+                 if(doc == null){
+                   callback("존재하지 않는 예약정보입니다",null);
+                 }else{
+                   callback(null,doc);
+                 }
+               });
   }
 };

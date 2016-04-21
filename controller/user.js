@@ -16,6 +16,11 @@ module.exports = {
   'SignUp' : (name, email, password, callback)=>{
     callback = callback || ()=>{};
 
+    if( !email || !name || !password){
+      callback("입력데이터를 확인해주세요.",null);
+      return;
+    }
+
     //이메일 중복 확인
     User.findOne({ email : email }).then((doc)=>{
       if( doc === null){
@@ -73,22 +78,23 @@ module.exports = {
   'ChangeUserPassword' : (userid, origin_password, change_password, callback)=>{
     callback = callback || ()=>{};
 
-    this.ChangeUpdateAt(userid);
-    User.findOne({ _id : userid, disable : false }).then((doc)=>{
-      return bcrypt.compare(origin_password, doc.password);
-    }).then((result)=>{
-      if(result === true){
-        return bcrypt.hash(change_password, 10);
-      }else{
-        throw new Error("잘못된 암호입니다.");
-      }
-    }).then((password_token)=>{
-      return User.update({ _id : userid }, { password : password_token });
-    }).then((doc)=>{
-      callback(null, doc);
-    }).catch((err)=>{
-      callback(err.message, false);
-    });
+    User.findOne({ _id : userid, disable : false })
+        .then((doc)=>{
+          return bcrypt.compare(origin_password, doc.password);
+        }).then((result)=>{
+          if(result === true){
+            return bcrypt.hash(change_password, 10)
+                         .then((password_token)=>{
+                           let now = new Date();
+                           User.update({ _id : userid }, { password : password_token, updatedAt : now })
+                               .then((doc)=>{
+                                callback(null,doc);
+                               });
+                          });
+          }else{
+            callback("암호가 일치하지 않습니다.",null);
+          }
+    })
   },
 
   'RemoveUser' : (userid, callback)=>{

@@ -9,6 +9,7 @@ let multer = require('multer')();
 
 let config = require('./config');
 global.models = require('./models/models.js');
+global.response = require('./controller/response');
 
 let routes = require('./routes/index');
 let login = require('./routes/login');
