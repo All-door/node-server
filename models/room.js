@@ -1,7 +1,7 @@
 'use strict'
 let shortid = require('shortid');
 let mongoose = require('mongoose');
-let timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0][0]$/;
+let timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-4]):[0][0]$/;
 let enumType = ['숙박','회의실','공부방','창고','강당'];
 let enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
 
