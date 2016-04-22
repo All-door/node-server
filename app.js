@@ -16,7 +16,7 @@ let login = require('./routes/login');
 
 let user = require('./routes/api/user');
 let user_room = require('./routes/api/user/room');
-let user_favorites = require('./routes/api/user/favorites');
+let user_favorites = require('./routes/api/user/favorite');
 let user_reserve = require('./routes/api/user/reserve');
 
 let room = require('./routes/api/room');
@@ -50,7 +50,7 @@ app.use('/', routes);
 app.use('/login',login);
 
 app.use('/api/user',user);
-app.use('/api/user/favorites',user_favorites);
+app.use('/api/user/favorite',user_favorites);
 app.use('/api/user/room',user_room);
 app.use('/api/user/reserve',user_reserve);
 
