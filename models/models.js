@@ -15,4 +15,8 @@ models.Room = mongoose.model('room',RoomSchema);
 let ReservationSchema = require('./reservation.js');
 models.Reservation = mongoose.model('reservation',ReservationSchema);
 
+/* Commnet DB*/
+let CommentSchema = require('./comment.js');
+models.Comment = mongoose.model('comment',CommentSchema);
+
 module.exports = models;
