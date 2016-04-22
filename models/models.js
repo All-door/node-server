@@ -19,4 +19,8 @@ models.Reservation = mongoose.model('reservation',ReservationSchema);
 let CommentSchema = require('./comment.js');
 models.Comment = mongoose.model('comment',CommentSchema);
 
+/* Review DB */
+let ReviewSchema = require('./review.js');
+models.Review = mongoose.model('review',ReviewSchema);
+
 module.exports = models;

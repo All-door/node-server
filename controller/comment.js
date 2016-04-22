@@ -78,7 +78,9 @@ module.exports = {
       return;
     }
     Comment.find({ room_id : room_id })
-           .sort({ updatedAt : -1 })
+           .sort({ createdAt : -1 })
+           .skip(offset)
+           .limit(limit)
            .then((docs)=>{
              callback(null,docs);
            });

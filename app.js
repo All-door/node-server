@@ -22,6 +22,8 @@ let user_reserve = require('./routes/api/user/reserve');
 let room = require('./routes/api/room');
 let room_comment = require('./routes/api/room/comment');
 
+let review = require('./routes/api/review');
+
 let app = express();
 let passport = require('passport');
 let session = require('express-session');
@@ -57,6 +59,8 @@ app.use('/api/user/reserve',user_reserve);
 
 app.use('/api/room',room);
 app.use('/api/room',room_comment);
+
+app.use('/api/review',review);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=>{
