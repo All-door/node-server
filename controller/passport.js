@@ -9,7 +9,9 @@ passport.use(new LocalStrategy({
   passwordField : 'password'
 },(userid,password,done)=>{
   let user = {};
-  User.findOne({ email : userid, disable : false }).then((doc)=>{
+  User
+  .findOne({ email : userid, disable : false })
+  .then((doc)=>{
     if( doc === null){
       done(null,false);
     }else{
@@ -20,7 +22,8 @@ passport.use(new LocalStrategy({
       };
       return bcrypt.compare(password,doc.password);
     }
-  }).then((result)=>{
+  })
+  .then((result)=>{
     if( result === true){
       done(null,user);
     }else{
