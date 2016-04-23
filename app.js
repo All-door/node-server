@@ -27,6 +27,7 @@ let review = require('./routes/api/review');
 let app = express();
 let passport = require('passport');
 let session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,7 +45,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret : config.Name,
   resave : true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store : new RedisStore()
 }));
 app.use(passport.initialize());
 app.use(passport.session());
