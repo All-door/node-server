@@ -1,0 +1,18 @@
+{
+  "name": "node-server",
+  "description": "",
+  "main": "",
+  "authors": [
+    "InhoChoi <revaer@naver.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/All-door/node-server",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
