@@ -185,13 +185,5 @@ module.exports = {
     limit = limit || 30;
     Room.find({}).sort({ favorite_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
-  },
-  'IncrementFavorites' : (room_id, callback)=>{
-    callback = callback || ()=>{};
-    Room.findOneAndUpdate({ _id : room_id },{ $inc : { favorite_count : 1 }},callback);
-  },
-  'DecrementFavorites' : (room_id, callback)=>{
-    callback = callback || ()=>{};
-    Room.findOneAndUpdate({ _id : room_id },{ $dec : { favorite_count : 1 }},callback);
   }
 };
