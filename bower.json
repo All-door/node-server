@@ -14,5 +14,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "react": "^15.0.1",
+    "jquery": "^2.2.3"
+  }
 }
