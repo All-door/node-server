@@ -11,7 +11,8 @@ let ReviewSchema = mongoose.Schema({
   user_id : { type : String, required : [true,'유저 정보가 필요합니다.']},
   title : { type : String, required : [true,'제목 정보가 필요합니다.']},
   detail : { type : String, required : [true,'내용 정보가 필요합니다.']},
-  view_count : { type : Number, default : 0 }
+  view_count : { type : Number, default : 0 },
+  images : Array
 });
 
 module.exports = ReviewSchema;

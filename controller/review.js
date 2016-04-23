@@ -12,6 +12,7 @@ module.exports = {
     let reservation_id = review.reservation_id;
     let title = review.title;
     let detail = review.detail;
+    let images = review.images || [];
 
     if( !user_id || !room_id || !reservation_id || !title || !detail){
       callback("데이터 정보를 확인해주세요",null);
@@ -29,7 +30,8 @@ module.exports = {
           room_id : room_id,
           reservation_id : reservation_id,
           title : title,
-          detail : detail
+          detail : detail,
+          images : images
          }).save()
           .then((doc)=>{
             callback(null,doc);
@@ -42,10 +44,10 @@ module.exports = {
 
     let review_id = review.review_id;
     let user_id = review.user_id;
-    let title = review.title;
-    let detail = review.detail;
+    let delete_images = review.delete_images || [];
+    let add_images = review.add_images || [];
 
-    if(!review_id || !user_id || !title || !detail){
+    if(!review_id || !user_id){
       callback("입력 데이터를 확인해주세요.",null);
       return;
     }
@@ -56,9 +58,23 @@ module.exports = {
       if(doc == null){
         callback('존재하지 않는 리뷰 정보입니다.',null);
       }else{
+        let title = review.title || doc.title;
+        let detail = review.detail || doc.detail;
+        let images = doc.images;
         let now = new Date();
+
+        for(let i=0,len = delete_images.length;i<len;i++){
+          if( images.indexOf(delete_images[i]) !== -1 ){
+            images.splice(delete_images[i],1);
+          }
+        }
+
+        for(let i=0,len = add_images.length;i<len;i++){
+          images.push(add_images[i]);
+        }
+
         Review
-        .update({ _id : review_id, user_id : user_id }, { title : title, detail : detail, updatedAt : now})
+        .update({ _id : review_id, user_id : user_id }, { title : title, detail : detail, updatedAt : now, images : images})
         .exec(callback);
       }
     });

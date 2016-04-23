@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
+const upload = require('../../controller/multer');
 const Review = require('../../controller/review');
 const User = require('../../controller/user');
 
@@ -33,7 +34,12 @@ router.get('/room/:room_id',(req,res,next)=>{
     }
   });
 });
-router.post('/room/:room_id',(req,res,next)=>{
+router.post('/room/:room_id',upload.array('image',5),(req,res,next)=>{
+  let images = [];
+  for(let i=0,len = req.files.length;i<len;i++){
+    images.push(req.files[i].filename);
+  }
+
   User.CheckSession(req,(result,user)=>{
     if(result === true){
       let review = {
@@ -41,7 +47,8 @@ router.post('/room/:room_id',(req,res,next)=>{
         room_id : req.params.room_id,
         reservation_id : req.body.reservation_id,
         title : req.body.title,
-        detail : req.body.detail
+        detail : req.body.detail,
+        images : images
       };
       Review.InsertReview(review,(err,doc)=>{
         if(err){
@@ -56,15 +63,30 @@ router.post('/room/:room_id',(req,res,next)=>{
   });
 });
 
-router.put('/:review_id',(req,res,next)=>{
+router.put('/:review_id',upload.array('add_image',5),(req,res,next)=>{
+  let add_images = [];
+  for(let i=0,len= req.files.length;i<len;i++){
+    add_images.push(req.files[i].filename);
+  }
+
   User.CheckSession(req,(result,user)=>{
     if(result === true){
+      let delete_images;
+      try {
+        delete_images = JSON.parse(req.body.delete_images);
+      } catch (e) {
+
+      }
+
       let review = {
         user_id : user.userid,
         review_id : req.params.review_id,
         title : req.body.title,
-        detail : req.body.detail
+        detail : req.body.detail,
+        add_images : add_images,
+        delete_images : delete_images
       };
+
       Review.UpdateReview(review,(err,doc)=>{
         if(err){
           response.Error(res,err);
