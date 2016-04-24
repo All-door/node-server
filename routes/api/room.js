@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const Room = require('../../controller/room');
+const Rate = require('../../controller/rate');
+const User = require('../../controller/user');
 
 /*
 * 모든 공간(방) 정보 가지고 오기
@@ -190,6 +192,40 @@ router.get('/type/:type/sort/reservation', (req,res,next)=>{
       response.Error(res,err);
     }else{
       response.Data(res,docs);
+    }
+  });
+});
+
+/*
+* 특정 방의 별점 정보 가지고 오기
+* GET /api/room/:room_id/rate
+*/
+router.get('/:room_id/rate',(req,res,next)=>{
+  Rate.GetRoomRate(req.params.room_id,(err,rate)=>{
+    if(err){
+      response.Error(res,err);
+    }else{
+      response.Data(res,rate);
+    }
+  });
+});
+
+/*
+* 특정 방의 별점 정보 넣기
+* POST /api/room/:room_id/rate
+*/
+router.post('/:room_id/rate',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      Rate.InsertRoomRate(user.userid,req.params.room_id,req.body.rate,(err,doc)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Message(res,'공간에 대한 별점 입력이 완료되었습니다.');
+        }
+      });
+    }else{
+      response.AuthFail(res);
     }
   });
 });

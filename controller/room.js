@@ -24,8 +24,8 @@ module.exports = {
     }
     if( type == '숙박' ){
        day_enable = ['월','화','수','목','금','토','일'];
-       enable_start_time = "00:00";
-       enable_end_time = "00:00";
+       enable_start_time = "24:00";
+       enable_end_time = "24:00";
     }
 
     if( type != '숙박' && ( !day_enable || !enable_start_time || !enable_end_time || enable_start_time > enable_end_time)){
