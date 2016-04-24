@@ -42,3 +42,5 @@ jspm_packages
 test
 
 components/
+
+dump.rdb
