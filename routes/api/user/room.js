@@ -7,9 +7,9 @@ const config = require('../../../config');
 const upload = require('../../../controller/multer');!
 
 /*
-* /api/user/room
+* 유저가 등록한 방 정보 가지고 오기
+* GET /api/user/room
 */
-
 router.get('/',(req, res, next)=>{
   User.CheckSession(req, (result,user)=>{
     if(result == true){
@@ -26,6 +26,10 @@ router.get('/',(req, res, next)=>{
   });
 });
 
+/*
+* 유저 공간(방) 등록하기
+* POST /api/user/room
+*/
 router.post('/',upload.array('room_image', 5),(req, res, next)=>{
   let room_images = [];
   for(let i=0,len = req.files.length; i<len;i++){
@@ -79,6 +83,10 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
   });
 });
 
+/*
+* 유저 공간(방) 수정하기
+* PUT /api/user/room
+*/
 router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
   let add_image = [];
   for(let i=0,len = req.files.length; i< len;i++){
@@ -139,6 +147,10 @@ router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
   });
 });
 
+/*
+* 유저 공간(방) 수정하기
+* DELETE /api/user/room/:room_id
+*/
 router.delete('/:room_id',(req,res, next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result == true){

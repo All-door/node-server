@@ -4,6 +4,10 @@ const router = express.Router();
 const Reservation = require('../../../controller/reserve');
 const User = require('../../../controller/user');
 
+/*
+* 유저의 예약정보 가지고 오기
+* GET /api/user/reserve
+*/
 router.get('/',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
@@ -20,6 +24,10 @@ router.get('/',(req,res,next)=>{
   });
 });
 
+/*
+* 유저의 특정 예약정보 가지고 오기
+* GET /api/user/reserve/:reservation_id
+*/
 router.get('/:reservation_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result == true){
@@ -36,6 +44,10 @@ router.get('/:reservation_id',(req,res,next)=>{
   });
 });
 
+/*
+* 유저의 특정 예약정보 수정하기
+* PUT /api/user/reserve/:reservation_id
+*/
 router.put('/:reservation_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result == true){
@@ -58,6 +70,10 @@ router.put('/:reservation_id',(req,res,next)=>{
   });
 });
 
+/*
+* 유저의 특정 예약정보 삭제하기
+* DELETE /api/user/reserve/:reservation_id
+*/
 router.delete('/:reservation_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result == true){
@@ -74,7 +90,10 @@ router.delete('/:reservation_id',(req,res,next)=>{
   });
 });
 
-
+/*
+* 유저의 특정 공간(방) 예약하기
+* POST /api/user/reserve/room/:room_id
+*/
 router.post('/room/:room_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){

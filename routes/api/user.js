@@ -6,9 +6,9 @@ let passport = require('../../controller/passport');
 let User = require('../../controller/user');
 
 /*
-* /api/user
+* 로그인된 유저 정보
+* GET /api/user
 */
-
 router.get('/',(req, res, next)=>{
   User.CheckSession(req, (result, user)=>{
     if(result === true){
@@ -19,6 +19,10 @@ router.get('/',(req, res, next)=>{
   });
 });
 
+/*
+* 유저 정보 수정하기
+* PUT /api/user
+*/
 router.put('/',(req, res, next)=>{
   if( !req.body.origin_password || !req.body.change_password){
     response.Message(res,"입력된 데이터를 확인해주세요.");
@@ -43,6 +47,10 @@ router.put('/',(req, res, next)=>{
   });
 });
 
+/*
+* 회원 탈퇴하기
+* DELETE /api/user
+*/
 router.delete('/',(req, res, next)=>{
   User.CheckSession(req, (result, user)=>{
     if(result === true){
@@ -56,7 +64,8 @@ router.delete('/',(req, res, next)=>{
 });
 
 /*
-* /api/user/signup
+* 회원 가입하기
+* POST /api/user/signup
 */
 router.post('/signup',(req, res, next)=>{
   let body = req.body;
@@ -71,7 +80,8 @@ router.post('/signup',(req, res, next)=>{
 });
 
 /*
-* /api/user/login
+* 로그인
+* POST /api/user/login
 */
 router.post('/login',passport.authenticate('local'),(req,res,next)=>{
   User.ChangeLoginAt(req.user.userid);
@@ -79,7 +89,8 @@ router.post('/login',passport.authenticate('local'),(req,res,next)=>{
 });
 
 /*
-* /api/user/logout
+* 로그아웃
+* GET /api/user/logout
 */
 router.get('/logout',(req,res,next)=>{
   User.LogOut(req, (result)=>{
@@ -90,7 +101,5 @@ router.get('/logout',(req,res,next)=>{
     }
   });
 });
-
-
 
 module.exports = router;
