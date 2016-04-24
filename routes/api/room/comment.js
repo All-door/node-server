@@ -4,6 +4,10 @@ const router = express.Router();
 const User = require('../../../controller/user');
 const Comment = require('../../../controller/comment');
 
+/*
+* 특정 공간(방)의 코멘트 가지고 오기
+* GET /api/room/:room_id/comment
+*/
 router.get('/:room_id/comment', (req, res, next)=>{
   Comment.GetCommentsByRoomId(req.query.offset,req.query.limit,req.params.room_id,(err,docs)=>{
     if(err){
@@ -14,6 +18,10 @@ router.get('/:room_id/comment', (req, res, next)=>{
   });
 });
 
+/*
+* 특정 공간(방)의 코멘트 작성하기
+* POST /api/room/:room_id/comment
+*/
 router.post('/:room_id/comment', (req, res, next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
@@ -35,6 +43,10 @@ router.post('/:room_id/comment', (req, res, next)=>{
   });
 });
 
+/*
+* 특정 공간(방)의 코멘트 수정하기
+* PUT /api/room/:room_id/comment
+*/
 router.put('/:room_id/comment/:comment_id', (req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
@@ -56,6 +68,10 @@ router.put('/:room_id/comment/:comment_id', (req,res,next)=>{
   });
 });
 
+/*
+* 특정 공간(방)의 코멘트 삭제하기
+* DELETE /api/room/:room_id/comment
+*/
 router.delete('/:room_id/comment/:comment_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result == true){

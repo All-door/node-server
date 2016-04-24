@@ -5,7 +5,8 @@ const Favorite = require('../../../controller/favorite');
 const User = require('../../../controller/user');
 
 /*
-* /api/user/favorites
+* 유저의 관심방 가지고 오기
+* GET /api/user/favorite
 */
 router.get('/',(req, res, next)=>{
   User.CheckSession(req,(result,user)=>{
@@ -23,6 +24,10 @@ router.get('/',(req, res, next)=>{
   });
 });
 
+/*
+* 유저의 관심방 추가하기
+* POST /api/user/favorite
+*/
 router.post('/',(req, res, next)=>{
   User.CheckSession(req,(result,user)=>{
     if( result === true){
@@ -40,7 +45,10 @@ router.post('/',(req, res, next)=>{
   });
 });
 
-
+/*
+* 유저의 관심방 삭제하기
+* DELETE /api/user/favorite
+*/
 router.delete('/',(req, res, next)=>{
   User.CheckSession(req,(result,user)=>{
     if( result === true){
