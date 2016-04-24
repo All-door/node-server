@@ -148,7 +148,7 @@ router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
 });
 
 /*
-* 유저 공간(방) 수정하기
+* 유저 공간(방) 삭제
 * DELETE /api/user/room/:room_id
 */
 router.delete('/:room_id',(req,res, next)=>{
