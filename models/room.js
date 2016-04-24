@@ -51,7 +51,8 @@ let RoomSchema = mongoose.Schema({
   view_count : { type : Number, default : 0},
   reservation_count : { type : Number, default : 0},
   price_for_hour : { type :Number, default : 0},
-  price_for_day : { type : Number, default : 0}
+  price_for_day : { type : Number, default : 0},
+  star : { type : Array }
 });
 
 module.exports = RoomSchema;
