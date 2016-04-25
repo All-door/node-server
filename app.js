@@ -24,6 +24,8 @@ let room_comment = require('./routes/api/room/comment');
 
 let review = require('./routes/api/review');
 
+let device = require('./routes/api/device');
+
 let app = express();
 let passport = require('passport');
 let session = require('express-session');
@@ -63,6 +65,8 @@ app.use('/api/room',room);
 app.use('/api/room',room_comment);
 
 app.use('/api/review',review);
+
+app.use('/api/device',device);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=>{

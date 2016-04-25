@@ -23,4 +23,8 @@ models.Comment = mongoose.model('comment',CommentSchema);
 let ReviewSchema = require('./review.js');
 models.Review = mongoose.model('review',ReviewSchema);
 
+/* Device LOG DB */
+let DeviceLogSchema = require('./device_log.js');
+models.DeviceLog = mongoose.model('device_log',DeviceLogSchema);
+
 module.exports = models;
