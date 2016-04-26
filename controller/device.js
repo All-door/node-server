@@ -51,7 +51,7 @@ module.exports={
       callback("입력 데이터를 확인해주세요.",null);
       return;
     }
-    
+
     redis
     .hget('device_info',device_id)
     .then((data)=>{
@@ -66,7 +66,7 @@ module.exports={
           battery_status : battery_status,
           oepn : 0
         };
-
+1
         redis
         .hset('device_info',device_id,JSON.stringify(status))
         .then(()=>{});
@@ -150,12 +150,30 @@ module.exports={
       }
     });
   },
-  'InsertDeviceLog' : (device_id,log,callback)=>{
+  'InsertDeviceLog' : (log,callback)=>{
     callback = callback || ()=>{};
 
-    if(!device_id){
-      callback("입력 데이터를 확인해주세요",null);
+    let device_id = log.device_id;
+    let pass_status = log.pass_status;
+
+    if(!device_id  || !pass_status ){
+      callback("Input Data Error",null);
       return;
     }
+
+    Room
+    .findOne({ device_id : device_id })
+    .then((doc)=>{
+      if(doc == null){
+        callback("Device isn't registered",null);
+      }else{
+        log.room_id = doc._id;
+        new DeviceLog(log)
+        .save()
+        .then((doc)=>{
+          callback(null,doc);
+        });
+      }
+    });
   }
 }

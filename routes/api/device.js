@@ -44,7 +44,7 @@ router.post('/:device_id',(req,res,next)=>{
 router.get('/:device_id/log',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
-      Device.GetDeviceLogs(req,query.offset,req.query.limit,user.userid,req.params.device_id,(err,docs)=>{
+      Device.GetDeviceLogs(req.query.offset,req.query.limit,user.userid,req.params.device_id,(err,docs)=>{
         if(err){
           response.Error(res,err);
         }else{
@@ -62,6 +62,17 @@ router.get('/:device_id/log',(req,res,next)=>{
 * GET /api/device/:device_id/log
 */
 router.post('/:device_id/log',(req,res,next)=>{
+  const status = ['인증 실패', '마스터키 접근','임시키 접근'];
+  Device.InsertDeviceLog({
+    device_id : req.params.device_id,
+    pass_status : status[req.body.pass_status] // 0-인증실패 1-마스터키 접근 2-임시키 접근
+  },(err,doc)=>{
+    if(err){
+      response.Error(res,err);
+    }else{
+      response.Message(res,"Logging Success");
+    }
+  });
 });
 
 module.exports = router;
