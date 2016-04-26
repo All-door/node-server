@@ -91,11 +91,16 @@ module.exports = {
                      if( doc != null){
                        callback("기존의 예약 시간과 겹칩니다.",null);
                      }else{
-                       reservation.status = '예약완료';
-                       return new Reservation(reservation).save();
+                       Room
+                       .findOneAndUpdate({ _id : room_id },{ $inc : { reservation_count : 1 }})
+                       .then((doc)=>{
+                         console.log(doc);
+                         reservation.status = '예약완료';
+                         return new Reservation(reservation).save();
+                       }).then((doc)=>{
+                         callback(null,doc);
+                       });
                      }
-                   }).then((doc)=>{
-                     callback(null,doc);
                    });
       }
     });
@@ -123,7 +128,14 @@ module.exports = {
       if(doc == null){
         callback("예약 정보가 존재하지 않습니다.",null);
       }else{
-        Reservation.findOne({ _id : reservation_id, user_id : user_id}).remove().exec(callback);
+        Room
+        .findOneAndUpdate({ _id : doc.room_id },{ $inc : { reservation_count : -1 }})
+        .then((doc)=>{
+          Reservation
+          .findOne({ _id : reservation_id, user_id : user_id})
+          .remove()
+          .exec(callback);
+        });
       }
     });
   },
