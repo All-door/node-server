@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<!-- HEAD PARTIAL -->
+<%- include ./partial/head %>
+<body>
+
+    <div id="loader">
+        <div class="loader-container">
+            <h3 class="loader-back-text"><img src="images/loader.gif" alt="" class="loader"></h3>
+        </div>
+    </div>
+
+    <div id="wrapper">
+      <!-- HEADER PARTIAL -->
+      <%- include ./partial/header.ejs %>
+
+        <section id="page-header" class="section background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="c1 breadcrumb text-left">
+                            <li><a href="#"> Home</a></li>
+                            <li>로그인 및 회원가입</li>
+                        </ul>
+                        <h3>로그인 및 회원가입</h3>
+                    </div>
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+
+        <section class="section clearfix">
+            <div class="container">
+                <div class="row">
+                    <div id="fullwidth" class="col-sm-12">
+
+                        <!-- START CONTENT -->
+                        <div class="row">
+                            <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="post-wrapper row clearfix">
+                                    <div class="col-md-6">
+                                        <h5>오늘 처음 오셨나요?</h5>
+                                        <p>간단한 가입을 통해 All-Door 서비스를 누려보세요!</p>
+                                        <hr>
+                                        <a href="/signup" type="submit" class="btn btn-primary btn-normal border-radius">가입하러 가기</a>
+                                    </div><!-- end col -->
+
+                                    <div class="col-md-6">
+                                        <form class="form-horizontal">
+                                            <div class="alert alert-danger" role="alert">로그인에 실패했습니다. 이메일/비밀번호를 확인해주세요.</div>
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label">이메일:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                                </div>
+                                                <label for="inputPassword3" class="col-sm-2 control-label">암호:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                                </div>
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <hr>
+                                                    <button type="submit" class="btn btn-primary btn-normal border-radius pull-right">로그인</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div><!-- end col -->
+                                </div><!-- end post-wrapper -->
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                        <!-- END CONTENT -->
+
+                    </div><!-- end fullwidth -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+
+        <!-- COPYRIGHTS PARTIAL -->
+        <%- include ./partial/copyrights.ejs %>
+    </div><!-- end wrapper -->
+
+    <!-- Template core JavaScript's
+================================================== -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/retina.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/circle.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/custom.js"></script>
+
+    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/revslider.js"></script>
+
+</body>
+</html>

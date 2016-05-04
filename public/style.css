@@ -36,6 +36,7 @@
 @import url(css/owl-carousel.css);
 @import url(css/prettyPhoto.css);
 
+/*
 @font-face {
     font-family: 'aqua_grotesqueregular';
     src: url('fonts/aqua-webfont.eot');
@@ -46,6 +47,12 @@
          url('fonts/aqua-webfont.svg#aqua_grotesqueregular') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+*/
+@font-face{
+    font-family:ng;
+    src:url('fonts/NanumGothic.eot');
+    src:local(※), url('fonts/NanumGothic.woff') format(‘woff’)
 }
 
 /* ==================================================================
@@ -108,7 +115,7 @@ strong {
 body {
 	color: #444444;
 	font-size: 15px;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Nanum Gothic", sans-serif;
 	font-style: normal;
 	font-weight: 300;
 	line-height: 26px;
@@ -163,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 20px;
 	text-transform: uppercase;
 	color:#444444;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	line-height: 1.2em;
 }
 h1 {
@@ -232,7 +239,7 @@ p.lead {
 	position: relative;
 }
 .btn {
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	text-transform: uppercase;
 	border-radius: 0;
 	font-weight: normal;
@@ -347,7 +354,7 @@ a,
 }
 .dropdown .btn-white {
     border: 1px solid #dddddd;
-    font-family: "Raleway";
+    font-family: "Nanum Gothic", sans-serif;
     background: #ffffff !important;
     color:#444444 !important;
     box-shadow: none !important;
@@ -431,7 +438,7 @@ a,
 	font-size: 12px;
 	padding-left: 30px;
 	text-transform:uppercase;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 }
 .comment-meta {
 	color:#888888;
@@ -854,7 +861,7 @@ a,
 .home-form .nav-tabs > li > a {
 	color: #444444;
 	text-align: center;
-    font-family: "aqua_grotesqueregular",serif;
+    font-family: "Nanum Gothic", sans-serif;
     text-transform: uppercase;
     font-size:15px;
 	padding: 20px 34px 20px 34px;
@@ -876,7 +883,7 @@ a,
 	line-height: 28px;
 }
 .homeform {
-	padding:100px 0 0px;
+	padding:200px 0 40px;
 }
 .home-form .nav-tabs > li {
 	width: 20%;
@@ -927,7 +934,7 @@ a,
 }
 .ui-datepicker .ui-datepicker-title {
     color: #444444;
-    font-family: aqua_grotesqueregular;
+    font-family: "Nanum Gothic", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.8em;
@@ -968,7 +975,7 @@ a,
     background:#222222;
     border: 1px solid #444444;
     color: #ffffff !important;
-    font-family: "raleway" !important;
+    font-family: "Nanum Gothic", sans-serif;
     font-weight: 300;
 }
 #countdown {
@@ -990,7 +997,7 @@ a,
 	font-weight: bold;
 	display: inline-block;
 	text-align: center;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	position: relative;
 	overflow: hidden;
 	position: relative;
@@ -1002,7 +1009,7 @@ a,
 	left:0;
 	right:0;
 	text-align:center;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	font-size:15px;
 	text-transform: uppercase;
 }
@@ -1034,7 +1041,7 @@ a,
 .pricing-price sup {
 	top:auto;
     bottom: 0 !important;
-    font-family: arial !important;
+    font-family: "Nanum Gothic", sans-serif; !important;
     font-size: 21px !important;
     font-weight: normal !important;
 }
@@ -1097,7 +1104,7 @@ a,
 	top:50%
 }
 .circle-stat h3 span {
-	font-family:"Raleway";
+	font-family:"Nanum Gothic", sans-serif;
 }
 .stat-details h3 {
 	font-size:15px;
@@ -1265,7 +1272,7 @@ a,
 }
 .price-details ul li span {
     display: -moz-stack;
-    font-family: "aqua_grotesqueregular",serif;
+    font-family: "Nanum Gothic", sans-serif;
     width: 114px;
 }
 .price-details ul {
@@ -1426,7 +1433,7 @@ i {
 	margin:0;
 	padding:0;
 	font-size: 12px;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	color:#ffffff;
 }
 .topbar li {
@@ -1452,12 +1459,13 @@ i {
 	display: block;
 	position: relative;
 	padding-top: 10px;
+	border-bottom: 1px solid #eeeeee;
 }
 .navbar-nav > li > a {
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	text-transform: uppercase;
-	font-size:20px;
-	color:#ffffff;
+	font-size:15px;
+	color:#444444;
 	padding:40px 15px;
 	border-bottom:3px solid #ffffff;
 }
@@ -1511,7 +1519,7 @@ i {
 }
 .dropdown-menu li {
 	text-transform: uppercase;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	border-top: 1px solid #333333;
 }
 .dropdown-menu li a {
@@ -1578,9 +1586,10 @@ i {
 .fixedheader {
 	background: #ffffff !important;
 	background: rgb(255, 255, 255); /* The Fallback */
-	background: rgba(255, 255, 255, 0) !important; 
+	background: rgba(255, 255, 255, 0.9) !important; 
 	box-shadow: none;
 	position: absolute;
+	top:52px;
 	left: 0;
 	z-index: 1000;
 	width:100%;
@@ -1642,7 +1651,7 @@ i {
 }
 .sidebar li {
 	text-transform: uppercase;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	border-bottom: 1px solid #ececec;
 }
 .sidebar li:last-child {
@@ -1745,7 +1754,7 @@ i {
 	font-size:45px;
 	line-height:60px;
 	margin:0px;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	text-align: center;
 	border-width:0px;
 	letter-spacing: 2px;
@@ -1753,7 +1762,7 @@ i {
 	white-space:nowrap;
 }
 .slider-title small {
-	font-size:20px;
+	font-size:20px;f
 	display: block;
 	margin-top: 20px;
 }
@@ -1761,7 +1770,7 @@ i {
 .tp-caption.slider-title2 {
 	position:absolute;
 	color:#fff;
-	font-weight:300;
+	fonts-weight:300;
 	font-size:18px;
 	line-height:24px;
 	margin:0px;
@@ -1790,7 +1799,7 @@ i {
 	font-size:13px !important;
 	text-transform: uppercase;
 	margin:0 10px 0 0;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: "Nanum Gothic", sans-serif;
 	padding:14px 44px;
 }
 .slider-btn .btn-white,
@@ -1863,7 +1872,7 @@ i {
 	padding:30px 0;
 	font-size:15px;
 	color:#aaaaaa;
-	font-family: 'aqua_grotesqueregular', serif;
+	font-family: '"Nanum Gothic", sans-serif;
 }
 .copyrights p {
 	margin: 0;
@@ -1897,7 +1906,6 @@ i {
 	position: relative;
 	display: block;
 	margin-bottom:60px;
-
 }
 #sidebar .widget a {
  	color:#444444;
@@ -1966,11 +1974,11 @@ h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a,
 .c2 li span,
 .btn-primary {
 	color: #fff;
-	background-color: #c278d8;
-	border-color: #c278d8;
+	background-color: #ffc926;
+	border-color: #ffc926;
 }
 .form-control:focus {
-	border-color: #c278d8;
+	border-color: #ffc926;
 	box-shadow: none;
 }
 .hotel-title hr,
@@ -1980,13 +1988,13 @@ h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a,
 .navbar-nav > li > a.active,
 .navbar-nav > li > a:focus,
 .navbar-nav > li > a:hover {
-	border-color: #c278d8;
+	border-color: #ffc926;
 }
 #infoform .form-control,
 .input-group-addon,
 .dropdown .btn-white,
 .form-inline .input-group > .form-control {
-	border-bottom-color: #c278d8;
+	border-bottom-color: #ffc926;
 }
 .post-title .pull-right span,
 .bootstrap-select .fa-angle-down,
@@ -2004,7 +2012,7 @@ a,
 .breadcrumb > li + li::before,
 .c3 span,
 .c1 li:before {
-	color: #c278d8;
+	color: #ffc926;
 }
 
 /* ==================================================================
@@ -2175,13 +2183,3 @@ a,
     margin: 10px 0 !important;
 }
 }
-
-
-.menuHeader {
-	display: block;
-	position: relative;
-	padding-top: 10px;
-	background-color: #484848;
-}
-
-
