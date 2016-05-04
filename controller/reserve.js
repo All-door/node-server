@@ -165,15 +165,17 @@ module.exports = {
       if(doc == null){
         callback("존재하지 않는 방입니다",null);
       }else{
-        Reservaion.find({ _id : room_id })
+        Reservation.find({ room_id : room_id })
                    .where('start_day').gte(today)
                    .where('end_day').gte(today)
-                   .where('status').in['예약중','예약완료']
-                   .sort(sort)
+                   .where('status').in(['예약중','예약완료'])
+                   .sort({ start_day : -1 })
                    .skip(offset)
-                   .limit(limit).then((docs)=>{
+                   .limit(limit)
+                   .select({ start_day : 1, start_time : 1, end_day : 1, end_time : 1 })
+                   .then((docs)=>{
                      callback(null,docs);
-                   });
+                   })
       }
     });
   },

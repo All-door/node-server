@@ -5,14 +5,12 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-let multer = require('multer')();
 
 let config = require('./config');
 global.models = require('./models/models.js');
 global.response = require('./controller/response');
 
 let routes = require('./routes/index');
-let login = require('./routes/login');
 
 let user = require('./routes/api/user');
 let user_room = require('./routes/api/user/room');
@@ -21,6 +19,7 @@ let user_reserve = require('./routes/api/user/reserve');
 
 let room = require('./routes/api/room');
 let room_comment = require('./routes/api/room/comment');
+let room_reservation = require('./routes/api/room/reservation');
 
 let review = require('./routes/api/review');
 
@@ -53,19 +52,22 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+/*
+* WEB FRONT ROUTE
+*/
 app.use('/', routes);
-app.use('/login',login);
 
+/*
+* API ROUTE
+*/
 app.use('/api/user',user);
 app.use('/api/user/favorite',user_favorites);
 app.use('/api/user/room',user_room);
 app.use('/api/user/reserve',user_reserve);
-
 app.use('/api/room',room);
 app.use('/api/room',room_comment);
-
+app.use('/api/room',room_reservation);
 app.use('/api/review',review);
-
 app.use('/api/device',device);
 
 // catch 404 and forward to error handler

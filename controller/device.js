@@ -66,7 +66,7 @@ module.exports={
           battery_status : battery_status,
           oepn : 0
         };
-1
+
         redis
         .hset('device_info',device_id,JSON.stringify(status))
         .then(()=>{});
