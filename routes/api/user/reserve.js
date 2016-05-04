@@ -25,6 +25,26 @@ router.get('/',(req,res,next)=>{
 });
 
 /*
+* 유저의 시간 지난 예약정보 가지고 오기
+* GET /api/user/reserve/old
+*/
+router.get('/old',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      Reservation.GetOldResevationByUserId(req.query.offset,req.query.limit,user.userid,(err,docs)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Data(res,docs);
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+
+/*
 * 유저의 특정 예약정보 가지고 오기
 * GET /api/user/reserve/:reservation_id
 */

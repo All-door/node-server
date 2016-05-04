@@ -148,8 +148,25 @@ module.exports = {
     let time = GetTodayTimeString();
 
     Reservation.find({ user_id : user_id})
+               .where('end_day').gte(today)
                .select({ password : 0 , user_id : 0})
                .sort({ start_day : - 1})
+               .skip(offset)
+               .limit(limit)
+               .exec(callback)
+  },
+  'GetOldResevationByUserId' : (offset,limit,user_id,callback)=>{
+    callback = callback || ()=>{};
+    offset = offset || 0;
+    limit = limit || 30;
+
+    let today = GetTodayDateString();
+    let time = GetTodayTimeString();
+
+    Reservation.find({ user_id : user_id })
+               .where('end_day').lt(today)
+               .select({ password : 0, user_id : 0})
+               .sort({ end_day : -1 })
                .skip(offset)
                .limit(limit)
                .exec(callback)
@@ -166,7 +183,6 @@ module.exports = {
         callback("존재하지 않는 방입니다",null);
       }else{
         Reservation.find({ room_id : room_id })
-                   .where('start_day').gte(today)
                    .where('end_day').gte(today)
                    .where('status').in(['예약중','예약완료'])
                    .sort({ start_day : -1 })
