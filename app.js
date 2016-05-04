@@ -23,6 +23,8 @@ let room_reservation = require('./routes/api/room/reservation');
 
 let review = require('./routes/api/review');
 
+let search = require('./routes/api/search');
+
 let device = require('./routes/api/device');
 
 let app = express();
@@ -69,6 +71,7 @@ app.use('/api/room',room_comment);
 app.use('/api/room',room_reservation);
 app.use('/api/review',review);
 app.use('/api/device',device);
+app.use('/api/search',search);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=>{

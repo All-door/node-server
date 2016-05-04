@@ -1,5 +1,7 @@
 'use strict'
 const Room = models.Room;
+const Reservation = models.Reservation;
+const async = require('async');
 const enumType = ['숙박','회의실','공부방','창고','강당'];
 const enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
 
@@ -185,5 +187,88 @@ module.exports = {
     limit = limit || 30;
     Room.find({}).sort({ favorite_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
+  },
+  'GetVancancyRoomsByQuery' : (offset,limit,query,callback)=>{
+    callback = callback || ()=>{};
+    offset = offset || 0;
+    limit = limit || 30;
+
+    let type = query.type;
+    let tag = query.tag;
+    let start_day = query.start_day;
+    let start_time = query.start_time;
+    let end_day = query.end_day;
+    let end_time = query.end_time;
+
+    if( !tag && !type ){
+      callback("데이터 정보를 확인해주세요.",null);
+      return;
+    }
+
+    if(!start_day || !end_day ){
+      callback("데이터 정보를 확인해주세요.",null);
+      return;
+    }
+
+    if( type != '숙박' && (!start_time || !end_time)){
+      callback("데이터 정보를 확인해주세요.",null);
+      return;
+    }
+
+    if( type == '숙박' ){
+      start_time = '24:00';
+      end_time = '24:00';
+    }
+
+    let find_query = {};
+    if(!tag && type){
+      find_query = {
+        type : type
+      };
+    }
+    if(tag && type){
+      find_query = {
+        tag : tag,
+        type : type
+      };
+    }
+    if(tag && !type){
+      find_query = {
+        tag : tag
+      };
+    }
+
+    Room
+    .find(find_query)
+    .then((docs)=>{
+      if(docs.length == 0){
+        callback(null,[]);
+      }else{
+        let list = [];
+        async.filter(docs,(doc,callback)=>{
+          Reservation.findOne({ room_id : doc._id })
+                     .where('start_day').lte(end_day).gte(start_day)
+                     .where('start_time').lte(end_time).gte(start_time)
+                     .where('end_day').lte(end_day).gte(start_day)
+                     .where('end_time').lte(end_time).gte(start_time)
+                     .then((result)=>{
+                       if( result == null){
+                         if(offset == 0 && limit > 0){
+                           list.push(doc);
+                           limit--;
+                         }
+                         if(offset > 0){
+                           offset--;
+                         }
+                         callback(null,doc);
+                       }else{
+                         callback(null,null);
+                       }
+                     });
+        },(err,results)=>{
+          callback(null,list);
+        });
+      }
+    });
   }
 };
