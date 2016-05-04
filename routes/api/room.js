@@ -63,7 +63,7 @@ router.get('/sort/favorite', (req,res,next)=>{
 
 /*
 * 특정 공간(방) 정보 가지고 오기
-* GET /api/room/:room_d
+* GET /api/room/:room_id
 */
 router.get('/:room_id', (req,res,next)=>{
   let room_id = req.params.room_id;
