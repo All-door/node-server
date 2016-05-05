@@ -30,7 +30,7 @@ let device = require('./routes/api/device');
 let app = express();
 let passport = require('passport');
 let session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+let RedisStore = require('connect-redis')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

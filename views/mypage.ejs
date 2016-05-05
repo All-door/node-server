@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<!-- HEAD PARTIAL -->
+<%- include ./partial/head %>
+<body>
+
+    <div id="loader">
+        <div class="loader-container">
+            <h3 class="loader-back-text"><img src="images/loader.gif" alt="" class="loader"></h3>
+        </div>
+    </div>
+
+    <div id="wrapper">
+      <!-- HEADER PARTIAL -->
+      <%- include ./partial/header.ejs %>
+
+        <section id="page-header" class="section background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="c1 breadcrumb text-left">
+                            <li><a href="#">Home</a></li>
+                            <li>My Page</li>
+                        </ul>
+                        <h3>My Page</h3>
+                    </div>
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+
+        <section class="section clearfix">
+            <div class="container">
+                <div class="row">
+                    <div id="fullwidth" class="col-sm-12">
+
+                        <!-- START CONTENT -->
+                        <div class="row">
+
+                            <div id="sidebar" class="col-md-4 col-sm-12 col-xs-12">
+                                <div class="widget clearfix">
+                                    <div class="widget-title">
+                                        <h3>예약 관련</h3>
+                                    </div><!-- end title -->
+                                    <div class="listwidget">
+                                        <ul>
+                                            <li><a href="#">예약 정보 확인하기</a></li>
+                                        </ul>
+                                    </div><!-- end listwidget -->
+                                </div><!-- end widget -->
+
+                                <div class="widget clearfix">
+                                    <div class="widget-title">
+                                        <h3>호스팅 관련</h3>
+                                    </div><!-- end title -->
+                                    <div class="listwidget">
+                                        <ul>
+                                            <li><a href="#">방 호스팅 등록</a></li>
+                                            <li><a href="#">등록된 방 확인</a></li>
+                                            <li><a href="#">예약 리스트 확인</a></li>
+                                            <li><a href="#">방의 상태 확인</a></li>
+                                        </ul>
+                                    </div><!-- end listwidget -->
+                                </div><!-- end widget -->
+
+                                <div class="widget clearfix">
+                                    <div class="widget-title">
+                                        <h3>개인 정보 관련</h3>
+                                    </div><!-- end title -->
+                                    <div class="listwidget">
+                                        <ul>
+                                            <li><a href="#">비밀번호 수정하기</a></li>
+                                            <li><a href="/logout">로그아웃</a></li>
+                                        </ul>
+                                    </div><!-- end listwidget -->
+                                </div><!-- end widget -->
+                            </div><!-- end col -->
+
+                            <div id="content" class="col-md-8 col-sm-12 col-xs-12">
+                                <div class="alert alert-danger" role="alert">데이터 서버 오류. 관리자에 문의 요망</div>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                        <!-- END CONTENT -->
+
+                    </div><!-- end fullwidth -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+
+
+        <!-- COPYRIGHTS PARTIAL -->
+        <%- include ./partial/copyrights.ejs %>
+    </div><!-- end wrapper -->
+
+    <!-- Template core JavaScript's
+================================================== -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/retina.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/circle.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+</html>
