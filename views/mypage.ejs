@@ -36,55 +36,15 @@
             <div class="container">
                 <div class="row">
                     <div id="fullwidth" class="col-sm-12">
-
                         <!-- START CONTENT -->
                         <div class="row">
-
-                            <div id="sidebar" class="col-md-4 col-sm-12 col-xs-12">
-                                <div class="widget clearfix">
-                                    <div class="widget-title">
-                                        <h3>예약 관련</h3>
-                                    </div><!-- end title -->
-                                    <div class="listwidget">
-                                        <ul>
-                                            <li><a href="#">예약 정보 확인하기</a></li>
-                                        </ul>
-                                    </div><!-- end listwidget -->
-                                </div><!-- end widget -->
-
-                                <div class="widget clearfix">
-                                    <div class="widget-title">
-                                        <h3>호스팅 관련</h3>
-                                    </div><!-- end title -->
-                                    <div class="listwidget">
-                                        <ul>
-                                            <li><a href="#">방 호스팅 등록</a></li>
-                                            <li><a href="#">등록된 방 확인</a></li>
-                                            <li><a href="#">예약 리스트 확인</a></li>
-                                            <li><a href="#">방의 상태 확인</a></li>
-                                        </ul>
-                                    </div><!-- end listwidget -->
-                                </div><!-- end widget -->
-
-                                <div class="widget clearfix">
-                                    <div class="widget-title">
-                                        <h3>개인 정보 관련</h3>
-                                    </div><!-- end title -->
-                                    <div class="listwidget">
-                                        <ul>
-                                            <li><a href="#">비밀번호 수정하기</a></li>
-                                            <li><a href="/logout">로그아웃</a></li>
-                                        </ul>
-                                    </div><!-- end listwidget -->
-                                </div><!-- end widget -->
-                            </div><!-- end col -->
-
+                          <!-- MYPAGE SIDEBAR PARTIAL -->
+                          <%- include ./partial/mypage_sidebar.ejs %>
                             <div id="content" class="col-md-8 col-sm-12 col-xs-12">
                                 <div class="alert alert-danger" role="alert">데이터 서버 오류. 관리자에 문의 요망</div>
                             </div><!-- end col -->
                         </div><!-- end row -->
                         <!-- END CONTENT -->
-
                     </div><!-- end fullwidth -->
                 </div><!-- end row -->
             </div><!-- end container -->
