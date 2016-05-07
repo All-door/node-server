@@ -67,7 +67,6 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
         room_images : room_images,
         address : address
       };
-      console.log(room);
       Room.InsertRoom(room,(err,doc)=>{
         if(err){
           response.Error(res,err);
