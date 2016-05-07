@@ -4,7 +4,7 @@
   Template Name: Trips
   Created By: TRENDING TEMPLATES TEAM
   http://themeforest.net/user/trendingtemplates
-  
+
   1) FONTS
   2) RESET
   3) SKELETON
@@ -22,7 +22,7 @@
   15) EXTRAS
   16) RESPONSIVE
 
-################################################################# */ 
+################################################################# */
 
 /* ==================================================================
 	FONTS
@@ -68,8 +68,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -79,7 +79,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -131,7 +131,7 @@ body {
 }
 input,
 select,
-textarea { 
+textarea {
 	font-size: 15px;
 	font-style: normal;
 	font-weight: 300;
@@ -405,7 +405,7 @@ a,
 }
 
 /* ==================================================================
-	BLOG 
+	BLOG
 ================================================================== */
 
 .comments-answer {
@@ -486,12 +486,12 @@ a,
 }
 .border-bottom {
 	margin-bottom: 60px;
-	padding:0 0 30px; 
+	padding:0 0 30px;
 }
 .section-bottom {
 	border-bottom:1px solid #eeeeee;
 }
-.pagination > li > a, 
+.pagination > li > a,
 .pagination > li > span {
     background-color: #f6f6f6;
     border: 1px solid #ddd;
@@ -756,13 +756,13 @@ a,
 	padding:0;
 }
 .thumbnails {
-	max-width:100px 
+	max-width:100px
 }
 .thumbnails img {
 	max-width:100px;
 	border:2px solid #ffffff;
 	margin:5px 0;
-} 
+}
 .hotel-hr {
 	margin: 40px 0
 }
@@ -924,8 +924,8 @@ a,
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
     width: 100%;
 }
-.ui-state-default, 
-.ui-widget-content .ui-state-default, 
+.ui-state-default,
+.ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	color: #ffffff;
 	font-size:12px;
@@ -1216,7 +1216,7 @@ a,
   	position: absolute;
   	z-index:10;
   	line-height: 20px;
-}	
+}
 .progress .progressbar-back-text {
   	position: absolute;
   	width: 100%;
@@ -1251,18 +1251,18 @@ a,
     width: 45px;
     z-index: 9999;
 }
-.progress-bar span:after { 
-	top: 100%; 
-	left: 50%; 
-	border: solid transparent; 
-	content: " "; 
-	height: 0; 
-	width: 0; 
-	position: absolute; 
-	pointer-events: none; 
-	border-color: rgba(0, 0, 0, 0); 
-	border-top-color: #000000; 
-	border-width: 4px; 
+.progress-bar span:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(0, 0, 0, 0);
+	border-top-color: #000000;
+	border-width: 4px;
 	margin-left: -4px;
 }
 .price-range img {
@@ -1303,7 +1303,7 @@ a,
 }
 
 /* ==================================================================
-	SECTION & PAGE 
+	SECTION & PAGE
 ================================================================== */
 
 /* background setup */
@@ -1492,19 +1492,19 @@ i {
     padding: 5px 0 5px;
     z-index: 9999;
 }
-.nav .open > a, 
-.nav .open > a:hover, 
+.nav .open > a,
+.nav .open > a:hover,
 .nav .open > a:focus,
 .navbar-nav > li > a.active,
 .navbar-nav > li > a:focus,
 .navbar-nav > li > a:hover,
-.navbar-nav > li > a:hover, 
-.navbar-nav > li > a:focus, 
-.navbar-nav > li > a.active, 
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.navbar-nav > li > a.active,
 .navbar-nav > li > a:active {
 	background: #ffffff !important;
 	background: rgb(255, 255, 255); /* The Fallback */
-	background: rgba(255, 255, 255, 1); 
+	background: rgba(255, 255, 255, 1);
 	box-shadow: none;
 }
 .sidebar li a,
@@ -1512,7 +1512,7 @@ i {
 .sidebar li a:focus {
 	background-color: transparent;
 	background: rgb(255, 255, 255); /* The Fallback */
-	background: rgba(255, 255, 255, 0); 
+	background: rgba(255, 255, 255, 0);
 }
 .dropdown-menu li:last-child {
 	border-bottom: 1px solid #333333;
@@ -1574,7 +1574,7 @@ i {
 .nopadding {
 	padding:0 !important;
 }
-.yamm-content .col-md-6 {	
+.yamm-content .col-md-6 {
     min-width: 210px;
 }
 .navbar-nav .noborder {
@@ -1586,7 +1586,7 @@ i {
 .fixedheader {
 	background: #ffffff !important;
 	background: rgb(255, 255, 255); /* The Fallback */
-	background: rgba(255, 255, 255, 0.9) !important; 
+	background: rgba(255, 255, 255, 0.9) !important;
 	box-shadow: none;
 	position: absolute;
 	top:52px;
@@ -1598,23 +1598,23 @@ i {
 	top:0;
 }
 .nobg,
-.fixedheader .nav .open > a, 
-.fixedheader .nav .open > a:hover, 
-.fixedheader .nav .open > a:focus, 
-.fixedheader .navbar-nav > li > a.active, 
-.fixedheader .navbar-nav > li > a:focus, 
-.fixedheader .navbar-nav > li > a:hover, 
-.fixedheader .navbar-nav > li > a:hover, 
-.fixedheader .navbar-nav > li > a:focus, 
-.fixedheader .navbar-nav > li > a.active, 
+.fixedheader .nav .open > a,
+.fixedheader .nav .open > a:hover,
+.fixedheader .nav .open > a:focus,
+.fixedheader .navbar-nav > li > a.active,
+.fixedheader .navbar-nav > li > a:focus,
+.fixedheader .navbar-nav > li > a:hover,
+.fixedheader .navbar-nav > li > a:hover,
+.fixedheader .navbar-nav > li > a:focus,
+.fixedheader .navbar-nav > li > a.active,
 .fixedheader .navbar-nav > li > a:active {
 	background: #ffffff !important;
 	background: rgb(255, 255, 255); /* The Fallback */
-	background: rgba(255, 255, 255, 0) !important; 
+	background: rgba(255, 255, 255, 0) !important;
 }
 .fixedheader .navbar-nav > li > a {
 	border-color:transparent;
-	background: rgba(255, 255, 255, 0) !important; 
+	background: rgba(255, 255, 255, 0) !important;
 }
 .nobg .navbar-nav > li > a i,
 .nobg .navbar-nav > li > a {
@@ -1729,8 +1729,8 @@ i {
 	top:0;
 }
 .boxedcontainer	{
-	max-width: 1170px; 
-	margin:auto; 
+	max-width: 1170px;
+	margin:auto;
 	padding:0px 30px;
 }
 .tp-banner-container{
@@ -1872,7 +1872,7 @@ i {
 	padding:30px 0;
 	font-size:15px;
 	color:#aaaaaa;
-	font-family: '"Nanum Gothic", sans-serif;
+	font-family: "Nanum Gothic", sans-serif;
 }
 .copyrights p {
 	margin: 0;
@@ -1887,7 +1887,7 @@ i {
 }
 
 /* ==================================================================
-	SIDEBAR WIDGETS 
+	SIDEBAR WIDGETS
 ================================================================== */
 
 .post-media img,
@@ -1982,8 +1982,8 @@ h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a,
 	box-shadow: none;
 }
 .hotel-title hr,
-.nav .open > a, 
-.nav .open > a:hover, 
+.nav .open > a,
+.nav .open > a:hover,
 .nav .open > a:focus,
 .navbar-nav > li > a.active,
 .navbar-nav > li > a:focus,
@@ -2000,7 +2000,6 @@ h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a,
 .bootstrap-select .fa-angle-down,
 .input-group-addon i,
 .rating i,
-a,
 .topbar-drops i,
 .sidebar li a:hover,
 .sidebar li a:focus,
@@ -2056,14 +2055,14 @@ a,
 	RESPONSIVE
 ================================================================== */
 
-@media (max-width: 1180px) { 
+@media (max-width: 1180px) {
 	.navbar-nav > li > a {
 	    font-size: 13px;
 	    padding: 40px 9px;
 	}
 }
 
-@media (max-width: 1024px) { 
+@media (max-width: 1024px) {
 	.bookform .input-group {
 		width: 100% !important;
 	}
@@ -2142,7 +2141,7 @@ a,
 	}
 	.copyrights .text-left,
 	.copyrights .text-right {
-		text-align: center !important; 
+		text-align: center !important;
 	}
 	.navbar-nav > li > a {
 		padding: 15px 0;
