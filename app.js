@@ -72,6 +72,7 @@ app.use('/api/room',room_reservation);
 app.use('/api/review',review);
 app.use('/api/device',device);
 app.use('/api/search',search);
+app.use('/api/images',express.static(config.ImagePath));
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=>{
