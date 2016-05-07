@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
+const User = require('../controller/user');
 
 /* GET home page. */
 router.get('/', (req, res, next)=>{
@@ -33,8 +34,13 @@ router.get('/search',(req,res,next)=>{
 });
 
 router.get('/mypage',(req,res,next)=>{
-  res.render('mypage',{});
-});
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      res.render('mypage',{});
+    }else{
+      res.redirect('/login');
+    }
+  });});
 
 router.get('/device',(req,res,next)=>{
   res.render('device',{});
@@ -48,4 +54,13 @@ router.get('/room',(req,res,next)=>{
   res.render('room',{});
 });
 
+router.get('/register',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      res.render('register',{});
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
 module.exports = router;
