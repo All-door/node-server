@@ -1,6 +1,6 @@
 var Login = (function(){
   /*
-  * REGEX FOR EMAIL CHECK 
+  * REGEX FOR EMAIL CHECK
   */
   var email_regex =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
@@ -51,7 +51,7 @@ var Login = (function(){
         password : password
       },
       success : function(data){
-        location.replace("/");
+        location.replace("/mypage");
       },
       error : function(request,status,error){
         $('#loader').delay(200).fadeOut();
