@@ -12,5 +12,14 @@
 }
 
 .delete{
-  
+
+}
+
+.removed_image {
+    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
+}
+
+.room_image {
+
 }

@@ -56,7 +56,7 @@ router.get('/mypage/room',(req,res,next)=>{
 router.get('/mypage/room/:room_id',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
-      res.render('404',{});
+      res.render('mypage-room-modify',{});
     }else{
       res.redirect('/login');
     }
