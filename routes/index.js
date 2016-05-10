@@ -40,7 +40,28 @@ router.get('/mypage',(req,res,next)=>{
     }else{
       res.redirect('/login');
     }
-  });});
+  });
+});
+
+router.get('/mypage/room',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      res.render('mypage-room',{});
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
+router.get('/mypage/room/:room_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      res.render('404',{});
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
 
 router.get('/device',(req,res,next)=>{
   res.render('device',{});
