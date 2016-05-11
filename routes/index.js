@@ -1,4 +1,4 @@
-'use strict'
+  'use strict'
 const express = require('express');
 const router = express.Router();
 const User = require('../controller/user');
@@ -72,6 +72,10 @@ router.get('/reservation',(req,res,next)=>{
 });
 
 router.get('/room',(req,res,next)=>{
+  res.render('room',{});
+});
+
+router.get('/room/:room_id',(req,res,next)=>{
   res.render('room',{});
 });
 

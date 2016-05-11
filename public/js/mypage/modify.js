@@ -116,7 +116,7 @@ var ModifyRoom = (function(){
         location.href = '/';
       }
     });
-  }
+  };
 
   var onClick_submit = function(){
     var name = $('#register-name').val();

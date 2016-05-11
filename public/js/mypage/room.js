@@ -40,13 +40,13 @@ var Room = (function(){
     var result = '';
     result += year;
     result += '-';
-    result += (month < 9) ? '0'+month : month;
+    result += (month <= 9) ? '0'+month : month;
     result += '-';
-    result += (day < 9) ? '0'+day : day;
+    result += (day <= 9) ? '0'+day : day;
     result += ' ';
-    result += (hour < 9) ? '0'+hour : hour;
+    result += (hour <= 9) ? '0'+hour : hour;
     result += '시 ';
-    result += (min < 9) ? '0'+min : min;
+    result += (min <= 9) ? '0'+min : min;
     result += '분';
     return result;
   };

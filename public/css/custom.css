@@ -23,3 +23,15 @@
 .room_image {
 
 }
+
+.room_image_padding{
+  padding: 15px;
+  margin-bottom: 15px !important;
+}
+
+.modal-body {
+    position: relative;
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 15px;
+}
