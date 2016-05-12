@@ -1,36 +1,31 @@
-'use strict'
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
+'use strict';
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-let config = require('./config');
+const config = require('./config');
 global.models = require('./models/models.js');
 global.response = require('./controller/response');
 
-let routes = require('./routes/index');
+const routes = require('./routes/index');
+const user = require('./routes/api/user');
+const user_room = require('./routes/api/user/room');
+const user_favorites = require('./routes/api/user/favorite');
+const user_reserve = require('./routes/api/user/reserve');
+const room = require('./routes/api/room');
+const room_comment = require('./routes/api/room/comment');
+const room_reservation = require('./routes/api/room/reservation');
+const review = require('./routes/api/review');
+const search = require('./routes/api/search');
+const device = require('./routes/api/device');
 
-let user = require('./routes/api/user');
-let user_room = require('./routes/api/user/room');
-let user_favorites = require('./routes/api/user/favorite');
-let user_reserve = require('./routes/api/user/reserve');
-
-let room = require('./routes/api/room');
-let room_comment = require('./routes/api/room/comment');
-let room_reservation = require('./routes/api/room/reservation');
-
-let review = require('./routes/api/review');
-
-let search = require('./routes/api/search');
-
-let device = require('./routes/api/device');
-
-let app = express();
-let passport = require('passport');
-let session = require('express-session');
-let RedisStore = require('connect-redis')(session);
+const app = express();
+const passport = require('passport');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
