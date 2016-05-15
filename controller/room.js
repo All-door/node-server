@@ -2,6 +2,7 @@
 const Room = models.Room;
 const Reservation = models.Reservation;
 const async = require('async');
+const dayList = ['일','월','화','수','목','금','토','일'];
 const enumType = ['숙박','회의실','공부방','창고','강당'];
 const enumTag = ['선릉역','신림역','길음역','강남역','역삼역','왕십리역'];
 
@@ -205,9 +206,18 @@ module.exports = {
       return;
     }
 
-    if(!start_day || !end_day ){
+    if((type != '숙박' && !start_day && !end_day)){
       callback("데이터 정보를 확인해주세요.",null);
       return;
+    }
+
+    if((type == '숙박' && (!start_day && end_dat))){
+      callback('데이터 정보를 확인해주세요.',null);
+      return;
+    }
+
+    if(type != '숙박'){
+      end_day = start_day;
     }
 
     if( type != '숙박' && (!start_time || !end_time)){
@@ -246,25 +256,64 @@ module.exports = {
       }else{
         let list = [];
         async.filter(docs,(doc,callback)=>{
-          Reservation.findOne({ room_id : doc._id })
-                     .where('start_day').lte(end_day).gte(start_day)
-                     .where('start_time').lte(end_time).gte(start_time)
-                     .where('end_day').lte(end_day).gte(start_day)
-                     .where('end_time').lte(end_time).gte(start_time)
-                     .then((result)=>{
-                       if( result == null){
-                         if(offset == 0 && limit > 0){
-                           list.push(doc);
-                           limit--;
+          if( type == '숙박'){
+            Reservation.find({ room_id : doc._id })
+                       .then((docs)=>{
+                         let reservations = docs.filter((doc)=>{
+                             if( start_day >= doc.start_day && start_day <= doc.end_day){
+                               return true;
+                             }
+                             if( end_day > doc.start_day && end_day <= doc.end_day){
+                               return true;
+                             }
+                             if(start_day <= doc.start_day && end_day >= doc.end_day){
+                               return true;
+                             }
+                             if(start_day >= doc.start_time && end_day <= doc.end_day){
+                               return true;
+                             }
+                             return false;
+                         });
+                         if( reservations.length == 0){
+                           if(offset == 0 && limit > 0){
+                             list.push(doc);
+                             limit --;
+                           }
+                           if( offset > 0){
+                             offseet --;
+                           }
+                           callback(null,doc);
+                         }else{
+                           callback(null,null);
                          }
-                         if(offset > 0){
-                           offset--;
+                       });
+          }else{
+            Reservation.findOne({ room_id : doc._id })
+                       .where('start_day').equals(start_day)
+                       .where('start_time').lte(end_time).gte(start_time)
+                       .where('end_time').lte(end_time).gte(start_time)
+                       .then((result)=>{
+                         if( result == null){
+                           let day = dayList[new Date(start_day).getDay()];
+
+                           if(doc.day_enable.indexOf(day) == -1 || start_time < doc.enable_start_time || end_time > doc.enable_end_time){
+                             callback(null,doc);
+                           }
+                           else{
+                             if(offset == 0 && limit > 0){
+                               list.push(doc);
+                               limit--;
+                             }
+                             if(offset > 0){
+                               offset--;
+                             }
+                             callback(null,doc);
+                           }
+                         }else{
+                           callback(null,null);
                          }
-                         callback(null,doc);
-                       }else{
-                         callback(null,null);
-                       }
-                     });
+                       });
+          }
         },(err,results)=>{
           callback(null,list);
         });
