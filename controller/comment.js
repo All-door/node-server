@@ -76,8 +76,8 @@ module.exports = {
   },
   'GetCommentsByRoomId' : (offset,limit,room_id,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
 
     if( !room_id ){
       callback("입력 데이터를 확인해주세요.",null);

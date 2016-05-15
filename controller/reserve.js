@@ -173,8 +173,8 @@ module.exports = {
   },
   'GetReservationByRoomId' : (offset,limit,room_id,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
 
     let today = GetTodayDateString();
 

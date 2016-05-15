@@ -32,11 +32,7 @@ module.exports = {
   },
   'InsertRoomRate' : (user_id,room_id,rate,callback)=>{
     callback = callback || ()=>{};
-
-    console.log(user_id);
-    console.log(room_id);
-    console.log(rate);
-    console.log(typeof(rate) === 'number');
+    
     if( !user_id || !room_id || !rate || !(typeof(rate) === 'number') || rate < 1 || rate > 5){
       callback("입력 데이터를 확인해주세요",null);
       return;

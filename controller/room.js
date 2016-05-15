@@ -134,16 +134,16 @@ module.exports = {
   },
   'GetRooms' : (offset,limit,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
 
     Room.find({}).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomsByUserId' : (user_id,offset,limit, callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
     Room.find({ user_id : user_id }).skip(offset).limit(limit)
         .exec(callback);
   },
@@ -153,45 +153,45 @@ module.exports = {
   },
   'GetRoomsByTag' : (tag,offset,limit,sort,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
     sort = sort || {};
     Room.find({ tag : tag }).sort(sort).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomsByType' : (type,offset,limit,sort,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
     sort = sort || {};
     Room.find({ type : type }).sort(sort).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomsByView' : (offset,limit,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
     Room.find({}).sort({ view_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomsByReservation' : (offset,limit,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
     Room.find({}).sort({ reservation_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetRoomsByFavorite' : (offset,limit,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
     Room.find({}).sort({ favorite_count : -1 }).skip(offset).limit(limit)
         .exec(callback);
   },
   'GetVancancyRoomsByQuery' : (offset,limit,query,callback)=>{
     callback = callback || ()=>{};
-    offset = offset || 0;
-    limit = limit || 30;
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
 
     let type = query.type;
     let tag = query.tag;
