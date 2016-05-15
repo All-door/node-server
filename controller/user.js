@@ -45,8 +45,13 @@ module.exports = {
         callback(null,doc);
       }
     }).catch((err)=>{
-      // 에러처리
-      callback(err.message,null);
+      if( err.message == '중복된 이메일 입니다.'){
+        callback(err.message,null);
+      }else if( err.message == '회원가입에 실패했습니다.'){
+        callback(err.message,null);
+      }else{
+        callback(err,null);
+      }
     });
   },
 
