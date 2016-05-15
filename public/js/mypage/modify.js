@@ -7,7 +7,7 @@ var ModifyRoom = (function(){
   var imageTemplate = '\
   <div class="<%= cls %>">\
     <div class="center-block" style="width: 370px; height: 185px; overflow: hidden; margin-bottom:10px !important;">\
-      <img id="<%= id %> class="room_image center-block" width="auto" height="185px" src="/api/images/<%= url %>">\
+      <img id="<%= id %>" class="room_image center-block" width="auto" height="185px" src="/api/images/<%= url %>">\
     </div>\
   </div>';
 

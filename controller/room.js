@@ -94,8 +94,9 @@ module.exports = {
         }
 
         let room_images = doc.room_images;
+        console.log(delete_images);
         for(let i = 0,len=delete_images.length; i<len;i++){
-          if( room_images.indexOf(delete_images[i] != -1)){
+          if( room_images.indexOf(delete_images[i]) != -1 ){
             room_images.splice(i,1);
           }
         }
