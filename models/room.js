@@ -40,11 +40,11 @@ let RoomSchema = mongoose.Schema({
   day_enable : [{ type : String, enum : ['월','화','수','목','금','토','일']}],
   enable_start_time : { type : String, validate : {
     validator : TimeValidator,
-    message : '시간 정보 형식이 잘못되었습니다 (HH:MM 30분단위)'
+    message : '시간 정보 형식이 잘못되었습니다 (HH:MM 1시간 단위)'
   }},
   enable_end_time : { type : String, validate : {
     validator : TimeValidator,
-    message : '시간 정보 형식이 잘못되었습니다 (HH:MM 30분단위)'
+    message : '시간 정보 형식이 잘못되었습니다 (HH:MM 1시간 단위)'
   }},
   comment : Array,
   favorite_count : { type : Number, default : 0 },
