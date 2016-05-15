@@ -1,4 +1,5 @@
 var RoomInfo = (function(){
+  var room_id = '';
   var imageTemplate = '\
   <div class="room_image_padding col-md-4" style="width: 370px; height: 185px; overflow: hidden; margin-bottom:10px !important;">\
     <img class="center-block" id="<%= image %>" src="/api/images/<%= image %>" height="185px" width="auto">\
@@ -100,9 +101,15 @@ var RoomInfo = (function(){
     $('img').click(onClick_image);
   };
 
+
+  var onClick_reservation = function(){
+    location.href= '/reservation/'+room_id  ;
+  };
+
   var init = function(){
-    var room_id = getRoomIdFromURL();
+    room_id = getRoomIdFromURL();
     getRoomInfo(room_id);
+    $('#room-reservation').click(onClick_reservation);
   };
 
   return {

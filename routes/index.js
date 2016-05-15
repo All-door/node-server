@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../controller/user');
+const Room = require('../controller/room');
 
 /* GET home page. */
 router.get('/', (req, res, next)=>{
@@ -88,4 +89,24 @@ router.get('/register',(req,res,next)=>{
     }
   });
 });
+
+router.get('/reservation/:room_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      Room.GetRoomByRoomId(req.params.room_id,(err,doc)=>{
+        if(!doc){
+          res.redirect('/');
+        }
+        else if(doc.type === '숙박'){
+          res.render('reservation-accommodation',{});
+        }else{
+          res.render('reservation',{});
+        }
+      });
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
 module.exports = router;

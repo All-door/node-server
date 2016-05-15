@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<!-- HEAD PARTIAL -->
+<%- include ./partial/head %>
+<body>
+
+<div id="loader">
+    <div class="loader-container">
+        <h3 class="loader-back-text"><img src="/images/loader.gif" alt="" class="loader"></h3>
+    </div>
+</div>
+
+<div id="wrapper">
+  <!-- HEADER PARTIAL -->
+  <%- include ./partial/header.ejs %>
+
+    <section id="page-header" class="section background">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="c1 breadcrumb text-left">
+                        <li><a href="/">Home</a></li>
+                        <li>예약하기</li>
+                    </ul>
+                    <h3 id="reservation-title">'공간 이름' 예약하기</h3>
+                </div>
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end section -->
+
+    <section class="section clearfix">
+        <div class="container">
+            <div class="row">
+                <div id="fullwidth" class="col-sm-12">
+                    <!-- START CONTENT -->
+                    <div class="row">
+                        <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="col-md-12">
+                            <h3>예약하기</h3>
+                            <hr/>
+                          </div>
+                          <div class="col-md-2">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th class="text-center"><strong>예약 가능한 날짜</strong></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr id="time-0" class="success text-center">
+                                  <td>5/14</td>
+                                </tr>
+                                <tr id="time-1" class="success text-center">
+                                  <td>5/15</td>
+                                </tr>
+                                <tr id="time-2" class="success text-center">
+                                  <td>5/16</td>
+                                </tr>
+                                <tr id="time-3" class="success text-center">
+                                  <td>5/17</td>
+                                </tr>
+                                <tr id="time-4" class="success text-center">
+                                  <td>5/18</td>
+                                </tr>
+                                <tr id="time-5" class="success text-center">
+                                  <td>5/19</td>
+                                </tr>
+                                <tr id="time-6" class="success text-center">
+                                  <td>5/20</td>
+                                </tr>
+                                <tr id="time-7" class="success text-center">
+                                  <td>5/21</td>
+                                </tr>
+                                <tr id="time-8" class="success text-center">
+                                  <td>5/22</td>
+                                </tr>
+                                <tr id="time-9" class="success text-center">
+                                  <td>5/23</td>
+                                </tr>
+                                <tr id="time-10" class="success text-center">
+                                  <td>5/23</td>
+                                </tr>
+                                <tr id="time-11" class="success text-center">
+                                  <td>5/23</td>
+                                </tr>
+                                <tr id="time-12" class="success text-center">
+                                  <td>5/23</td>
+                                </tr>
+                                <tr id="time-13" class="success text-center">
+                                  <td>5/23</td>
+                                </tr>
+                                <tr id="time-14" class="success text-center">
+                                  <td>5/23</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-md-10">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <label for="inputName" class="col-sm-2 control-label" id="reservation-starttime-labael"><strong>시작 날짜</strong> :</label>
+                            <div class="col-sm-4">
+                              <input type="text" class="form-control" placeholder="시작 날짜를 입력해주세요" id="datepicker">
+                            </div>
+                            <label for="inputName" class="col-sm-2 control-label" id="reservation-endtime-label"><strong>종료 날짜</strong> :</label>
+                            <div class="col-sm-4">
+                              <input type="text" class="form-control" placeholder="종료 날짜를 입력해주세요" id="datepicker1">
+                            </div>
+                            <hr/>
+                            <label for="inputName" class="col-sm-2 control-label"><strong>암호</strong> :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="reservation-password" placeholder="암호를 입력해주세요">
+                            </div>
+                           <div class="col-sm-offset-2 col-sm-10">
+                                <hr>
+                                <a id="reservation-submit" type="submit" class="btn btn-primary btn-normal border-radius pull-right">예약하기</a>
+                           </div>
+                          </div>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                    <!-- END CONTENT -->
+                </div><!-- end fullwidth -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end section -->
+
+
+    <!-- COPYRIGHTS PARTIAL -->
+    <%- include ./partial/copyrights.ejs %>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/circle.js"></script>
+    <script src="/js/progress.js"></script>
+    <script src="/js/jquery.prettyPhoto.js"></script>
+    <script src="/js/contact.js"></script>
+    <script src="/js/parallax.js"></script>
+    <script src="/js/owl.carousel.js"></script>
+    <script src="/js/bootstrap-select.js"></script>
+    <script src="/js/custom.js"></script>
+
+    <script src="/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="/js/revslider.js"></script>
+
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/reservation/accommodation.js"></script>
+</body>
+</html>
