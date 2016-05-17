@@ -31,7 +31,7 @@ router.get('/list',(req,res,next)=>{
 });
 
 router.get('/search',(req,res,next)=>{
-  res.render('serach',{});
+  res.render('search',{});
 });
 
 router.get('/mypage',(req,res,next)=>{

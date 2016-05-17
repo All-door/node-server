@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- HEAD PARTIAL -->
+<%- include ./partial/head %>
+
+    <body>
+        <div id="loader">
+            <div class="loader-container">
+                <h3 class="loader-back-text"><img src="images/loader.gif" alt="" class="loader"></h3>
+            </div>
+        </div>
+        <div id="wrapper">
+            <!-- HEADER PARTIAL -->
+            <%- include ./partial/header.ejs %>
+                <section id="page-header" class="section background">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="c1 breadcrumb text-left">
+                                    <li><a href="/">Home</a></li>
+                                    <li>공간 검색하기</li>
+                                </ul>
+                                <h3>공간 검색하기</h3>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </section>
+                <!-- end section -->
+
+                <section class="section clearfix">
+                    <div class="container">
+                        <div class="row">
+                            <div id="fullwidth" class="col-sm-12">
+                                <!-- START CONTENT -->
+                                <div class="row">
+                                    <!-- MYPAGE SIDEBAR PARTIAL -->
+                                    <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+                                        <h3>공간 검색하기</h3>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">공간 타입 :</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="search-type">
+                                                    <option value="숙박">숙박</option>
+                                                    <option value="강당">강당</option>
+                                                    <option value="공부방">공부방</option>
+                                                    <option value="회의실">회의실</option>
+                                                    <option value="창고">창고</option>
+                                                </select>
+                                            </div>
+                                            <label for="inputName" class="col-sm-2 control-label">공간 태그 :</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="search-tag">
+                                                    <option value=""></option>
+                                                    <option value="강남역">강남역</option>
+                                                    <option value="선릉역">선릉역</option>
+                                                    <option value="신림역">신림역</option>
+                                                    <option value="길음역">길음역</option>
+                                                </select>
+                                            </div>
+                                            <div id="search-tab-1">
+                                              <label for="inputDate" class="col-sm-2 control-label">예약 날짜 :</label>
+                                              <div class="col-sm-10">
+                                                  <input type="text" class="form-control" placeholder="예약 날짜" id="datepicker">
+                                              </div>
+                                              <label for="inputStarttime" class="col-sm-2 control-label">시작 시간 :</label>
+                                              <div class="col-sm-4">
+                                                  <select class="form-control" id="search-starttime">
+                                                      <option value="00:00">00:00</option>
+                                                      <option value="01:00">01:00</option>
+                                                      <option value="02:00">02:00</option>
+                                                      <option value="03:00">03:00</option>
+                                                      <option value="04:00">04:00</option>
+                                                      <option value="05:00">05:00</option>
+                                                      <option value="06:00">06:00</option>
+                                                      <option value="07:00">07:00</option>
+                                                      <option value="08:00">08:00</option>
+                                                      <option value="09:00">09:00</option>
+                                                      <option value="10:00">10:00</option>
+                                                      <option value="11:00">11:00</option>
+                                                      <option value="12:00">12:00</option>
+                                                      <option value="13:00">13:00</option>
+                                                      <option value="14:00">14:00</option>
+                                                      <option value="15:00">15:00</option>
+                                                      <option value="16:00">16:00</option>
+                                                      <option value="17:00">17:00</option>
+                                                      <option value="18:00">18:00</option>
+                                                      <option value="19:00">19:00</option>
+                                                      <option value="20:00">20:00</option>
+                                                      <option value="21:00">21:00</option>
+                                                      <option value="22:00">22:00</option>
+                                                      <option value="23:00">23:00</option>
+                                                      <option value="24:00">24:00</option>
+                                                  </select>
+                                              </div>
+                                              <label for="inputEndtime" class="col-sm-2 control-label">종료 시간 :</label>
+                                              <div class="col-sm-4">
+                                                  <select class="form-control" id="search-endtime">
+                                                      <option value="00:00">00:00</option>
+                                                      <option value="01:00">01:00</option>
+                                                      <option value="02:00">02:00</option>
+                                                      <option value="03:00">03:00</option>
+                                                      <option value="04:00">04:00</option>
+                                                      <option value="05:00">05:00</option>
+                                                      <option value="06:00">06:00</option>
+                                                      <option value="07:00">07:00</option>
+                                                      <option value="08:00">08:00</option>
+                                                      <option value="09:00">09:00</option>
+                                                      <option value="10:00">10:00</option>
+                                                      <option value="11:00">11:00</option>
+                                                      <option value="12:00">12:00</option>
+                                                      <option value="13:00">13:00</option>
+                                                      <option value="14:00">14:00</option>
+                                                      <option value="15:00">15:00</option>
+                                                      <option value="16:00">16:00</option>
+                                                      <option value="17:00">17:00</option>
+                                                      <option value="18:00">18:00</option>
+                                                      <option value="19:00">19:00</option>
+                                                      <option value="20:00">20:00</option>
+                                                      <option value="21:00">21:00</option>
+                                                      <option value="22:00">22:00</option>
+                                                      <option value="23:00">23:00</option>
+                                                      <option value="24:00">24:00</option>
+                                                  </select>
+                                              </div>
+                                            </div>
+                                            <div id="search-tab-2">
+                                              <label for="inputStartday" class="col-sm-2 control-label">시작 날짜 :</label>
+                                              <div class="col-sm-4">
+                                                <input type="text" class="form-control" placeholder="예약 날짜" id="datepicker1">
+                                              </div>
+                                              <label for="inputEndday" class="col-sm-2 control-label">종료 날짜 :</label>
+                                              <div class="col-sm-4">
+                                                <input type="text" class="form-control" placeholder="예약 날짜" id="datepicker2">
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <a id="search-submit" type="submit" class="btn btn-primary btn-normal border-radius pull-right">검색하기</a>
+                                            </div>
+                                        </div>
+                                        <div id="search-result" class="mini-desti row noborder">
+                                            <div class="col-md-12">
+                                                <h3> 공간 검색 결과 </h3>
+                                                <hr/>
+                                            </div>
+                                            <div id="search-list">
+                                                <div class="col-md-4">
+                                                    <img src="upload/mini_desti_03.jpg" alt="" class="img-responsive">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="mini-desti-title">
+                                                        <div class="pull-left">
+                                                            <h6>공간 제목</h6>
+                                                            <hr/>
+                                                            <p class="btn btn-default btn-success">숙박</p>
+                                                            <p class="btn btn-default btn-default">강남역</p>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="mini-desti-desc" style="margin-top : 5px !important;">
+                                                            <p><strong>설명</strong> : 이 공간은 그지 같은 공간입니다. 예약하지 마세요! 제발요</p>
+                                                            <div>
+                                                                <p style="margin-bottom:0px !important;"><strong>공간 주소</strong> : 충남 홍성군 홍북면 상하리 </p>
+                                                                <p style="margin-bottom:0px !important;"><strong>사용 가능 시간</strong> : 10:00 ~ 20:00 </p>
+                                                                <p style="margin-bottom:0px !important;"><strong>사용 가능 요일</strong> : 월 화 수 목 금 토 일 </p>
+                                                                <hr/>
+                                                                <a class="btn btn-default btn-default border-radius text-right">공간정보 보러가기</a>
+                                                                <a class="btn btn-default btn-deafult border-radius text-right">예약하러 가기</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="search-more" class="col-md-12 text-right">
+                                                <br/>
+                                                <h2 class="btn btn-default">더 보기</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- COPYRIGHTS PARTIAL -->
+                <%- include ./partial/copyrights.ejs %>
+        </div>
+        <!-- end wrapper -->
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/circle.js"></script>
+        <script src="js/progress.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/contact.js"></script>
+        <script src="js/parallax.js"></script>
+        <script src="js/owl.carousel.js"></script>
+        <script src="js/bootstrap-select.js"></script>
+        <script src="js/custom.js"></script>
+
+        <script src="/js/underscore-min.js"></script>
+        <script src="/js/search/index.js"></script>
+    </body>
+</html>
