@@ -64,6 +64,36 @@ router.get('/mypage/room/:room_id',(req,res,next)=>{
   });
 });
 
+router.get('/mypage/reservation',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if( result === true){
+      res.render('mypage-reservation',{});
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
+router.get('/mypage/reservation/old',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if( result === true){
+      res.render('mypage-reservation-old',{});
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
+router.get('/mypage/change',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if( result === true){
+      res.render('mypage-change',{});
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
 router.get('/device',(req,res,next)=>{
   res.render('device',{});
 });
