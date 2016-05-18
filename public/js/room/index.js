@@ -19,10 +19,6 @@ var RoomInfo = (function(){
     return result;
   };
 
-
-  /*
-  * ROOM INFO MODULE INIT
-  */
   var getRoomIdFromURL = function(){
     var link =  document.location.href.split('/');
     var index = link.indexOf('room') + 1;
@@ -51,7 +47,6 @@ var RoomInfo = (function(){
 
   var onClick_image = function(){
     var id = $(this).attr('id');
-    console.log(id);
     $('#room-modal-image').prop('src','/api/images/'+id);
     $('#imageModal').modal({
       keyboard: false
@@ -73,42 +68,47 @@ var RoomInfo = (function(){
     }
     $('#room-detail').html(detail);
 
-    $('#room-address').html('<strong>공간 주소 : </strong>'+room.address);
+    $('#room-address').html('<strong>공간 주소 : </strong>' + room.address);
 
     if( room.type != '숙박'){
-      $('#room-enabletime').html('<strong>사용 가능 시간 : </strong> '+ room.enable_start_time + ' ~ ' + room.enable_end_time);
+      $('#room-enabletime').html('<strong>사용 가능 시간 : </strong> ' + room.enable_start_time + ' ~ ' + room.enable_end_time);
 
-      var str = '';
+      var day_enable = '';
       _.each(room.day_enable,function(day){
-        str += day + ' ';
+        day_enable += day_enable + ' ';
       });
-      $('#room-enableday').html('<strong>사용 가능 요일 : </strong>'+str);
+      $('#room-enableday').html('<strong>사용 가능 요일 : </strong>' + day_enable);
     }else{
       $('#room-enabletime').hide();
       $('#room-enableday').hide();
     }
 
-
     var template = '';
     var length = room.room_images.length;
+
     _.each(room.room_images,function(image){
       var complied = _.template(imageTemplate);
       template += complied({
         image : image
       });
     });
+
     $('#images').html(template);
     $('img').click(onClick_image);
   };
 
 
   var onClick_reservation = function(){
-    location.href= '/reservation/'+room_id  ;
+    location.href= '/reservation/'+room_id;
   };
 
+  /*
+  * ROOM INFO MODULE INIT
+  */
   var init = function(){
     room_id = getRoomIdFromURL();
     getRoomInfo(room_id);
+
     $('#room-reservation').click(onClick_reservation);
   };
 
