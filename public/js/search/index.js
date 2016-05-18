@@ -1,34 +1,37 @@
 var Search = (function(){
   var SearchTemplate = '\
-  <div class="col-md-4" style="width: 370px; height: 200px; overflow: hidden; margin-bottom:10px !important;">\
-      <img src="/api/images/<%= image %>" width="370px" height="auto" alt="" class="img-responsive">\
-  </div>\
-  <div class="col-md-8">\
-      <div class="mini-desti-title">\
-          <div class="pull-left">\
-              <h6><%= title %></h6>\
-              <hr/>\
-              <p class="btn btn-default btn-success"><%= type %></p>\
-              <p class="btn btn-default btn-default"><%= tag %></p>\
-          </div>\
-          <div class="clearfix"></div>\
-          <div class="mini-desti-desc" style="margin-top : 5px !important;">\
-              <hr/>\
-              <p><strong>설명</strong> : <%= detail %> </p>\
-              <div>\
-                  <%= address %>\
-                  <%= time_enable %>\
-                  <%= day_enable %>\
-                  <hr/>\
-                  <a href="/room/<%= id %>" class="btn btn-default btn-default border-radius text-right">공간정보 보러가기</a>\
-                  <a href="/reservation/<%= id %>" class="btn btn-default btn-deafult border-radius text-right">예약하러 가기</a>\
-              </div>\
-          </div>\
-      </div>\
+  <div class="col-md-12" style="margin-bottom : 10px !important;">\
+    <div class="col-md-4" style="width: 370px; height: 370px; overflow: hidden; margin-bottom:10px !important; ">\
+        <img src="/api/images/<%= image %>" width="270px" height="auto" alt="" class="img-responsive">\
+    </div>\
+    <div class="col-md-8">\
+        <div class="mini-desti-title">\
+            <div class="pull-left">\
+                <h4><strong><%= title %></strong></h4>\
+                <hr/>\
+                <p class="btn btn-default btn-success"><%= type %></p>\
+                <p class="btn btn-default btn-default"><%= tag %></p>\
+            </div>\
+            <div class="clearfix"></div>\
+            <div class="mini-desti-desc" style="margin-top : 5px !important;">\
+                <hr/>\
+                <p><strong>설명</strong> : <%= detail %> </p>\
+                <div>\
+                    <%= address %>\
+                    <%= time_enable %>\
+                    <%= day_enable %>\
+                    <hr/>\
+                    <a href="/room/<%= id %>" class="btn btn-default btn-default border-radius text-right">공간정보 보러가기</a>\
+                    <a href="/reservation/<%= id %>" class="btn btn-default btn-deafult border-radius text-right">예약하러 가기</a>\
+                </div>\
+            </div>\
+        </div>\
+    </div>\
+    <br/>\
   </div>';
 
   var offset = 0;
-  var limit = 10;
+  var limit = 30;
 
   var getUrlParams = function() {
     var params = {};
@@ -78,8 +81,14 @@ var Search = (function(){
     var tag = $('#search-tag').val();
 
     if( type == '숙박'){
-      var startday = $('#datepicker1').val().split('/')[2] + "-" + $('#datepicker1').val().split('/')[0] + "-" +$('#datepicker1').val().split('/')[1];
-      var endday = $('#datepicker2').val().split('/')[2] + "-" + $('#datepicker2').val().split('/')[0] + "-" +$('#datepicker2').val().split('/')[1];
+      var startday = getdateStringYYYYMMDD($('#datepicker1').val());
+      var endday = getdateStringYYYYMMDD($('#datepicker2').val());
+
+      if( !startday || !endday ){
+        alert('시작 날짜와 종료 날짜를 입력해주세요.');
+        $('#loader').delay(200).fadeOut();
+        return;
+      }
 
       if( startday > endday){
         alert('종료 날짜가 시작 날짜보다 이전입니다.');
@@ -92,7 +101,7 @@ var Search = (function(){
         method : 'GET',
         data : {
           type : type,
-          tag : tag,
+          tag : tag ? tag : undefined,
           start_day : startday,
           end_day : endday,
           offset : offset,
@@ -107,10 +116,15 @@ var Search = (function(){
         }
       });
     }else{
-      var startday = $('#datepicker').val().split('/')[2] + "-" + $('#datepicker').val().split('/')[0] + "-" +$('#datepicker').val().split('/')[1];
+      var startday = getdateStringYYYYMMDD($('#datepicker').val());
       var startime = $('#search-starttime').val();
       var endtime = $('#search-endtime').val();
 
+      if( !startday ){
+        alert('예약 날짜를 입력해주세요.');
+        $('#loader').delay(200).fadeOut();
+        return;
+      }
       if( startime >= endtime ){
         alert('종료시간이 시작시간보다 먼저이거나 동일합니다.');
         $('#loader').delay(200).fadeOut();
@@ -122,7 +136,7 @@ var Search = (function(){
         method : 'GET',
         data : {
           type : type,
-          tag : tag,
+          tag : tag ? tag : undefined,
           start_day : startday,
           start_time : startime,
           end_time : endtime,
@@ -140,8 +154,15 @@ var Search = (function(){
     }
   };
 
+  var getdateStringYYYYMMDD = function(string){
+    if( !string ){
+      return null;
+    }
+    return string.split('/')[2] + "-" + string.split('/')[0] + "-" + string.split('/')[1];
+  };
+
   var onChange_startday = function(){
-    var startday = $('#datepicker1').val().split('/')[2] + "-" + $('#datepicker1').val().split('/')[0] + "-" +$('#datepicker1').val().split('/')[1];
+    var startday = getdateStringYYYYMMDD($('#datepicker1').val());
     var today = getTodayDateString();
     if( today > startday ){
       alert('오늘 이전 날짜는 선택하실 수 없습니다.');
@@ -151,8 +172,8 @@ var Search = (function(){
   };
 
   var onChange_endday = function(){
-    var startday = $('#datepicker1').val().split('/')[2] + "-" + $('#datepicker1').val().split('/')[0] + "-" +$('#datepicker1').val().split('/')[1];
-    var endday = $('#datepicker2').val().split('/')[2] + "-" + $('#datepicker2').val().split('/')[0] + "-" +$('#datepicker2').val().split('/')[1];
+    var startday = getdateStringYYYYMMDD($('#datepicker1').val());
+    var endday = getdateStringYYYYMMDD($('#datepicker2').val());
     var today = getTodayDateString();
 
     if( today > endday ){
@@ -169,7 +190,7 @@ var Search = (function(){
   };
 
   var onChange_datepicker = function(){
-    var startday = $('#datepicker').val().split('/')[2] + "-" + $('#datepicker').val().split('/')[0] + "-" +$('#datepicker').val().split('/')[1];
+    var startday = getdateStringYYYYMMDD($('#datepicker').val());
     var today = getTodayDateString();
     if( today > startday ){
       alert('오늘 이전 날짜는 선택하실 수 없습니다.');
@@ -178,14 +199,23 @@ var Search = (function(){
     }
   };
 
+  var getTimeString = function(starttime,endtime){
+    return starttime + " ~ " + endtime;
+  };
+
+  var getDayEnableList = function(day_enable){
+    var ret = '';
+    _.each(day_enable,function(day){
+      day_enable += day + " ";
+    });
+    return ret;
+  };
+
+  var Render_roomspec = function(key,value){
+    return '<p style="margin-bottom:0px !important;"><strong>'+ key +'</strong> : '+ value +'</p>';
+  };
 
   var Render = function(data){
-    if(data.length == 10){
-      offset += 10;
-    }else{
-      $('#search-more').hide();
-    }
-
     var template = '';
 
     _.each(data,function(room){
@@ -195,30 +225,24 @@ var Search = (function(){
         template += compiled({
           image : room.room_images[0],
           title : room.title,
-          detail : room.detail.substring(0,20) + " ....",
+          detail : room.detail.substring(0,100) + " ....",
           type : room.type,
           tag : room.tag,
-          address : '<p style="margin-bottom:0px !important;"><strong>공간 주소</strong> : '+room.address+'</p>',
+          address : Render_roomspec('공간 주소',room.address),
           time_enable : '',
           day_enable : '',
           id : room._id,
         });
       }else{
-        var day_enable = '';
-        _.each(room.day_enable,function(day){
-          day_enable += day + " ";
-        });
-
         template += compiled({
           image : room.room_images[0],
           title : room.title,
-          detail : room.detail.substring(0,20)+" ....",
+          detail : room.detail.substring(0,100)+" ....",
           type : room.type,
           tag : room.tag,
-          address : '<p style="margin-bottom:0px !important;"><strong>공간 주소</strong> : '+room.address+'</p>',
-          time_enable : '<p style="margin-bottom:0px !important;"><strong>예약 가능한 시간</strong> : '+ room.enable_start_time +" ~ " + room.enable_end_time +'</p>',
-          day_enable : '<p style="margin-bottom:0px !important;"><strong>예약 가능한 시간</strong> : '+ room.enable_start_time +" ~ " + room.enable_end_time +'</p>',
-          time_enable : '<p style="margin-bottom:0px !important;"><strong>예약 가능한 요일</strong> : '+ day_enable +'</p>',
+          address : Render_roomspec('공간 주소',room.address),
+          time_enable : Render_roomspec('예약 가능한 시간',getTimeString(room.enable_start_time,room.enable_end_time)),
+          day_enable : Render_roomspec('예약 가능한 요일',getDayEnableList(room.day_enable)),
           id : room._id
         });
       }
@@ -230,39 +254,36 @@ var Search = (function(){
       $('#search-list').append(template);
     }
 
+    if(data.length == 30){
+      offset += 30;
+    }else{
+      $('#search-more').hide();
+    }
     $('#search-result').show();
     $('#loader').delay(100).fadeOut();
   };
 
-  var onClick_more = function(){
-
+  var isAccommodation = function(params){
+    return params.hasOwnProperty('type') && params.hasOwnProperty('start_day') && params.hasOwnProperty('end_day');
   };
 
-  /*
-  *  SEARCH PAGE MODULE INIT
-  */
-  var init = function(){
-    $('#search-tab-1').hide();
-    $('#search-tab-2').show();
-    $('#search-result').hide();
+  var isSpace = function(params){
+    return params.hasOwnProperty('type') && params.hasOwnProperty('start_day') && params.hasOwnProperty('start_time') && params.hasOwnProperty('end_time');
+  };
 
-    $('#search-type').change(onChange_type);
-    $('#search-endtime').change(onChange_endtime);
-    $('#search-starttime').change(onChange_starttime);
-    $('#datepicker').change(onChange_datepicker);
-    $('#datepicker1').change(onChange_startday);
-    $('#datepicker2').change(onChange_endday);
-    $('#search-more').click(onClick_submit);
-    $('#search-submit').click(onClick_submit);
+  var datepickerFormatMMDDYYYY = function(string){
+    return decodeURI(string).split('-')[1]+"/"+decodeURI(string).split('-')[2]+"/"+decodeURI(string).split('-')[0];
+  };
 
+  var checkParams = function (){
     var params = getUrlParams();
-    if( params.hasOwnProperty('type') && params.hasOwnProperty('start_day') && params.hasOwnProperty('end_day') ){
+    if(isAccommodation(params)){
       // 숙박 검색
       $('#search-tab-1').hide();
       $('#search-tab-2').show();
 
-      var datepicker1 = decodeURI(params.start_day).split('-')[1]+"/"+decodeURI(params.start_day).split('-')[2]+"/"+decodeURI(params.start_day).split('-')[0];
-      var datepicker2 = decodeURI(params.end_day).split('-')[1]+"/"+decodeURI(params.end_day).split('-')[2]+"/"+decodeURI(params.end_day).split('-')[0];
+      var datepicker1 = datepickerFormatMMDDYYYY(params.start_day);
+      var datepicker2 = datepickerFormatMMDDYYYY(params.end_day);
 
       $('#search-type').val(decodeURI(params.type));
       $('#search-tag').val(decodeURI(params.tag));
@@ -289,12 +310,13 @@ var Search = (function(){
           location.href="/";
         }
       });
-    } else if(params.hasOwnProperty('type') && params.hasOwnProperty('start_day') && params.hasOwnProperty('start_time') && params.hasOwnProperty('end_time') ){
+    } else if(isSpace(params)){
       // 숙박 아닌 다른 검색
       $('#search-tab-2').hide();
       $('#search-tab-1').show();
 
-      var datepicker = decodeURI(params.start_day).split('-')[1]+"/"+decodeURI(params.start_day).split('-')[2]+"/"+decodeURI(params.start_day).split('-')[0];
+      var datepicker = datepickerFormatMMDDYYYY(params.start_day);
+
       $('#search-type').val(decodeURI(params.type));
       $('#search-tag').val(decodeURI(params.tag));
       $('#datepicker').val(datepicker);
@@ -322,6 +344,26 @@ var Search = (function(){
         }
       });
      }
+  };
+
+  /*
+  *  SEARCH PAGE MODULE INIT
+  */
+  var init = function(){
+    $('#search-tab-1').hide();
+    $('#search-tab-2').show();
+    $('#search-result').hide();
+
+    $('#search-type').change(onChange_type);
+    $('#search-endtime').change(onChange_endtime);
+    $('#search-starttime').change(onChange_starttime);
+    $('#datepicker').change(onChange_datepicker);
+    $('#datepicker1').change(onChange_startday);
+    $('#datepicker2').change(onChange_endday);
+    $('#search-more').click(onClick_submit);
+    $('#search-submit').click(onClick_submit);
+
+    checkParams();
   };
 
   return {
