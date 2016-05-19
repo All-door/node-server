@@ -206,7 +206,7 @@ var Search = (function(){
   var getDayEnableList = function(day_enable){
     var ret = '';
     _.each(day_enable,function(day){
-      day_enable += day + " ";
+      ret += day + " ";
     });
     return ret;
   };
