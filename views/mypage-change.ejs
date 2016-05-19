@@ -42,7 +42,22 @@
                           <%- include ./partial/mypage_sidebar.ejs %>
                             <div id="content" class="col-md-8 col-sm-12 col-xs-12">
                               <br/>
-                              <h3>비밀 번호 변경</h3>
+                              <h3>핸드폰 번호</h3>
+                              <hr/>
+                              <div class="form-group">
+                                <label for="inputPassword1" class="col-sm-2 control-label">기존 번호 :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="phoneNumber" placeholder="기존 핸드폰 번호" disabled="true">
+                                </div>
+                                <label for="inputPassword1" class="col-sm-2 control-label">새로운 번호 :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="change-phoneNumber" placeholder="새로운 핸드폰 번호">
+                                </div>
+                                <div class="col-md-12 text-right">
+                                  <a id="change-submit-phoneNumber" class="btn btn-default">변경 하기</a>
+                                </div>
+                              </div>
+                              <h3>비밀 번호</h3>
                               <hr/>
                               <br/>
                               <div class="form-group">
