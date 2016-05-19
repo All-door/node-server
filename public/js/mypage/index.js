@@ -7,7 +7,6 @@ var Mypage = (function(){
       url : url,
       method : 'GET',
       success : function(data){
-        console.log(data.user);
         Render(data.user);
       },
       error : function(request,status,error){
