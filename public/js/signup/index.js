@@ -3,6 +3,7 @@ var Signup = (function(){
   * REGEX FOR EMAIL CHECK
   */
   var email_regex =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+  var PhoneNumberRegex = /^\d{3}-\d{3,4}-\d{4}$/;
 
   /*
   * LOGIN AFTER SGINUP
@@ -41,6 +42,7 @@ var Signup = (function(){
 
     var email = $('#signup-email').val();
     var name = $('#signup-name').val();
+    var phoneNumber = $('#signup-phoneNumber').val();
     var password1 = $('#signup-password1').val();
     var password2 = $('#signup-password2').val();
 
@@ -51,6 +53,11 @@ var Signup = (function(){
 
     if(email_regex.test(email) == false){
       error_message('이메일 형식이 잘못되었습니다.');
+      return;
+    }
+
+    if(PhoneNumberRegex.test(phoneNumber) == false){
+      error_message('핸드폰 번호가 잘못되었습니다.');
       return;
     }
 
@@ -76,9 +83,11 @@ var Signup = (function(){
       data : {
         email : email,
         name : name,
-        password : password1
+        password : password1,
+        phoneNumber : phoneNumber
       },
       success : function(data){
+        alert('회원가입이 완료되었습니다.');
         login(email,password1,function(data){
           location.replace("/");
         });
