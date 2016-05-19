@@ -4,6 +4,12 @@ var Login = (function(){
   */
   var email_regex =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
+  var getUrlParams = function() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    return params;
+  };
+
   /*
   * LOGIN BUTTON ONCLICK
   */
@@ -51,7 +57,13 @@ var Login = (function(){
         password : password
       },
       success : function(data){
-        location.replace("/mypage");
+        var params = getUrlParams();
+
+        if( params.redirect ){
+          location.replace("/"+params.redirect);
+        }else{
+          location.replace("/");
+        }
       },
       error : function(request,status,error){
         $('#loader').delay(200).fadeOut();
