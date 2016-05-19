@@ -43,7 +43,7 @@ router.put('/',(req, res, next)=>{
             response.Error(res,err);
           }else{
             req.user.phoneNumber = phoneNumber;
-            response.Message(res,"비밀번호 변경이 완료되었습니다.");
+            response.Message(res,"핸드폰 번호 변경이 완료되었습니다.");
           }
         });
       }
