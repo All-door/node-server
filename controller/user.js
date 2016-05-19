@@ -85,6 +85,11 @@ module.exports = {
   'ChangeUserPassword' : (userid, origin_password, change_password, callback)=>{
     callback = callback || ()=>{};
 
+    if( !userid || !origin_password || !change_password){
+      callback('데이터를 확인해주세요.',null);
+      return;
+    }
+
     User.findOne({ _id : userid, disable : false })
         .then((doc)=>{
           return bcrypt.compare(origin_password, doc.password);
@@ -103,7 +108,16 @@ module.exports = {
           }
     })
   },
+  'ChangeUserPhoneNumber' : (userid,phoneNumber,callback)=>{
+    callback = callback || ()=>{};
 
+    if( !userid || !PhoneNumberRegex.test(phoneNumber)){
+      callback('데이터를 확인해주세요.',null);
+      return;
+    }
+
+    User.update({ _id : userid },{ phoneNumber : phoneNumber },callback);
+  },
   'RemoveUser' : (userid, callback)=>{
     callback = callback || ()=>{};
     User.update({ _id : userid }, { disable : true },callback);

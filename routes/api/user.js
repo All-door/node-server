@@ -24,23 +24,29 @@ router.get('/',(req, res, next)=>{
 * PUT /api/user
 */
 router.put('/',(req, res, next)=>{
-  if( !req.body.origin_password || !req.body.change_password){
-    response.Message(res,"입력된 데이터를 확인해주세요.");
-    return;
-  }
-
   User.CheckSession(req, (result, user)=>{
     if(result === true){
-      let origin_password = req.body.origin_password;
-      let change_password = req.body.change_password;
-      User.ChangeUserPassword(req.user.userid,origin_password,change_password,(err, doc)=>{
-        if(err){
-          response.Error(res,err);
-        }else{
-          response.Message(res,"비밀번호 변경이 완료되었습니다.");
-        }
-      });
-
+      if( req.body.origin_password && req.body.change_password){
+        let origin_password = req.body.origin_password;
+        let change_password = req.body.change_password;
+        User.ChangeUserPassword(req.user.userid,origin_password,change_password,(err, doc)=>{
+          if(err){
+            response.Error(res,err);
+          }else{
+            response.Message(res,"비밀번호 변경이 완료되었습니다.");
+          }
+        });
+      }else if( req.body.phoneNumber ){
+        let phoneNumber = req.body.phoneNumber;
+        User.ChangeUserPhoneNumber(req.user.userid,phoneNumber,(err,doc)=>{
+          if(err){
+            response.Error(res,err);
+          }else{
+            req.user.phoneNumber = phoneNumber;
+            response.Message(res,"비밀번호 변경이 완료되었습니다.");
+          }
+        });
+      }
     }else{
       response.AuthFail(res);
     }
