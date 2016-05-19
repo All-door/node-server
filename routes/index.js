@@ -39,7 +39,7 @@ router.get('/mypage',(req,res,next)=>{
     if(result === true){
       res.render('mypage',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=mypage');
     }
   });
 });
@@ -49,7 +49,7 @@ router.get('/mypage/room',(req,res,next)=>{
     if(result === true){
       res.render('mypage-room',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=mypage/room');
     }
   });
 });
@@ -59,7 +59,7 @@ router.get('/mypage/room/:room_id',(req,res,next)=>{
     if(result === true){
       res.render('mypage-room-modify',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=mypage/room/'+req.params.room_id);
     }
   });
 });
@@ -69,7 +69,7 @@ router.get('/mypage/reservation',(req,res,next)=>{
     if( result === true){
       res.render('mypage-reservation',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=mypage/reservation');
     }
   });
 });
@@ -79,7 +79,7 @@ router.get('/mypage/reservation/old',(req,res,next)=>{
     if( result === true){
       res.render('mypage-reservation-old',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=mypage/reservation/old');
     }
   });
 });
@@ -89,7 +89,7 @@ router.get('/mypage/change',(req,res,next)=>{
     if( result === true){
       res.render('mypage-change',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=mypage/change');
     }
   });
 });
@@ -115,7 +115,7 @@ router.get('/register',(req,res,next)=>{
     if(result === true){
       res.render('register',{});
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=register');
     }
   });
 });
@@ -134,7 +134,7 @@ router.get('/reservation/:room_id',(req,res,next)=>{
         }
       });
     }else{
-      res.redirect('/login');
+      res.redirect('/login?redirect=reservation/'+req.params.room_id);
     }
   });
 });
