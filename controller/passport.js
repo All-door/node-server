@@ -18,8 +18,10 @@ passport.use(new LocalStrategy({
       user = {
         userid : doc._id,
         name : doc.name,
-        email : doc.email
+        email : doc.email,
+        phoneNumber : doc.phoneNumber
       };
+      console.log(user);
       return bcrypt.compare(password,doc.password);
     }
   })

@@ -70,7 +70,7 @@ router.delete('/',(req, res, next)=>{
 router.post('/signup',(req, res, next)=>{
   let body = req.body;
 
-  User.SignUp(body.name, body.email, body.password, (err, doc)=>{
+  User.SignUp(body.name, body.email, body.password, body.phoneNumber,(err, doc)=>{
     if(err){
       response.Error(res,err);
     }else{

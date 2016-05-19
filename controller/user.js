@@ -1,6 +1,7 @@
 'use strict'
 const bcrypt = require('bcrypt-then');
 const User = models.User;
+const PhoneNumberRegex = /^\d{3}-\d{3,4}-\d{4}$/;
 
 module.exports = {
   'CheckSession' : (req, callback)=>{
@@ -13,10 +14,10 @@ module.exports = {
     }
   },
 
-  'SignUp' : (name, email, password, callback)=>{
+  'SignUp' : (name, email, password, phoneNumber, callback)=>{
     callback = callback || ()=>{};
 
-    if( !email || !name || !password){
+    if( !email || !name || !password || !phoneNumber || !PhoneNumberRegex.test(phoneNumber)){
       callback("입력데이터를 확인해주세요.",null);
       return;
     }
@@ -33,6 +34,7 @@ module.exports = {
       let user = new User({
         name : name,
         email : email,
+        phoneNumber : phoneNumber,
         password : password_token
       });
       //유저정보 저장
