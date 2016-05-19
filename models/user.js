@@ -10,6 +10,7 @@ let UserSchema = mongoose.Schema({
   name : String,
   email : String,
   password : String,
+  phoneNumber : String,
   facebook_token : String,
   isAdmin : Boolean,
   isSupply : Boolean,
