@@ -7,6 +7,7 @@ var Mypage = (function(){
       url : url,
       method : 'GET',
       success : function(data){
+        console.log(data.user);
         Render(data.user);
       },
       error : function(request,status,error){
@@ -19,6 +20,7 @@ var Mypage = (function(){
   var Render = function(user){
     $('#mypage-name').html(user.name);
     $('#mypage-email').html(user.email);
+    $('#mypage-phoneNumber').html(user.phoneNumber ? user.phoneNumber : '000-000-0000');
   };
 
   /*
