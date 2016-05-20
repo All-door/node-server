@@ -6,7 +6,7 @@ var RoomList = (function(){
       <div class="post-wrapper clearfix border-bottom">\
           <div class="hotel-wrapper">\
               <div class="post-media" style="width : 370px; height : 185px;">\
-                  <a href="/room/<%= id %>"><img src="/api/images/<%= image %>" onerror="this.src=\'/upload/btn_bg_01.png\'" idth="370px" height="auto" class="img-responsive" placeholder="/images/loading.gif"></a>\
+                  <a href="/room/<%= id %>"><img src="/api/images/<%= image %>" onerror="this.src=\'/upload/btn_bg_01.png\'" idth="370px" height="auto" class="img-responsive"></a>\
               </div>\
               <div class="post-title clearfix">\
                   <div class="pull-center">\
