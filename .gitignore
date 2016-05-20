@@ -44,3 +44,5 @@ test
 components/
 
 dump.rdb
+
+config.js
