@@ -2,684 +2,135 @@
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
 
 <!-- HEAD PARTIAL -->
 <%- include ./partial/head %>
-<body>
 
-    <div id="loader">
-        <div class="loader-container">
-            <h3 class="loader-back-text"><img src="images/loader.gif" alt="" class="loader"></h3>
+    <body>
+        <div id="loader">
+            <div class="loader-container">
+                <h3 class="loader-back-text"><img src="images/loader.gif" alt="" class="loader"></h3>
+            </div>
         </div>
-    </div>
 
-    <div id="wrapper">
-      <!-- HEADER PARTIAL -->
-      <%- include ./partial/header.ejs %>
+        <div id="wrapper">
+            <!-- HEADER PARTIAL -->
+            <%- include ./partial/header.ejs %>
 
-        <section id="page-header" class="section background">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="c1 breadcrumb text-left">
-                            <li><a href="#">HOME</a></li>
-                            <li>인기 있는 공간</li>
-                        </ul>
-                        <h3>인기 있는 공간</h3>
-                    </div>
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <section class="section clearfix">
-            <div class="container">
-                <div class="hotel-title">
-                    <h4>예약 수가 많은 공간 리스트</h4>
-                    <hr class="left">
-                </div><!-- end hotel-title -->
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_01.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VALLE AURINA</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_02.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>PRINCIPE FORTE DEI MARMI</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row noborder">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_03.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VOGLAUER QUADRO</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-                    </div><!-- end col -->
-
-                    <div class="col-md-6">
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_04.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VALLE AURINA</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_05.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>PRINCIPE FORTE DEI MARMI</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row noborder">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_06.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VOGLAUER QUADRO</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <section class="section clearfix">
-            <div class="container">
-                <div class="hotel-title">
-                    <h4>조회수가 많은 공간 리스트</h4>
-                    <hr class="left">
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_01.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VALLE AURINA</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_02.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>PRINCIPE FORTE DEI MARMI</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row noborder">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_03.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VOGLAUER QUADRO</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-                    </div><!-- end col -->
-
-                    <div class="col-md-6">
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_04.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VALLE AURINA</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_05.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>PRINCIPE FORTE DEI MARMI</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-
-                        <div class="mini-desti row noborder">
-                            <div class="col-md-4">
-                                <img src="upload/mini_desti_06.jpg" alt="" class="img-responsive">
-                            </div><!-- end col -->
-                            <div class="col-md-8">
-                                <div class="mini-desti-title">
-                                    <div class="pull-left">
-                                        <h6>VOGLAUER QUADRO</h6>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                    </div>
-                                    <div class="pull-right">
-                                        <h6>$500</h6>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="mini-desti-desc">
-                                        <p>Template based on deep research on the most popular travel booking websites such as</p>
-                                    </div>
-                                </div><!-- end title -->
-                            </div><!-- end col -->
-                        </div><!-- end mini-desti -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <section class="section clearfix">
-            <div class="container">
-                <div class="row">
-                    <div id="fullwidth" class="col-sm-12">
-
-                        <!-- START CONTENT -->
+                <section id="page-header" class="section background">
+                    <div class="container">
                         <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_01.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">VALLE AURINA</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$500</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_02.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">PRINCIPE FORTE DEI MARMI</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$225</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_03.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">VOGLAUER QUADRO</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$225</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_04.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">HOTEL DELUXE AURINA</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$980</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_05.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">PRINCIPE HOTEL DA MITA</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$225</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_06.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">SAMANDARO QUADRO</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$225</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_07.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">HOTEL MAND AURINA</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$980</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_08.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">PRINCE IPE HOTEL DA MITA</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$225</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="post-wrapper clearfix border-bottom">
-                                    <div class="hotel-wrapper">
-                                        <div class="post-media">
-                                            <a href="hotel-single.html"><img src="upload/hotel_09.png" alt="" class="img-responsive"></a>
-                                        </div><!-- end media -->
-                                        <div class="post-title clearfix">
-                                            <div class="pull-left">
-                                                <h5><a href="hotel-single.html" title="">BICH QUADRO</a></h5>
-                                            </div><!-- end left -->
-                                            <div class="pull-right">
-                                                <h6>$225</h6>
-                                            </div><!-- end left -->
-                                        </div><!-- end title -->
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span><!-- end rating -->
-                                        <p>Template based on deep research on the most popular travel booking websites such as booking.com, tripadvisor, yahoo travel, expedia..</p>
-                                    </div><!-- end hotel-wrapper -->
-                                </div><!-- end post-wrapper -->
-                            </div><!-- end col -->
-
-                            <nav class="text-center">
-                                <ul class="pagination">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
+                            <div class="col-sm-12">
+                                <ul class="c1 breadcrumb text-left">
+                                    <li><a href="/">HOME</a></li>
+                                    <li>공간 리스트</li>
                                 </ul>
-                            </nav>
+                                <h3>공간 리스트</h3>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
+                <section class="section clearfix">
+                    <div class="container">
+                        <div class="row">
+                            <div id="fullwidth" class="col-sm-12">
+                                <ul id="nav" class="nav nav-pills">
+                                    <li id="nav-total" role="total" class="active"><a>전체 공간 리스트</a></li>
+                                    <li id="nav-view" role="view"><a>조회수 많은 공간 리스트</a></li>
+                                    <li id="nav-reservation" role="reservation"><a>예약수 많은 공간 리스트 </a></li>
+                                </ul>
+                                <hr/>
+                                <div id="room-list" class="row">
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="post-wrapper clearfix border-bottom">
+                                            <div class="hotel-wrapper">
+                                                <div class="post-media">
+                                                    <a href="hotel-single.html"><img src="upload/hotel_01.png" alt="" class="img-responsive"></a>
+                                                </div>
+                                                <div class="post-title clearfix">
+                                                    <div class="pull-center">
+                                                        <h5><a href="/room" title=""><strong>공간 제목</strong></a></h5>
+                                                    </div>
+                                                </div>
+                                                <p class="btn btn-default btn-success">숙박</p>
+                                                <p class="btn btn-default btn-success">강남역</p>
+                                                <hr/>
+                                                <p>공간 내용 디테일</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        </div><!-- end row -->
-                        <!-- END CONTENT -->
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="post-wrapper clearfix border-bottom">
+                                            <div class="hotel-wrapper">
+                                                <div class="post-media">
+                                                    <a href="hotel-single.html"><img src="upload/hotel_01.png" alt="" class="img-responsive"></a>
+                                                </div>
+                                                <div class="post-title clearfix">
+                                                    <div class="pull-center">
+                                                        <h5><a href="/room" title=""><strong>공간 제목</strong></a></h5>
+                                                    </div>
+                                                </div>
+                                                <p class="btn btn-default btn-success">숙박</p>
+                                                <p class="btn btn-default btn-success">강남역</p>
+                                                <hr/>
+                                                <p>공간 내용 디테일</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                    </div><!-- end fullwidth -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="post-wrapper clearfix border-bottom">
+                                            <div class="hotel-wrapper">
+                                                <div class="post-media">
+                                                    <a href="hotel-single.html"><img src="upload/hotel_01.png" alt="" class="img-responsive"></a>
+                                                </div>
+                                                <div class="post-title clearfix">
+                                                    <div class="pull-center">
+                                                        <h5><a href="/room" title=""><strong>공간 제목</strong></a></h5>
+                                                    </div>
+                                                </div>
+                                                <p class="btn btn-default btn-success">숙박</p>
+                                                <p class="btn btn-default btn-success">강남역</p>
+                                                <hr/>
+                                                <p>공간 내용 디테일</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        <!-- COPYRIGHTS PARTIAL -->
-        <%- include ./partial/copyrights.ejs %>
-    </div><!-- end wrapper -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-    <!-- Template core JavaScript's
-================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/retina.js"></script>
-    <script src="js/sidebar.js"></script>
-    <script src="js/circle.js"></script>
-    <script src="js/progress.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/parallax.js"></script>
-    <script src="js/owl.carousel.js"></script>
-    <script src="js/bootstrap-select.js"></script>
-    <script src="js/custom.js"></script>
+                <!-- COPYRIGHTS PARTIAL -->
+                <%- include ./partial/copyrights.ejs %>
+        </div>
 
-    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-    <script src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-    <script src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="js/revslider.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/circle.js"></script>
+        <script src="js/progress.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/contact.js"></script>
+        <script src="js/parallax.js"></script>
+        <script src="js/owl.carousel.js"></script>
+        <script src="js/bootstrap-select.js"></script>
+        <script src="js/custom.js"></script>
 
-</body>
+        <script src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="js/revslider.js"></script>
+        <script src="/js/underscore-min.js"></script>
+
+        <script src="/js/list/index.js"></script>
+    </body>
+
 </html>
