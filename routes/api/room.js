@@ -187,7 +187,7 @@ router.get('/type/:type/sort/favorite', (req,res,next)=>{
 */
 router.get('/type/:type/sort/reservation', (req,res,next)=>{
   let type = req.params.type;
-  Room.GetRoomsByType(type,req.query.offset,req.query.limit,{ reservation_count : -1 },(err,doc)=>{
+  Room.GetRoomsByType(type,req.query.offset,req.query.limit,{ reservation_count : -1 },(err,docs)=>{
     if(err){
       response.Error(res,err);
     }else{
