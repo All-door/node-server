@@ -2,7 +2,7 @@
 const config = {
   Name : 'alldoor',
   MongoDB : 'mongodb://localhost/alldoor',
-  ImagePath : '/var/images',
+  ImagePath : '/root/images',
   Port : '3000',
   RedisOption : {
 
