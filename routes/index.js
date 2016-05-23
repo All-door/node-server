@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
+const passport = require('../controller/passport');
 const User = require('../controller/user');
 const Room = require('../controller/room');
 
@@ -137,6 +138,20 @@ router.get('/reservation/:room_id',(req,res,next)=>{
       res.redirect('/login?redirect=reservation/'+req.params.room_id);
     }
   });
+});
+
+router.get('/login/facebook',passport.authenticate('facebook'));
+router.get('/login/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/login/facebook/success',
+  failureRedirect: '/login/facebook/fail'
+}));
+
+router.get('/login/facebook/success',(req,res,next)=>{
+  res.redirect('/');
+});
+
+router.get('/login/facebook/fail',(req,res,next)=>{
+  res.redirect('/login');
 });
 
 module.exports = router;
