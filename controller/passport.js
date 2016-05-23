@@ -38,7 +38,7 @@ passport.use(new LocalStrategy({
 passport.use(new FacebookStrategy({
   clientID: '239049116459438',
   clientSecret: 'ff2f8d96fdd5647d6d7711f2bd60d07b',
-  callbackURL: "http://localhost:3000/login/facebook/callback",
+  callbackURL: process.env.NODE_ENV == 'production'? "http://all-door.net/login/facebook/callback":"http://localhost:3000/login/facebook/callback",
   profileFields: ['id', 'emails', 'name']
 },
 function(accessToken,refreshToken,profile,done){
