@@ -37,10 +37,36 @@ var Change = (function(){
     })
   };
 
+  var getUserInformation = function(){
+    var url = "/api/user";
+
+    $.ajax({
+      url : url,
+      method : 'GET',
+      success : function(data){
+        Render(data.user);
+      },
+      error : function(request,status,error){
+        alert('로그인이 필요한 서비스입니다.');
+        location.href="/login";
+      }
+    });
+  };
+
+  var Render = function(data){
+    if( data.hasOwnProperty('facebookId')){
+      $('#change-submit').prop('disabled',true);
+      $('#change-password1').prop('disabled',true);
+      $('#change-password2').prop('disabled',true);
+      $('#change-password3').prop('disabled',true);
+    }
+  };
+
   /*
   * MY PAGE CHANGE MODULE INIT
   */
   var init = function(){
+    getUserInformation();
     $('#change-submit').click(onClick_submit);
   };
 
