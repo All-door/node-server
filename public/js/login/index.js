@@ -75,6 +75,10 @@ var Login = (function(){
     })
   };
 
+  var onClick_facebook = function(){
+    $('#loader').show();
+  };
+
   /*
   * LOGIN MODULE INIT
   */
@@ -82,6 +86,7 @@ var Login = (function(){
     $('#login-message').hide();
     $('#loader').hide();
     $('#login-button').click(onClick_button);
+    $('#login-facebook').click(onClick_facebook);
   };
 
   return {
