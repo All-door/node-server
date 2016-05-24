@@ -16,6 +16,7 @@ var Topbar = (function(){
         /* Session 없을 경우 */
         $('#topbar-logout').hide();
         $('#topbar-mypage').hide();
+        $('#topbar-favorite').hide();
       }
     });
   };

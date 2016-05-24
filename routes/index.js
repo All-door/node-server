@@ -95,6 +95,16 @@ router.get('/mypage/change',(req,res,next)=>{
   });
 });
 
+router.get('/mypage/favorite',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if( result === true){
+      res.render('mypage-favorite',{});
+    }else{
+      res.redirect('/login?redirect=mypage/favorite');
+    }
+  });
+});
+
 router.get('/device',(req,res,next)=>{
   res.render('device',{});
 });
