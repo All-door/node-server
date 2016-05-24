@@ -22,7 +22,6 @@ passport.use(new LocalStrategy({
         email : doc.email,
         phoneNumber : doc.phoneNumber
       };
-      console.log(user);
       return bcrypt.compare(password,doc.password);
     }
   })
