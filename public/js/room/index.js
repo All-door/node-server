@@ -75,7 +75,7 @@ var RoomInfo = (function(){
 
       var day_enable = '';
       _.each(room.day_enable,function(day){
-        day_enable += day_enable + ' ';
+        day_enable += day + ' ';
       });
       $('#room-enableday').html('<strong>사용 가능 요일 : </strong>' + day_enable);
     }else{
@@ -113,7 +113,8 @@ var RoomInfo = (function(){
   };
 
   return {
-    init : init
+    init : init,
+    room_id : room_id
   };
 })();
 
