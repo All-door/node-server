@@ -47,7 +47,9 @@ function(accessToken,refreshToken,profile,done){
   .then((doc)=>{
     if(doc == null){
       new User({
-        name : profile._json.last_name + profile._json.first_name,
+        name : profile._json.last_name.match(/[^a-zA-Z]/) == null ?
+        profile._json.last_name + " " + profile._json.first_name : // 이름이 영문일 경우
+         profile._json.last_name + profile._json.first_name, // 이름이 영문이 아닐 경우
         facebookId : profile.id,
         email : "None",
         phoneNumber : ""
