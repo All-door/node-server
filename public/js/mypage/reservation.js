@@ -53,7 +53,7 @@ var Reservation = (function(){
 
         if(room.type == '숙박'){
           template += complied({
-            reservation_title : "<strong>" + data.title + "</strong>",
+            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>",
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 시작 시간</strong> : " + data.start_day,
             content : "<strong>예약 종료 시간</strong> : " + data.end_day,
@@ -62,7 +62,7 @@ var Reservation = (function(){
           });
         }else{
           template += complied({
-            reservation_title : "<strong>" + data.title + "</strong>",
+            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>",
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 날짜</strong> : " + data.start_day,
             content : "<strong>예약 시간</strong> : " + data.start_time + " ~ " + data.end_time,
