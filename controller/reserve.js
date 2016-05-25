@@ -30,6 +30,7 @@ module.exports = {
   'ReserveRoom' : (reservation,callback)=>{
     callback = callback || ()=>{};
 
+    let title = reservation.title;
     let user_id = reservation.user_id;
     let room_id = reservation.room_id;
     let start_day = reservation.start_day;
@@ -38,7 +39,8 @@ module.exports = {
     let end_time = reservation.end_time;
     let password = reservation.password;
 
-    if( !user_id ||
+    if( !title ||
+        !user_id ||
         !room_id ||
         !password ){
           callback("데이터 정보를 확인해주세요",null);

@@ -119,6 +119,7 @@ router.post('/room/:room_id',(req,res,next)=>{
     if(result === true){
       let body = req.body;
       let reservation = {
+        title : body.title,
         user_id : user.userid,
         room_id : req.params.room_id,
         start_day : body.start_day,

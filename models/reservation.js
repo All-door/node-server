@@ -14,6 +14,7 @@ let ReservationSchema = mongoose.Schema({
   _id : { type: String, default : shortid.generate },
   createdAt : { type : Date, default : Date.now },
   updatedAt : { type : Date, default : Date.now },
+  title : { type : String, required : [ true, "예약 제목이 필요합니다."] },
   room_id : { type : String, required : [ true , "공간 정보가 필요합니다."]},
   user_id : { type : String, required : [ true , "유저 정보가 필요합니다."]},
   start_day : { type : String, required : [ true , "시작 시간 정보가 필요합니다."]},

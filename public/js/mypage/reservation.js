@@ -3,6 +3,7 @@ var Reservation = (function(){
   var ReservationTemplate = '\
   <div class="col-md-6 col-sm-12">\
     <ul class="list-group list-group-flush">\
+      <li class="list-group-item"><%= reservation_title %></li>\
       <li class="list-group-item"><%= title %></li>\
       <li class="list-group-item"><%= time %></li>\
       <li class="list-group-item"><%= content %></li>\
@@ -52,6 +53,7 @@ var Reservation = (function(){
 
         if(room.type == '숙박'){
           template += complied({
+            reservation_title : "<strong>" + data.title + "</strong>",
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 시작 시간</strong> : " + data.start_day,
             content : "<strong>예약 종료 시간</strong> : " + data.end_day,
@@ -60,6 +62,7 @@ var Reservation = (function(){
           });
         }else{
           template += complied({
+            reservation_title : "<strong>" + data.title + "</strong>",
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 날짜</strong> : " + data.start_day,
             content : "<strong>예약 시간</strong> : " + data.start_time + " ~ " + data.end_time,

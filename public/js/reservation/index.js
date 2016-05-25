@@ -53,7 +53,7 @@ var Reservation = (function(){
 
   var Render = function(room_info){
     $('#reservation-title').html("'"+room_info.title+"' 예약하기");
-    
+
     if( room_info.type != '숙박'){
       $('#reservation-content-2').hide();
       var start_time = Number(room_info.enable_start_time.split(':')[0]);
@@ -94,9 +94,15 @@ var Reservation = (function(){
   var onClick_submit = function(){
     var today = getTodayDateString();
     var date = $('#datepicker').val();
+    var title = $('#reservation-name').val();
     var start_time =  $('#reservation-starttime').val();
     var end_time = $('#reservation-endtime').val();
     var password = $('#reservation-password').val();
+
+    if( !title ){
+      alert('예약 제목을 입력해주세요.');
+      return;
+    }
 
     if( !date ){
       alert('예약 날짜를 입력해주세요.');
@@ -139,6 +145,7 @@ var Reservation = (function(){
       method : 'POST',
       dataType : 'json',
       data : {
+        title : title,
         start_day : start_day,
         end_day : start_day,
         start_time : start_time,

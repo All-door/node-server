@@ -208,9 +208,15 @@ var Acoomodation = (function(){
 
 
   var onClick_submit = function(){
+    var title = $('#reservation-name').val();
     var start_day = $('#datepicker').val().split('/')[2]+'-'+$('#datepicker').val().split('/')[0]+'-'+$('#datepicker').val().split('/')[1];
     var end_day = $('#datepicker1').val().split('/')[2]+'-'+$('#datepicker1').val().split('/')[0]+'-'+$('#datepicker1').val().split('/')[1];
     var password = $('#reservation-password').val();
+
+    if( !title ){
+      alert('예약 제목을 입력해주세요.');
+      return;
+    }
 
     if( !start_day ){
       alert('시작 날짜를 입력해주세요');
@@ -233,6 +239,7 @@ var Acoomodation = (function(){
       method : 'POST',
       dataType : 'json',
       data : {
+        title : title,
         start_day : start_day,
         end_day : end_day,
         password : password
