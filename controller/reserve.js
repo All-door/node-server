@@ -201,6 +201,7 @@ module.exports = {
     callback = callback || ()=>{};
 
     Reservation.findOne({ _id : reservation_id, user_id : user_id })
+               .select({ password : 0 })
                .then((doc)=>{
                  if(doc == null){
                    callback("존재하지 않는 예약정보입니다",null);
