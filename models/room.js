@@ -48,8 +48,8 @@ let RoomSchema = mongoose.Schema({
   favorite_count : { type : Number, default : 0 },
   view_count : { type : Number, default : 0},
   reservation_count : { type : Number, default : 0},
-  price_for_hour : { type :Number, default : 0},
-  price_for_day : { type : Number, default : 0},
+  price : { type : Number, default : 0},
+  capacity : { type : Number, default : 0 },
   rates : { type : Array }
 });
 

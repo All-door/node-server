@@ -20,8 +20,10 @@ module.exports = {
     let enable_end_time = room.enable_end_time;
     let room_images = room.room_images;
     let address = room.address;
+    let price = room.price;
+    let capacity = room.capacity;
 
-    if( !user_id || !device_id || !title || !detail || !type || !tag || !room_images || !address || enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
+    if( !price || !capacity || !user_id || !device_id || !title || !detail || !type || !tag || !room_images || !address || enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
       callback("데이터 정보를 확인해주세요.",null);
       return;
     }
@@ -49,7 +51,9 @@ module.exports = {
           enable_start_time : enable_start_time,
           enable_end_time : enable_end_time,
           room_images : room_images,
-          address : address}).save().then((doc)=>{
+          address : address,
+          price : price,
+          capacity : capacity}).save().then((doc)=>{
             callback(null,doc);
           });
       }else{
@@ -82,6 +86,8 @@ module.exports = {
         let enable_start_time = room.enable_start_time || doc.enable_start_time;
         let enable_end_time = room.enable_end_time || doc.enable_end_time;
         let address = room.address || doc.address;
+        let price = room.price || doc.price;
+        let capacity = room.capacity || doc.capacity;
 
         if( type == '숙박' ){
            day_enable = ['월','화','수','목','금','토','일'];
@@ -117,6 +123,8 @@ module.exports = {
           enable_end_time : enable_end_time,
           room_images : room_images,
           address : address,
+          price : price,
+          capacity : capacity,
           updatedAt : now
         },callback);
       }

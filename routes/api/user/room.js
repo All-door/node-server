@@ -44,6 +44,9 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
       let detail = req.body.detail;
       let type = req.body.type;
       let tag = req.body.tag;
+      let price = req.body.price;
+      let capacity = req.body.capacity;
+
       let day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);
@@ -65,7 +68,9 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
         enable_start_time : enable_start_time,
         enable_end_time : enable_end_time,
         room_images : room_images,
-        address : address
+        address : address,
+        price : price,
+        capacity : capacity
       };
       Room.InsertRoom(room,(err,doc)=>{
         if(err){
@@ -101,6 +106,8 @@ router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
       let detail = req.body.detail;
       let type = req.body.type;
       let tag = req.body.tag;
+      let price = req.body.price;
+      let capacity = req.body.capacity;
       let day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);
@@ -128,7 +135,9 @@ router.put('/:room_id',upload.array('add_image', 5),(req, res, next)=>{
         enable_end_time : enable_end_time,
         add_images : add_image,
         delete_images : delete_images,
-        address : address
+        address : address,
+        price : price,
+        capacity : capacity
       };
 
       Room.UpdateRoom(room,(err,doc)=>{
