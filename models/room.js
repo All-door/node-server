@@ -25,12 +25,10 @@ let RoomSchema = mongoose.Schema({
   user_id : { type : String, required : [ true , "유저 정보가 필요합니다."]},
   title : { type : String, required : [ true , "제목 정보가 필요합니다."]},
   detail : { type : String, required : [ true , "세부사항 정보가 필요합니다."]},
-/*  type : { type : String, enum : ['숙박','회의실','공부방','창고','강당']}, */
   type : { type : String, validate : {
     validator : TypeValidator,
     message : '공간 정보가 잘못되었습니다.'
   }},
-/*  tag : { type : String, enum : ['선릉역','신림역','길음역','강남역','역삼역','왕십리역']}, */
   tag : { type : String, validate : {
     validator : TagValidator,
     message : '태그 정보가 잘못되었습니다.'
