@@ -69,6 +69,7 @@ var RoomInfo = (function(){
     $('#room-detail').html(detail);
 
     $('#room-address').html('<strong>공간 주소 : </strong>' + room.address);
+    $('#room-capacity').html('<strong>최대 사용 인원 : </strong> ' + room.capacity + '명');
 
     if( room.type != '숙박'){
       $('#room-enabletime').html('<strong>사용 가능 시간 : </strong> ' + room.enable_start_time + ' ~ ' + room.enable_end_time);
@@ -78,9 +79,11 @@ var RoomInfo = (function(){
         day_enable += day + ' ';
       });
       $('#room-enableday').html('<strong>사용 가능 요일 : </strong>' + day_enable);
+      $('#room-price').html('<strong>하루 당 가격 : </strong> '+room.price + '원');
     }else{
       $('#room-enabletime').hide();
       $('#room-enableday').hide();
+      $('#room-price').html('<strong>시간 당 가격 : </strong> '+room.price + '원');
     }
 
     var template = '';

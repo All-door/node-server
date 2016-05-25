@@ -88,6 +88,8 @@ var Register = (function(){
     var starttime = $('#register-starttime').val();
     var endtime = $('#register-endtime').val();
     var address = $('#register-address').val();
+    var price = Number($('#register-price').val());
+    var capacity = Number($('#register-capacity').val());
     var day = getDayList();
 
     if(!name){
@@ -115,6 +117,15 @@ var Register = (function(){
       return;
     }
 
+    if( price < 0){
+      alert('시간/하루 당 가격이 0보다 작습니다.');
+      return;
+    }
+
+    if( capacity <= 0){
+      alert('최대 이용 인원이 0이거나 0보다 작습니다.');
+      return;
+    }
     if(endtime < starttime){
       alert('이용 종료 시간이 이용 시작 시간보다 앞섭니다.');
       return;
@@ -147,6 +158,8 @@ var Register = (function(){
     formData.append('enable_end_time',endtime);
     formData.append('day_enable',JSON.stringify(day));
     formData.append('address',address);
+    formData.append('price',price);
+    formData.append('capacity',capacity);
 
     $('#loader').show();
     $.ajax({

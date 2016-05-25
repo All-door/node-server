@@ -127,6 +127,8 @@ var ModifyRoom = (function(){
     var endtime = $('#register-endtime').val();
     var address = $('#register-address').val();
     var day = getDayList();
+    var price = Number($('#register-price').val());
+    var capacity = Number($('#register-capacity').val());
     var roomimage_1 = $("input[name=roomimage]")[0].files[0];
     var roomimage_2 = $("input[name=roomimage]")[1].files[0];
     var roomimage_3 = $("input[name=roomimage]")[2].files[0];
@@ -148,6 +150,15 @@ var ModifyRoom = (function(){
       return;
     }
 
+    if( price < 0 ){
+      alert('시간/하루 당 가격이 0보다 작습니다.');
+      return;
+    }
+
+    if( capacity <= 0 ){
+      alert('최대 사용 인원이 0이거나 0보다 작습니다.');
+      return;
+    }
     if(endtime < starttime){
       alert('이용 종료 시간이 이용 시작 시간보다 앞섭니다.');
       return;
@@ -184,6 +195,8 @@ var ModifyRoom = (function(){
     formData.append('add_image',roomimage_4);
     formData.append('add_image',roomimage_5);
     formData.append('delete_images',JSON.stringify(delete_images));
+    formData.append('price',price);
+    formData.append('capacity',capacity);
 
     $('#loader').show();
     $.ajax({
@@ -229,6 +242,8 @@ var ModifyRoom = (function(){
     $('#register-address').val(room.address);
     $('#register-detail').val(room.detail);
     $('#register-deviceId').val(room.device_id);
+    $('#register-price').val(room.price);
+    $('#register-capacity').val(room.capacity);
 
     if( room.type != '숙박'){
       $('#register-starttime').val(room.enable_start_time);
