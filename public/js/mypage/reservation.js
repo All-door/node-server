@@ -7,6 +7,8 @@ var Reservation = (function(){
       <li class="list-group-item"><%= title %></li>\
       <li class="list-group-item"><%= time %></li>\
       <li class="list-group-item"><%= content %></li>\
+      <li class="list-group-item"><%= address %></li>\
+      <li class="list-group-item"><%= totalPrice %></li>\
       <li class="list-group-item center-block">\
         <a class="btn btn-default" href="/room/<%= room_id %>">방 정보 보기</a>\
         <a class="delete btn btn-default" id="<%= id %>">취소하기</a>\
@@ -57,6 +59,8 @@ var Reservation = (function(){
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 시작 시간</strong> : " + data.start_day,
             content : "<strong>예약 종료 시간</strong> : " + data.end_day,
+            address : "<strong>공간 주소</strong> : " + (data.address ? data.address : room.address),
+            totalPrice : "<strong>총 가격</strong> : " + (data.totalPrice ? data.totalPrice +"원" : "0원" ),
             room_id : data.room_id,
             id : data._id
           });
@@ -66,6 +70,8 @@ var Reservation = (function(){
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 날짜</strong> : " + data.start_day,
             content : "<strong>예약 시간</strong> : " + data.start_time + " ~ " + data.end_time,
+            address : "<strong>공간 주소</strong> : " + (data.address ? data.address : room.address),
+            totalPrice : "<strong>총 가격</strong> : " + (data.totalPrice ? data.totalPrice + "원" : "0원"),
             room_id : data.room_id,
             id : data._id
           });
@@ -104,7 +110,6 @@ var Reservation = (function(){
     * MY PAGE RESERVAION MODULE INIT
   */
   var init = function(){
-    console.log("MY PAGE RESERVAION MODULE INIT");
     getReservation();
   };
 
