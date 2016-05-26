@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 let shortid = require('shortid');
 let mongoose = require('mongoose');
 let timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-4]):[0][0]$/;
@@ -31,7 +31,11 @@ let ReservationSchema = mongoose.Schema({
   status : { type : String, default : '예약중', required : [ true, "예약 상태 정보가 필요합니다." ], validate : {
     validator : statusValiadtor,
     message : '예약 상태 정보가 잘못되었습니다.'
-  }}
+  }},
+  room_title : { type : String, required : [ true, "공간 제목 정보가 필요합니다."]},
+  room_type : { type : String, required : [ true, "공간 타입 정보가 필요합니다."]},
+  address : { type : String, required : [ true, "주소 정보가 필요합니다."]},
+  totalPrice : { type : Number, default : 0 }
 });
 
 module.exports = ReservationSchema;

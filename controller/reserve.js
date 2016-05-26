@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const Reservation = models.Reservation;
 const Room = models.Room;
 const GetTodayDateString = ()=>{
@@ -24,6 +24,22 @@ const GetTodayDayString = (date)=>{
   const now = new Date(date);
   const week = ['일','월','화','수','목','금','토','일'];
   return week[now.getDay()];
+};
+
+const GetDateDifference = (start_day, end_day)=>{
+  const date1 = new Date(start_day);
+  const date2 = new Date(end_day);
+  const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+  const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  return diffDays + 1;
+};
+
+const GetHourDifference = (start_time, end_time)=>{
+  const date1 = new Date("2015/01/01 " + start_time);
+  const date2 = new Date("2015/01/01 " + end_time);
+  const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+  const diffHour = Math.ceil(timeDiff / (1000 * 3600));
+  return diffHour;
 };
 
 module.exports = {
@@ -52,16 +68,22 @@ module.exports = {
         callback("존재하지 않는 방입니다.",null);
       }else{
         let type = doc.type;
-        let enable_start_time = doc.enable_start_time;
-        let enable_end_time = doc.enable_end_time;
-        let day_enable = doc.day_enable;
+        let price = doc.price ? doc.price : 0;
+
+        reservation.room_title = doc.title;
+        reservation.room_type = doc.type;
+        reservation.address = doc.address;
 
         if( type === '숙박'){
           start_time = '24:00';
           end_time = '24:00';
           reservation.start_time = '24:00';
           reservation.end_time = '24:00';
+          reservation.totalPrice = GetDateDifference(start_day,end_day) * price;
         }else{
+          let enable_start_time = doc.enable_start_time;
+          let enable_end_time = doc.enable_end_time;
+          let day_enable = doc.day_enable;
           let date = GetTodayDateString();
           let time = GetTodayTimeString();
 
@@ -82,6 +104,9 @@ module.exports = {
                 callback("예약 가능한 시간/요일이 아닙니다.",null);
                 return;
               }
+
+              console.log(GetHourDifference(start_time,end_time));
+          reservation.totalPrice = GetHourDifference(start_time,end_time) * price;
         }
 
         Reservation.findOne({ room_id : room_id })
@@ -96,7 +121,6 @@ module.exports = {
                        Room
                        .findOneAndUpdate({ _id : room_id },{ $inc : { reservation_count : 1 }})
                        .then((doc)=>{
-                         console.log(doc);
                          reservation.status = '예약완료';
                          return new Reservation(reservation).save();
                        }).then((doc)=>{
