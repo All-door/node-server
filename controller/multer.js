@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     cb(null, config.ImagePath);
   },
   'filename' : (req, file, cb) => {
-    cb(null, file.fieldname + '-'+ shortid() + '-' + Date.now()+'.'+path.extname(file.originalname));
+    cb(null, file.fieldname + '-'+ shortid() + '-' + Date.now()+path.extname(file.originalname));
   }
 });
 const upload = multer({ storage : storage });
