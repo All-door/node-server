@@ -43,165 +43,22 @@
                             <h3>예약하기</h3>
                             <hr/>
                           </div>
-                          <div class="col-md-3">
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th class="text-center"><strong>예약 가능한 시간</strong></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr id="time-0" class="active text-center">
-                                  <td>00:00 ~ 01:00</td>
-                                </tr>
-                                <tr id="time-1" class="active text-center">
-                                  <td>01:00 ~ 02:00</td>
-                                </tr>
-                                <tr id="time-2"  class="active text-center">
-                                  <td>02:00 ~ 03:00</td>
-                                </tr>
-                                <tr id="time-3" class="active text-center">
-                                  <td>03:00 ~ 04:00</td>
-                                </tr>
-                                <tr id="time-4" class="active text-center">
-                                  <td>04:00 ~ 05:00</td>
-                                </tr>
-                                <tr id="time-5" class="active text-center">
-                                  <td>05:00 ~ 06:00</td>
-                                </tr>
-                                <tr id="time-6" class="active text-center">
-                                  <td>06:00 ~ 07:00</td>
-                                </tr>
-                                <tr id="time-7" class="active text-center">
-                                  <td>07:00 ~ 08:00</td>
-                                </tr>
-                                <tr id="time-8" class="active text-center">
-                                  <td>08:00 ~ 09:00</td>
-                                </tr>
-                                <tr id="time-9" class="active text-center">
-                                  <td>09:00 ~ 10:00</td>
-                                </tr>
-                                <tr id="time-10" class="active text-center">
-                                  <td>10:00 ~ 11:00</td>
-                                </tr>
-                                <tr id="time-11" class="active text-center">
-                                  <td>11:00 ~ 12:00</td>
-                                </tr>
-                                <tr id="time-12" class="active text-center">
-                                  <td>12:00 ~ 13:00</td>
-                                </tr>
-                                <tr id="time-13" class="active text-center">
-                                  <td>13:00 ~ 14:00</td>
-                                </tr>
-                                <tr id="time-14" class="active text-center">
-                                  <td>14:00 ~ 15:00</td>
-                                </tr>
-                                <tr id="time-15" class="active text-center">
-                                  <td>15:00 ~ 16:00</td>
-                                </tr>
-                                <tr id="time-16" class="active text-center">
-                                  <td>16:00 ~ 17:00</td>
-                                </tr>
-                                <tr id="time-17" class="active text-center">
-                                  <td>17:00 ~ 18:00</td>
-                                </tr>
-                                <tr id="time-18" class="active text-center">
-                                  <td>18:00 ~ 19:00</td>
-                                </tr>
-                                <tr id="time-19" class="active text-center">
-                                  <td>19:00 ~ 20:00</td>
-                                </tr>
-                                <tr id="time-20" class="active text-center">
-                                  <td>20:00 ~ 21:00</td>
-                                </tr>
-                                <tr id="time-21" class="active text-center">
-                                  <td>21:00 ~ 22:00</td>
-                                </tr>
-                                <tr id="time-22" class="active text-center">
-                                  <td>22:00 ~ 23:00</td>
-                                </tr>
-                                <tr id="time-23" class="active text-center">
-                                  <td>23:00 ~ 24:00</td>
-                                </tr>
-                              </tbody>
-                            </table>
+                          <div class="col-md-12">
+                            <div class="col-md-12 panel panel-default">
+                              <div class="panel-heading" style="background : gray !important;">예약 정보</div>
+                              <div class="panel-body">
+                                <p><strong>예약 날짜 : </strong> <div id="start_day" class="text-right">2016-02-13</div></p>
+                                <p><strong>시작 시간 : </strong> <div id="start_time" class="text-right">11:00</div></p>
+                                <p><strong>종료 시간 : </strong> <div id="end_time" class="text-right">12:00</div></p>
+                                <p><strong>총 가격 : </strong> <div id="total_price" class="text-right">1000원</div></p>
+                              </div>
+                            </div>
                           </div>
-                          <div class="col-md-9">
-                            <br/>
-                            <div class="col-sm-offset-2 col-sm-10">
-                              <h6 id="reservation-enableday">예약이 가능한 요일 : 월 화 수 목 금 토 일</h6>
-                            </div>
-                            <div class="col-sm-offset-2 col-sm-10">
-                              <h6 id="reservation-enabletime">예약이 가능한 시간 : 00:00 ~ 24:00</h6>
-                            </div>
+                          <div class="col-md-12">
                             <br/>
                             <label for="inputName" class="col-sm-2 control-label"><strong>예약 제목</strong> :</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" placeholder="예약 제목" id="reservation-name">
-                            </div>
-                            <label for="inputName" class="col-sm-2 control-label"><strong>예약 날짜</strong> :</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" placeholder="예약 날짜" id="datepicker">
-                            </div>
-                            <label for="inputName" class="col-sm-2 control-label" id="reservation-starttime-labael"><strong>예약 시작 시간</strong> :</label>
-                            <div class="col-sm-4">
-                              <select class="form-control" id="reservation-starttime">
-                                <option value="00:00">00:00</option>
-                                <option value="01:00">01:00</option>
-                                <option value="02:00">02:00</option>
-                                <option value="03:00">03:00</option>
-                                <option value="04:00">04:00</option>
-                                <option value="05:00">05:00</option>
-                                <option value="06:00">06:00</option>
-                                <option value="07:00">07:00</option>
-                                <option value="08:00">08:00</option>
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="21:00">21:00</option>
-                                <option value="22:00">22:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="24:00">24:00</option>
-                              </select>
-                            </div>
-                            <label for="inputName" class="col-sm-2 control-label" id="reservation-endtime-label"><strong>예약 종료 시간</strong> :</label>
-                            <div class="col-sm-4">
-                              <select class="form-control" id="reservation-endtime">
-                                <option value="00:00">00:00</option>
-                                <option value="01:00">01:00</option>
-                                <option value="02:00">02:00</option>
-                                <option value="03:00">03:00</option>
-                                <option value="04:00">04:00</option>
-                                <option value="05:00">05:00</option>
-                                <option value="06:00">06:00</option>
-                                <option value="07:00">07:00</option>
-                                <option value="08:00">08:00</option>
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="21:00">21:00</option>
-                                <option value="22:00">22:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="24:00">24:00</option>
-                              </select>
                             </div>
                             <hr/>
                             <label for="inputName" class="col-sm-2 control-label"><strong>암호</strong> :</label>
