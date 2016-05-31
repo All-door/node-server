@@ -220,7 +220,7 @@ module.exports = {
       return;
     }
 
-    if((type == '숙박' && (!start_day && end_dat))){
+    if((type == '숙박' && (!start_day && end_day))){
       callback('데이터 정보를 확인해주세요.',null);
       return;
     }
