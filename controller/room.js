@@ -205,6 +205,7 @@ module.exports = {
 
     let type = query.type;
     let tag = query.tag;
+    let capacity = query.capacity;
     let start_day = query.start_day;
     let start_time = query.start_time;
     let end_day = query.end_day;
@@ -240,21 +241,19 @@ module.exports = {
     }
 
     let find_query = {};
-    if(!tag && type){
-      find_query = {
-        type : type
-      };
+
+    if( capacity ){
+      find_query.capacity = { $gte : capacity };
     }
-    if(tag && type){
-      find_query = {
-        tag : tag,
-        type : type
-      };
+    if(type && tag){
+      find_query.type = type;
+      find_query.tag = tag;
     }
-    if(tag && !type){
-      find_query = {
-        tag : tag
-      };
+    else if(type){
+      find_query.type = type;
+    }
+    else if(tag){
+      find_query.tag = tag;
     }
 
     Room

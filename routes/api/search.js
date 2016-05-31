@@ -10,7 +10,8 @@ router.get('/',(req,res,next)=>{
     start_day : req.query.start_day,
     start_time : req.query.start_time,
     end_day : req.query.end_day,
-    end_time : req.query.end_time
+    end_time : req.query.end_time,
+    capacity : req.query.capacity
   };
   Room.GetVancancyRoomsByQuery(req.query.offset,req.query.limit,query,(err,docs)=>{
     if(err){
