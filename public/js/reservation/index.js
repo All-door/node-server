@@ -1,11 +1,24 @@
 var Reservation = (function(){
-  var timeTableIds = ['time-0','time-1','time-2','time-3','time-4','time-5','time-6','time-7','time-8','time-9','time-10','time-11','time-12','time-13',
-'time-14','time-15','time-16','time-17','time-18','time-19','time-20','time-21','time-22','time-23','time-24'];
-  var dayList = ['일','월','화','수','목','금','토','일'];
-
   var room_id = '';
   var room_info = null;
   var reservation_info = null;
+  var start_day = '';
+  var start_time = '';
+  var end_time = '';
+
+  var getUrlParams = function() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    return params;
+  };
+
+  var GetHourDifference = function(start_time, end_time){
+    var date1 = new Date("2015/01/01 " + start_time);
+    var date2 = new Date("2015/01/01 " + end_time);
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var diffHour = Math.ceil(timeDiff / (1000 * 3600));
+    return diffHour;
+  };
 
   var isNumber = function(s) {
     s += ''; // 문자열로 변환
@@ -28,7 +41,6 @@ var Reservation = (function(){
       success : function(data){
         if(data.data != null){
           room_info = data.data;
-
           Render(room_info);
         }else{
           alert('존재하지 않는 방입니다.');
@@ -40,45 +52,23 @@ var Reservation = (function(){
         location.href = '/';
       }
     });
-
-    var url = "/api/room/"+room_id+"/reservation";
-    $.ajax({
-      url : url,
-      method : 'GET',
-      success : function(data){
-        reservation_info = data.data;
-      }
-    });
   };
 
   var Render = function(room_info){
     $('#reservation-title').html("'"+room_info.title+"' 예약하기");
 
-    if( room_info.type != '숙박'){
-      $('#reservation-content-2').hide();
-      var start_time = Number(room_info.enable_start_time.split(':')[0]);
-      var end_time = Number(room_info.enable_end_time.split(':')[0]);
-      var day_enable = room_info.day_enable;
+    var params = getUrlParams();
+    start_day = params.day;
+    start_time = params.start_time;
+    end_time = params.end_time;
 
-      for(var i=0;i<24;i++){
-        if( i >= start_time && i <= end_time){
-          $('#'+timeTableIds[i]).removeClass('active');
-          $('#'+timeTableIds[i]).removeClass('danger');
-          $('#'+timeTableIds[i]).addClass('success');
-        }else{
-          $('#'+timeTableIds[i]).hide();
-        }
-      }
+    $('#start_day').html(start_day);
+    $('#start_time').html(start_time);
+    $('#end_time').html(end_time);
 
-      $('#reservation-enabletime').html('<strong>예약 가능한 시간</strong> : '+room_info.enable_start_time+" ~ "+ room_info.enable_end_time);
-      $('#reservation-enableday').html('<strong>예약 가능한 요일</strong> : ');
-      for(var i=0;i<room_info.day_enable.length;i++){
-        $('#reservation-enableday').append(room_info.day_enable[i]+' ');
-      }
-
-      $('#reservation-starttime').val(room_info.enable_start_time);
-      $('#reservation-endtime').val(room_info.enable_end_time);
-    }
+    var diff = GetHourDifference(start_time,end_time);
+    var total_price = Number(diff) * room_info.price;
+    $('#total_price').html(String(total_price) + "원");
   };
 
   var getTodayDateString = function(){
@@ -92,37 +82,11 @@ var Reservation = (function(){
   };
 
   var onClick_submit = function(){
-    var today = getTodayDateString();
-    var date = $('#datepicker').val();
     var title = $('#reservation-name').val();
-    var start_time =  $('#reservation-starttime').val();
-    var end_time = $('#reservation-endtime').val();
     var password = $('#reservation-password').val();
 
     if( !title ){
       alert('예약 제목을 입력해주세요.');
-      return;
-    }
-
-    if( !date ){
-      alert('예약 날짜를 입력해주세요.');
-      return;
-    }
-
-    var day = dayList[new Date(date).getDay()];
-
-    if(room_info.day_enable.indexOf(day) == -1 ){
-      alert('예약이 불가능한 요일입니다.');
-      return;
-    }
-
-    if( start_time >= end_time){
-      alert('예약 시간이 동일하거나 종료 시간이 시작시간보다 앞섭니다.');
-      return;
-    }
-
-    if( start_time < room_info.enable_start_time || end_time > room_info.enable_end_time){
-      alert('사용이 불가능한 예약시간입니다.');
       return;
     }
 
@@ -135,9 +99,6 @@ var Reservation = (function(){
       alert('암호는 숫자만 가능합니다.');
       return;
     }
-
-    var strings = date.split('/');
-    var start_day = strings[2] + "-"+ strings[0] + "-" + strings[1];
 
     var url = "/api/user/reserve/room/"+room_id;
     $.ajax({
@@ -162,118 +123,20 @@ var Reservation = (function(){
     });
   };
 
-  var onChange_datepicker = function(){
-    var _this = $(this);
-    var today = new Date(getTodayDateString() + " 00:00:00").getTime();
-    var select_day = new Date(_this.val() + " 00:00:00").getTime();
-
-    if( select_day < today){
-      _this.val('');
-      alert('시간이 지난 요일은 선택할 수 없습니다.');
-      return;
-    }
-
-    var strings = _this.val().split('/');
-    var day = strings[2] + "-"+ strings[0] + "-" + strings[1];
-
-    var reservations = reservation_info.filter(function(reservation){
-      if(reservation.start_day >= day && reservation.end_day <= day){
-        return true;
-      }else{
-        return false;
-      }
-    });
-
-    for(var i=0;i<24;i++){
-      $('#'+timeTableIds[i]).removeClass('danger');
-      $('#'+timeTableIds[i]).addClass('success');
-    }
-
-    _.each(reservations,function(reservation){
-      var start_time = Number(reservation.start_time.split(':')[0]);
-      var end_time = Number(reservation.end_time.split(':')[0]);
-
-      for( var i=start_time;i<end_time;i++){
-        $('#'+timeTableIds[i]).removeClass('success');
-        $('#'+timeTableIds[i]).addClass('danger');
-      }
-    });
-  };
-
-  var onChange_endtime = function(){
-    var start_time = $('#reservation-starttime').val();
-    var end_time = $('#reservation-endtime').val();
-    var date = $('#datepicker').val();
-
-    if( !date ){
-      alert('예약 날짜 정보부터 입력해주세요.');
-      return;
-    }
-
-    if( start_time >= end_time){
-      alert('예약 시간이 동일하거나 종료 시간이 시작시간보다 앞섭니다.');
-      $('#reservation-endtime').val($('#reservation-starttime').val());
-      return;
-    }
-
-    var enable_start_time = room_info.enable_start_time;
-    var enable_end_time = room_info.enable_end_time;
-
-    if( start_time < enable_start_time || end_time > enable_end_time){
-      alert('사용이 불가능한 예약시간입니다.');
-      return;
-    }
-
-    var strings = date.split('/');
-    var day = strings[2] + "-"+ strings[0] + "-" + strings[1];
-
-    if( checkReservation(day,start_time,end_time) != 0 ){
-      alert('이미 시간이 중복된 예약이 존재합니다.');
-    }
-  };
-
-  var checkReservation = function(day,start_time,end_time){
-    var reservations = reservation_info.filter(function(reservation){
-      if(reservation.start_day >= day && reservation.end_day <= day){
-        return true;
-      }else{
-        return false;
-      }
-    });
-
-    var times = reservations.filter(function(reservation){
-      if( start_time >= reservation.start_time && start_time < reservation.end_time){
-        return true;
-      }
-
-      if( end_time > reservation.start_time && end_time <= reservation.end_time){
-        return true;
-      }
-
-      if(start_time <= reservation.start_time && end_time >= reservation.end_time){
-        return true;
-      }
-
-      if(start_time >= reservation.start_time && end_time <= reservation.end_time){
-        return true;
-      }
-
-      return false;
-    });
-
-    return times.length;
-  }
   /*
   * RESERVAION PAGE MODULE INIT
   */
   var init = function(){
-    console.log("RESERVAION PAGE MODULE INIT");
     room_id = getRoomIdFromURL();
     getRoomInfo(room_id);
 
     $('#reservation-submit').click(onClick_submit);
-    $('#datepicker').change(onChange_datepicker);
-    $('#reservation-endtime').change(onChange_endtime);
+
+    var params = getUrlParams();
+    if( !params.hasOwnProperty('day') || !params.hasOwnProperty('start_time') || !params.hasOwnProperty('end_time')){
+      alert('잘못된 접근입니다.');
+      location.href="/room/"+room_id;
+    }
   };
 
   return {

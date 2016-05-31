@@ -214,7 +214,7 @@ module.exports = {
                    .sort({ start_day : -1 })
                    .skip(offset)
                    .limit(limit)
-                   .select({ start_day : 1, start_time : 1, end_day : 1, end_time : 1 })
+                   .select({ password : 0, user_id : 0, status : 0, room_id : 0, _id : 0 })
                    .then((docs)=>{
                      callback(null,docs);
                    })
@@ -225,7 +225,7 @@ module.exports = {
     callback = callback || ()=>{};
 
     Reservation.findOne({ _id : reservation_id, user_id : user_id })
-               .select({ password : 0 })
+               .select({ password : 0, user_id : 0, status : 0, room_id : 0, _id : 0 })
                .then((doc)=>{
                  if(doc == null){
                    callback("존재하지 않는 예약정보입니다",null);
