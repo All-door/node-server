@@ -20,6 +20,7 @@ var Search = (function(){
                     <%= address %>\
                     <%= time_enable %>\
                     <%= day_enable %>\
+                    <%= capacity %>\
                     <hr/>\
                     <a href="/room/<%= id %>" class="btn btn-default btn-default border-radius text-right">공간정보 보러가기</a>\
                     <a href="/reservation/<%= id %>" class="btn btn-default btn-deafult border-radius text-right">예약하러 가기</a>\
@@ -232,6 +233,7 @@ var Search = (function(){
           time_enable : '',
           day_enable : '',
           id : room._id,
+          capacity : Render_roomspec('최대 사용 인원','' + room.capacity + '명'),
         });
       }else{
         template += compiled({
@@ -243,7 +245,8 @@ var Search = (function(){
           address : Render_roomspec('공간 주소',room.address),
           time_enable : Render_roomspec('예약 가능한 시간',getTimeString(room.enable_start_time,room.enable_end_time)),
           day_enable : Render_roomspec('예약 가능한 요일',getDayEnableList(room.day_enable)),
-          id : room._id
+          id : room._id,
+          capacity : Render_roomspec('최대 사용 인원','' + room.capacity + '명')
         });
       }
     });
