@@ -56,24 +56,8 @@
                                   <p id="room-tag" class="btn btn-default btn-normal">강남역 </p>
                                 </div><!-- end tags -->
                                 <br/>
-                                <h3><strong>공간에 대한 설명</strong></h3>
-                                <div id="room-detail">
-                                  <p>설명이 들어갈 공간</p>
-                                </div>
-                                <hr/>
-                                <div>
-                                  <p id="room-address" style="margin-bottom : 0px !important;"><strong>공간 주소 : </strong>충남 홍성군 홍북면 상하리 상산 324</p>
-                                  <p id="room-enabletime" style="margin-bottom : 0px !important;"><strong>사용 가능 시간 : </strong> 23:00 ~ 24:00</p>
-                                  <p id="room-enableday" style="margin-bottom : 0px !important;"><strong>사용 가능 요일 : </strong> 월, 화, 수, 목, 금, 토, 일</p>
-                                  <p id="room-price" style="margin-bottom : 0px !important;"><strong>시간/하루 당 가격 : </strong> 1000원 </p>
-                                  <p id="room-capacity" style="margin-bottom : 0px !important;"><strong>최대 사용 인원 : </strong> 10명</p>
-                                </div>
-                                <hr/>
-                                <a id="room-reservation" class="btn btn-primary btn-lg border-radius">바로 예약하러 가기</a>
-                                <hr/>
                                 <div class="post-content clearfix">
                                   <h3><strong>공간 사진</strong></h3>
-                                  <hr>
                                   <p class="alert alert-info">사진을 클릭하면 큰 화면으로 볼수 있습니다.</p>
                                   <div id="images">
                                     <div class="room_image_padding col-md-4" style="width: 370px; height: 185px; overflow: hidden; margin-bottom:10px !important;">
@@ -94,7 +78,101 @@
                                     <div class="room_image_padding col-md-4" style="width: 370px; height: 185px; overflow: hidden; margin-bottom:10px !important;">
                                     </div>
                                   </div>
-                                </div><!-- end post-content -->
+                                </div>
+                                <hr/>
+                                <div>
+                                  <p id="room-address" style="margin-bottom : 0px !important;"><strong>공간 주소 : </strong>충남 홍성군 홍북면 상하리 상산 324</p>
+                                  <p id="room-enabletime" style="margin-bottom : 0px !important;"><strong>사용 가능 시간 : </strong> 23:00 ~ 24:00</p>
+                                  <p id="room-enableday" style="margin-bottom : 0px !important;"><strong>사용 가능 요일 : </strong> 월, 화, 수, 목, 금, 토, 일</p>
+                                  <p id="room-price" style="margin-bottom : 0px !important;"><strong>시간/하루 당 가격 : </strong> 1000원 </p>
+                                  <p id="room-capacity" style="margin-bottom : 0px !important;"><strong>최대 사용 인원 : </strong> 10명</p>
+                                </div>
+                                <hr/>
+                                <h3><strong>공간에 대한 설명</strong></h3>
+                                <div id="room-detail">
+                                  <p>설명이 들어갈 공간</p>
+                                </div>
+                                <hr/>
+                                <h3><strong>예약하기</strong></h3>
+                                <div id="room-reservation-1">
+                                  <label for="inputName" class="col-sm-2 control-label" id="room-reservationday"><strong>예약 날짜</strong> :</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="예약 날짜" id="datepicker">
+                                  </div>
+                                  <label for="inputName" class="col-sm-2 control-label" id="room-starttime-label"><strong>예약 시작 시간</strong> :</label>
+                                  <div class="col-sm-4">
+                                    <select class="form-control" id="room-starttime">
+                                      <option value="00:00">00:00</option>
+                                      <option value="01:00">01:00</option>
+                                      <option value="02:00">02:00</option>
+                                      <option value="03:00">03:00</option>
+                                      <option value="04:00">04:00</option>
+                                      <option value="05:00">05:00</option>
+                                      <option value="06:00">06:00</option>
+                                      <option value="07:00">07:00</option>
+                                      <option value="08:00">08:00</option>
+                                      <option value="09:00">09:00</option>
+                                      <option value="10:00">10:00</option>
+                                      <option value="11:00">11:00</option>
+                                      <option value="12:00">12:00</option>
+                                      <option value="13:00">13:00</option>
+                                      <option value="14:00">14:00</option>
+                                      <option value="15:00">15:00</option>
+                                      <option value="16:00">16:00</option>
+                                      <option value="17:00">17:00</option>
+                                      <option value="18:00">18:00</option>
+                                      <option value="19:00">19:00</option>
+                                      <option value="20:00">20:00</option>
+                                      <option value="21:00">21:00</option>
+                                      <option value="22:00">22:00</option>
+                                      <option value="23:00">23:00</option>
+                                      <option value="24:00">24:00</option>
+                                    </select>
+                                  </div>
+                                  <label for="inputName" class="col-sm-2 control-label" id="room-endtime-label"><strong>예약 종료 시간</strong> :</label>
+                                  <div class="col-sm-4">
+                                    <select class="form-control" id="room-endtime">
+                                      <option value="00:00">00:00</option>
+                                      <option value="01:00">01:00</option>
+                                      <option value="02:00">02:00</option>
+                                      <option value="03:00">03:00</option>
+                                      <option value="04:00">04:00</option>
+                                      <option value="05:00">05:00</option>
+                                      <option value="06:00">06:00</option>
+                                      <option value="07:00">07:00</option>
+                                      <option value="08:00">08:00</option>
+                                      <option value="09:00">09:00</option>
+                                      <option value="10:00">10:00</option>
+                                      <option value="11:00">11:00</option>
+                                      <option value="12:00">12:00</option>
+                                      <option value="13:00">13:00</option>
+                                      <option value="14:00">14:00</option>
+                                      <option value="15:00">15:00</option>
+                                      <option value="16:00">16:00</option>
+                                      <option value="17:00">17:00</option>
+                                      <option value="18:00">18:00</option>
+                                      <option value="19:00">19:00</option>
+                                      <option value="20:00">20:00</option>
+                                      <option value="21:00">21:00</option>
+                                      <option value="22:00">22:00</option>
+                                      <option value="23:00">23:00</option>
+                                      <option value="24:00">24:00</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div id="room-reservation-2">
+                                  <label for="inputName" class="col-sm-2 control-label" id="room-startday-label"><strong>시작 날짜</strong> :</label>
+                                  <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="시작 날짜를 입력해주세요" id="datepicker2">
+                                  </div>
+                                  <label for="inputName" class="col-sm-2 control-label" id="room-endday-label"><strong>종료 날짜</strong> :</label>
+                                  <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="종료 날짜를 입력해주세요" id="datepicker3">
+                                  </div>
+                                </div>
+                                <p id="message" class="col-md-12 alert alert-danger">경고 메시지가 나오는 부분</p>
+                                <a id="room-reservation" class="col-sm-offset-10 col-sm-2 btn btn-primary btn-lg border-radius text-right">바로 예약하기</a>
+                                <hr/>
                                 <br/>
                             </div><!-- end post-wrapper -->
                         </div><!-- end col -->
