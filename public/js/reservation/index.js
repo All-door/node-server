@@ -92,7 +92,6 @@ var Reservation = (function(){
   };
 
   var onClick_submit = function(){
-    var today = getTodayDateString();
     var date = $('#datepicker').val();
     var title = $('#reservation-name').val();
     var start_time =  $('#reservation-starttime').val();
