@@ -175,13 +175,21 @@ module.exports = {
           if( doc != null){
             callback("기존의 예약 시간과 겹칩니다.",null);
           }else{
-            Room
-            .findOneAndUpdate({ _id : room_id },{ $inc : { reservation_count : 1 }})
+            PreReservation
+            .findOne({ room_id : room_id })
+            .where('start_day').lte(end_day).gte(start_day)
+            .where('start_time').lte(end_time).gte(start_time)
+            .where('end_day').lte(end_day).gte(start_day)
+            .where('end_time').lte(end_time).gte(start_time)
             .then((doc)=>{
-              return new PreReservation(reservation).save();
-            }).then((doc)=>{
-              callback(null,doc);
-            });
+              if( doc == null){
+                return new PreReservation(reservation).save().then((doc)=>{
+                  callback(null,doc);
+                });
+              }else{
+                callback("기존의 예약 시간과 겹칩니다.",null);
+              }
+            })
           }
         });
       }
