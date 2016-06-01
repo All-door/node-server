@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../../../controller/room');
 const User = require('../../../controller/user');
+const Reserve = require('../../../controller/reserve');
 const config = require('../../../config');
 const upload = require('../../../controller/multer');!
 
@@ -172,6 +173,46 @@ router.delete('/:room_id',(req,res, next)=>{
     }else{
       response.AuthFail(res);
       return;
+    }
+  });
+});
+
+/*
+* 유저가 등록한 공간(방)의 예약 정보 가지고 오기
+* GET /api/user/room/:room_id/reservation
+*/
+router.get('/:room_id/reservation',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if( result === true){
+      Reserve.GetReservationByRoomIdInAdmin(req.query.offset,req.query.limit,user.userid,req.params.room_id,(err,docs)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Data(res,docs);
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+
+/*
+* 유저가 등록한 공간(방)의 예약 정보 취소하기
+* DELETE /api/usr/room/:room_id/reservation/:reservation_id
+*/
+router.delete('/:room_id/reservation/:reservation_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      Reserve.RemoveReservationByReservationIdInAdmin(req.query.offset,req.query.limit,user.userid,req.params.room_id,req.params.reservation_id,(err,result)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.Message(res,"해당 예약 정보를 취소했습니다.")
+        }
+      });
+    }else{
+      response.AuthFail(res);
     }
   });
 });

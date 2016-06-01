@@ -303,5 +303,91 @@ module.exports = {
                    callback(null,doc);
                  }
                });
+  },
+  'GetReservationByRoomIdInAdmin' : (offset,limit,user_id,room_id,callback)=>{
+    callback = callback || ()=>{};
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
+
+    if( !user_id || !room_id ){
+      callback('데이터 정보를 확인해주세요.',null);
+      return;
+    }
+
+    Room.findOne({ _id : room_id })
+    .then((doc)=>{
+      if(doc == null){
+        throw new Error('공간 정보가 존재하지 않습니다.');
+      }else{
+        if( doc.user_id == user_id){
+          return Reservation
+          .find({ room_id : room_id })
+          .select({ password : 0 });
+        }else{
+          throw new Error('공간 접근 권한이 없습니다.');
+        }
+      }
+    })
+    .then((docs)=>{
+      callback(null,docs.slice(offset,offset+limit));
+    })
+    .catch((e)=>{
+      switch (e.message) {
+        case '공간 접근 권한이 없습니다':
+        case '공간 정보가 존재하지 않습니다.':
+          callback(e.message,null);
+          break;
+        default:
+          callback(String(e),null);
+      }
+    });
+  },
+  'RemoveReservationByReservationIdInAdmin' : (offset,limit,user_id,room_id,reservation_id,callback)=>{
+    callback = callback || ()=>{};
+    offset = Number(offset) || 0;
+    limit = Number(limit) || 30;
+
+    if( !user_id || !room_id || !reservation_id ){
+      callback('데이터 정보를 확인해주세요.',null);
+      return;
+    }
+
+    Room.findOne({ _id : room_id })
+    .then((doc)=>{
+      if( doc == null){
+        throw new Error('공간 정보가 존재하지 않습니다.');
+      }else{
+        if( doc.user_id == user_id){
+          return Reservation
+          .findOne({ _id : reservation_id, room_id : room_id })
+          .where('status').in(['예약 완료']);
+        }else{
+          throw new Error('공간 접근 권한이 없습니다.');
+        }
+      }
+    })
+    .then((doc)=>{
+      if( doc == null){
+        throw new Error('예약 정보가 존재하지 않습니다.')
+      }else{
+        return Reservation
+        .update({ _id : reservation_id, room_id : room_id }, { status : '관리자 취소'})
+      }
+    })
+    .then((doc)=>{
+      console.log(doc);
+      callback(null,doc);
+    })
+    .catch((e)=>{
+      switch (e.message) {
+        case '공간 접근 권한이 없습니다':
+        case '공간 정보가 존재하지 않습니다.':
+        case '예약 정보가 존재하지 않습니다.':
+          callback(e.message,null);
+          break;
+        default:
+          callback(String(e),null);
+      }
+    });
   }
 };
