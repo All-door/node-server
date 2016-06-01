@@ -103,9 +103,7 @@ module.exports = {
               day_enable.indexOf(GetTodayDayString(end_day)) === -1){
                 callback("예약 가능한 시간/요일이 아닙니다.",null);
                 return;
-              }
-
-              console.log(GetHourDifference(start_time,end_time));
+          }
           reservation.totalPrice = GetHourDifference(start_time,end_time) * price;
         }
 
