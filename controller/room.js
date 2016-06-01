@@ -277,7 +277,7 @@ module.exports = {
                              if(start_day <= doc.start_day && end_day >= doc.end_day){
                                return true;
                              }
-                             if(start_day >= doc.start_time && end_day <= doc.end_day){
+                             if(start_day >= doc.start_day && end_day <= doc.end_day){
                                return true;
                              }
                              return false;
