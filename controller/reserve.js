@@ -375,7 +375,6 @@ module.exports = {
       }
     })
     .then((doc)=>{
-      console.log(doc);
       callback(null,doc);
     })
     .catch((e)=>{
