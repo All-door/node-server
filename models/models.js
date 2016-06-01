@@ -27,4 +27,8 @@ models.Review = mongoose.model('review',ReviewSchema);
 let DeviceLogSchema = require('./device_log.js');
 models.DeviceLog = mongoose.model('device_log',DeviceLogSchema);
 
+/* Pre Reservation DB */
+let PreReservationSchema = require('./pre_reservation.js');
+models.PreReservation = mongoose.model('pre_reservation',PreReservationSchema);
+
 module.exports = models;

@@ -16,6 +16,7 @@ const user = require('./routes/api/user');
 const user_room = require('./routes/api/user/room');
 const user_favorites = require('./routes/api/user/favorite');
 const user_reserve = require('./routes/api/user/reserve');
+const user_pre_reserve = require('./routes/api/user/prereserve');
 const room = require('./routes/api/room');
 const room_comment = require('./routes/api/room/comment');
 const room_reservation = require('./routes/api/room/reservation');
@@ -62,6 +63,7 @@ app.use('/api/user',user);
 app.use('/api/user/favorite',user_favorites);
 app.use('/api/user/room',user_room);
 app.use('/api/user/reserve',user_reserve);
+app.use('/api/user/prereserve',user_pre_reserve);
 app.use('/api/room',room);
 app.use('/api/room',room_comment);
 app.use('/api/room',room_reservation);
@@ -72,9 +74,9 @@ app.use('/api/search',search);
 
 app.use('/api/images/:image_id',(req, res, next)=>{
   let imagepath = path.join(config.ImagePath,req.params.image_id);
-  res.header('Content-Type', 'image/*')
   res.sendFile(imagepath);
-})
+});
+
 // catch 404 and forward to error handler
 app.use((req, res, next)=>{
   let err = new Error('Not Found');
