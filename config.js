@@ -8,5 +8,5 @@ const config = {
 
   }
 };
-console.log(process.env.ALL_DOOR_IMAGE_PATH);
+
 module.exports = config;
