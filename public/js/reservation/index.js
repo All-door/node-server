@@ -5,6 +5,26 @@ var Reservation = (function(){
   var start_day = '';
   var start_time = '';
   var end_time = '';
+  var count_down = 60*5 -1;
+
+  var preReserve = function(room_id){
+    $.ajax({
+      url : '/api/user/prereserve/room/'+room_id,
+      method : 'POST',
+      dataType : 'json',
+      data : {
+        start_day : start_day,
+        start_time : start_time,
+        end_time : end_time
+      },
+      success : function(data){
+      },
+      error : function(request,status,error){
+        alert('예약이 불가능합니다.');
+        location="/room/"+room_id;
+      }
+    });
+  };
 
   var getUrlParams = function() {
     var params = {};
@@ -62,6 +82,7 @@ var Reservation = (function(){
     start_time = params.start_time;
     end_time = params.end_time;
 
+    preReserve(room_info._id);
     $('#start_day').html(start_day);
     $('#start_time').html(start_time);
     $('#end_time').html(end_time);
@@ -137,6 +158,18 @@ var Reservation = (function(){
       alert('잘못된 접근입니다.');
       location.href="/room/"+room_id;
     }
+
+    setInterval(function(){
+      if(count_down == 0){
+        alert('예약 대기 시간이 완료 되었습니다.');
+        location.href="/room/"+room_id;
+      }
+      var min = Math.floor(count_down / 60);
+      var sec = count_down % 60;
+
+      $('#count_down').html((min >= 10 ? min : '0'+min) +':'+ (sec >= 10 ? sec : '0'+sec));
+      count_down--;
+    },1000);
   };
 
   return {
