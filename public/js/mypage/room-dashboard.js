@@ -107,14 +107,14 @@ var Dashboard = (function(){
           $('#dashboard-device').removeClass('panel-green');
           $('#dashboard-device').addClass('panel-red');
           $('#dashboard-device-status').html('디바이스의 상태 : Bad');
-          $('#dashboard-device-time').html('최근 동기화 시간 : ' + getStringFromDate(data.data.updatedAt));
+          $('#dashboard-device-status-time').html('최근 동기화 시간 : ' + getStringFromDate(data.data.updatedAt));
         }
       },
       error : function(){
         $('#dashboard-device').removeClass('panel-green');
         $('#dashboard-device').addClass('panel-red');
         $('#dashboard-device-status').html('데이터가 존재하지 않습니다.');
-        $('#dashboard-device-time').html('최근 동기화 시간 : 데이터가 존재하지 않습니다.');
+        $('#dashboard-device-status-time').html('최근 동기화 시간 : 데이터가 존재하지 않습니다.');
       }
     })
   };
