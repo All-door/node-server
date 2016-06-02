@@ -11,7 +11,7 @@ var Reservation = (function(){
       <li class="list-group-item"><%= totalPrice %></li>\
       <li class="list-group-item center-block">\
         <a class="btn btn-default" href="/room/<%= room_id %>">방 정보 보기</a>\
-        <a class="delete btn btn-default" id="<%= id %>">취소하기</a>\
+        <%= cancel %>\
       </li>\
     </ul>\
   </div>';
@@ -53,27 +53,33 @@ var Reservation = (function(){
         var room = result[0];
         var complied = _.template(ReservationTemplate);
 
+
+        var status = '';
+        if( data.status != '예약완료'){
+          status = ' <small class="small" style="color : gray !important;">['+data.status+']</small>';
+        }
+
         if(room.type == '숙박'){
           template += complied({
-            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>",
+            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>"+status,
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 시작 시간</strong> : " + data.start_day,
             content : "<strong>예약 종료 시간</strong> : " + data.end_day,
             address : "<strong>공간 주소</strong> : " + (data.address ? data.address : room.address),
             totalPrice : "<strong>총 가격</strong> : " + (data.totalPrice ? data.totalPrice +"원" : "0원" ),
             room_id : data.room_id,
-            id : data._id
+            cancel : data.status != '예약완료' ? '' : '<a class="delete btn btn-default" id="'+data._id+'">취소하기</a>'
           });
         }else{
           template += complied({
-            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>",
+            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>"+status,
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 날짜</strong> : " + data.start_day,
             content : "<strong>예약 시간</strong> : " + data.start_time + " ~ " + data.end_time,
             address : "<strong>공간 주소</strong> : " + (data.address ? data.address : room.address),
             totalPrice : "<strong>총 가격</strong> : " + (data.totalPrice ? data.totalPrice + "원" : "0원"),
             room_id : data.room_id,
-            id : data._id
+            cancel : data.status != '예약완료' ? '' : '<a class="delete btn btn-default" id="'+data._id+'">취소하기</a>'
           });
         }
         callback();
