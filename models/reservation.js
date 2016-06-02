@@ -2,7 +2,7 @@
 let shortid = require('shortid');
 let mongoose = require('mongoose');
 let timeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-4]):[0][0]$/;
-let statusEnum = ['예약완료','예약 취소','관리자 취소'];
+let statusEnum = ['예약완료','예약취소','관리자취소'];
 let TimeValidator = (v)=>{
   return timeRegex.test(v);
 };
