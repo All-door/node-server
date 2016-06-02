@@ -59,11 +59,11 @@ app.use('/', routes);
 /*
 * API ROUTE
 */
-app.use('/api/user',user);
 app.use('/api/user/favorite',user_favorites);
 app.use('/api/user/room',user_room);
 app.use('/api/user/reserve',user_reserve);
 app.use('/api/user/prereserve',user_pre_reserve);
+app.use('/api/user',user);
 app.use('/api/room',room);
 app.use('/api/room',room_comment);
 app.use('/api/room',room_reservation);
