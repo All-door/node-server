@@ -8,7 +8,7 @@ var Room = (function(){
       <li class="list-group-item"> <strong>도어락 상태</strong> : <%= status %></li>\
       <li class="list-group-item"> <strong>최근 입출입 시간</strong> : <%= log_date %></li>\
       <li class="list-group-item text-center">\
-        <a class="btn btn-default" href="/room/<%= id %>">자세히보기</a>\
+        <a class="btn btn-default" href="/mypage/room/<%= id %>/dashboard">대쉬 보드</a>\
         <a class="btn btn-default" href="/mypage/room/<%= id %>">수정하기</a>\
         <a class="delete btn btn-default" id="<%= id%>">삭제하기</a>\
       </li>\
@@ -45,9 +45,9 @@ var Room = (function(){
     result += (day <= 9) ? '0'+day : day;
     result += ' ';
     result += (hour <= 9) ? '0'+hour : hour;
-    result += '시 ';
+    result += ':';
     result += (min <= 9) ? '0'+min : min;
-    result += '분';
+    result += '';
     return result;
   };
 

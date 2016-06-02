@@ -65,6 +65,16 @@ router.get('/mypage/room/:room_id',(req,res,next)=>{
   });
 });
 
+router.get('/mypage/room/:room_id/dashboard',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if( result === true){
+      res.render('mypage-room-dashboard',{});
+    }else{
+      res.redirect('/login?redirect=mypage/room/'+req.params.room_id+'/dashboard');
+    }
+  });
+});
+
 router.get('/mypage/reservation',(req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if( result === true){
