@@ -27,7 +27,7 @@ let ReservationSchema = mongoose.Schema({
     validator : TimeValidator,
     message : '시간 정보 형식이 잘못되었습니다 (HH:MM 1시간 단위)'
   }},
-  status : { type : String, default : '예약 완료', required : [ true, "예약 상태 정보가 필요합니다." ], validate : {
+  status : { type : String, default : '예약완료', required : [ true, "예약 상태 정보가 필요합니다." ], validate : {
      validator : statusValiadtor,
      message : '예약 상태 정보가 잘못되었습니다.'
   }},
