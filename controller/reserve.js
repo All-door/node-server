@@ -100,6 +100,7 @@ module.exports = {
 
         Reservation
         .findOne({ room_id : room_id })
+        .where('status').in(['예약완료'])
         .where('start_day').lte(end_day).gte(start_day)
         .where('start_time').lte(end_time).gte(start_time)
         .where('end_day').lte(end_day).gte(start_day)
