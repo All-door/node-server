@@ -20,6 +20,25 @@ router.get('/',(req, res, next)=>{
 });
 
 /*
+* 다른 유저 정보 얻어 오기
+* GET /api/user/:user_id
+*/
+router.get('/:user_id',(req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      User.GetUserInfoByUserId(req.params.user_id,(err,doc)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          response.User(res,doc);
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+/*
 * 유저 정보 수정하기
 * PUT /api/user
 */

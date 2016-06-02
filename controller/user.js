@@ -121,5 +121,27 @@ module.exports = {
   'RemoveUser' : (userid, callback)=>{
     callback = callback || ()=>{};
     User.update({ _id : userid }, { disable : true },callback);
+  },
+  'GetUserInfoByUserId' : (user_id,callback)=>{
+    callback = callback || () =>{};
+
+    User.findOne({ _id : user_id, disable : false })
+    .select({ name : 1, phoneNumber : 1})
+    .then((doc)=>{
+      if( doc == null){
+        throw new Error('존재 하지 않는 유저입니다.');
+      }else{
+        callback(null,doc);
+      }
+    })
+    .catch((e)=>{
+      switch (e.message) {
+        case '존재 하지 않는 유저입니다.':
+          callback(e.message,null);
+          break;
+        default:
+          callback(String(e),null);
+      }
+    })
   }
 };
