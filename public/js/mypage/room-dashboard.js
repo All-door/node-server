@@ -165,7 +165,7 @@ var Dashboard = (function(){
         start_day : data.start_day,
         end_day : data.room_type == '숙박' ? data.end_day : data.start_day,
         start_time : data.room_type == '숙박' ? '-' : data.start_time,
-        end_time : data.room_type ==' 숙박' ? '-' : data.end_time,
+        end_time : data.room_type == '숙박' ? '-' : data.end_time,
         id : data._id,
         cancel_button : data.status != '예약완료' ? '-' : '<a id="'+ data._id +'" class="cancel btn btn-default">예약 취소</a>',
         title : data.title,
