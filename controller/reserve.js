@@ -320,8 +320,10 @@ module.exports = {
         throw new Error('공간 정보가 존재하지 않습니다.');
       }else{
         if( doc.user_id == user_id){
+          let today = GetTodayDateString();
           return Reservation
           .find({ room_id : room_id })
+          .where('end_day').gte(today)
           .select({ password : 0 });
         }else{
           throw new Error('공간 접근 권한이 없습니다.');
@@ -360,7 +362,7 @@ module.exports = {
         if( doc.user_id == user_id){
           return Reservation
           .findOne({ _id : reservation_id, room_id : room_id })
-          .where('status').in(['예약 완료']);
+          .where('status').in(['예약완료']);
         }else{
           throw new Error('공간 접근 권한이 없습니다.');
         }
