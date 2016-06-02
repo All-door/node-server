@@ -223,8 +223,7 @@ module.exports = {
         .findOneAndUpdate({ _id : doc.room_id },{ $inc : { reservation_count : -1 }})
         .then((doc)=>{
           Reservation
-          .findOne({ _id : reservation_id, user_id : user_id})
-          .remove()
+          .update({ _id : reservation_id, user_id : user_id},{ status : '예약취소'})
           .exec(callback);
         });
       }
@@ -241,7 +240,7 @@ module.exports = {
     Reservation.find({ user_id : user_id})
                .where('end_day').gte(today)
                .select({ password : 0 , user_id : 0})
-               .sort({ start_day : - 1})
+               .sort({ end_day : 1 })
                .skip(offset)
                .limit(limit)
                .exec(callback)
