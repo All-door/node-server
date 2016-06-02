@@ -324,7 +324,8 @@ module.exports = {
           return Reservation
           .find({ room_id : room_id })
           .where('end_day').gte(today)
-          .select({ password : 0 });
+          .select({ password : 0 })
+          .sort({ createdAt : 1 });
         }else{
           throw new Error('공간 접근 권한이 없습니다.');
         }
