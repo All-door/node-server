@@ -11,6 +11,7 @@ var Reservation = (function(){
       <li class="list-group-item"><%= totalPrice %></li>\
       <li class="list-group-item center-block">\
         <a class="btn btn-default" href="/room/<%= room_id %>">방 정보 보기</a>\
+        <%= modify %>\
         <%= cancel %>\
       </li>\
     </ul>\
@@ -68,7 +69,8 @@ var Reservation = (function(){
             address : "<strong>공간 주소</strong> : " + (data.address ? data.address : room.address),
             totalPrice : "<strong>총 가격</strong> : " + (data.totalPrice ? data.totalPrice +"원" : "0원" ),
             room_id : data.room_id,
-            cancel : data.status != '예약완료' ? '' : '<a class="delete btn btn-default" id="'+data._id+'">취소하기</a>'
+            cancel : data.status != '예약완료' ? '' : '<a class="delete btn btn-default" id="'+data._id+'">취소하기</a>',
+            modify : data.status != '예약완료' ? '' : '<a class="modify btn btn-default" id="'+data._id+'">암호 변경하기</a>'
           });
         }else{
           template += complied({
@@ -79,7 +81,8 @@ var Reservation = (function(){
             address : "<strong>공간 주소</strong> : " + (data.address ? data.address : room.address),
             totalPrice : "<strong>총 가격</strong> : " + (data.totalPrice ? data.totalPrice + "원" : "0원"),
             room_id : data.room_id,
-            cancel : data.status != '예약완료' ? '' : '<a class="delete btn btn-default" id="'+data._id+'">취소하기</a>'
+            cancel : data.status != '예약완료' ? '' : '<a class="delete btn btn-default" id="'+data._id+'">취소하기</a>',
+            modify : data.status != '예약완료' ? '' : '<a class="modify btn btn-default" id="'+data._id+'">암호 변경하기</a>'
           });
         }
         callback();
@@ -87,6 +90,7 @@ var Reservation = (function(){
     },function(err){
       $('#reservation-list').html(template);
       $('.delete').click(onClick_delete);
+      $('.modify').click(onClick_modify);
     });
   };
 
@@ -110,6 +114,27 @@ var Reservation = (function(){
         }
       });
     }
+  };
+
+  var onClick_modify = function(){
+    var id = $(this).attr('id');
+    var password = prompt("변경할 암호를 입력해주세요.");
+
+    var url = '/api/user/reserve/'+id;
+    $.ajax({
+      url : url,
+      method : 'PUT',
+      dataType : 'json',
+      data : {
+        password : password
+      },
+      success : function(data){
+        alert('암호 변경이 완료되었습니다.')
+      },
+      error : function(reuqest,status,error){
+        location.href="/";
+      }
+    });
   };
 
   /*
