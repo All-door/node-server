@@ -2,7 +2,7 @@ module.exports = {
   'Error' : (res,err)=>{
     res.header('Access-Control-Allow-Origin', '*').status(400).json({
       "status" : 400,
-      "meessage" : err
+      "message" : err
     });
   },
   'AuthFail' : (res)=>{
