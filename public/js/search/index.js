@@ -28,7 +28,7 @@ var Search = (function(){
             </div>\
         </div>\
     </div>\
-    <br/>\
+    <hr class="col-md-12"/>\
   </div>';
 
   var offset = 0;
