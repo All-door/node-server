@@ -93,12 +93,11 @@ module.exports={
         }else{
           let now = GetTodayTimeString();
           let today = GetTodayDateString();
-
           if( doc.type === '숙박'){
             Reservation
             .findOne({ room_id : doc._id })
-            .where("start_day").gte(today)
-            .where("end_day").lte(today)
+            .where("start_day").lte(today)
+            .where("end_day").gte(today)
             .then((doc)=>{
               if(doc == null){
                 callback(null,{ open : open });
@@ -109,10 +108,10 @@ module.exports={
           }else{
             Reservation
             .findOne({ room_id : doc._id })
-            .where("start_day").gte(today)
-            .where("end_day").lte(today)
-            .where("start_time").gte(now)
-            .where("end_time").lte(now)
+            .where("start_day").lte(today)
+            .where("end_day").gte(today)
+            .where("start_time").lte(now)
+            .where("end_time").gte(now)
             .then((doc)=>{
               if(doc == null){
                 callback(null,{ open : open});
