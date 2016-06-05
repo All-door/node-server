@@ -84,12 +84,11 @@ module.exports={
         .hset('device_info',device_id,JSON.stringify(status))
         .then(()=>{});
       }
-
       Room
       .findOne({ device_id : device_id })
       .then((doc)=>{
         if(doc == null){
-          callback("공간 정보가 존재하지 않습니다.",null);
+          callback("Device isn't registered",null);
         }else{
           let now = GetTodayTimeString();
           let today = GetTodayDateString();
