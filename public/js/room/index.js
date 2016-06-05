@@ -65,6 +65,12 @@ var RoomInfo = (function(){
     $('#imageModal').modal({
       keyboard: false
     });
+    $('#imageModal').click(function(){
+      $('#imageModal').modal('hide');
+    });
+    $('#room-modal-image').click(function(){
+      $('#imageModal').modal('hide');
+    });
   };
 
   var Render = function(room){
@@ -356,7 +362,7 @@ var RoomInfo = (function(){
         return;
       }
     }
-    
+
     $('#datepicker3').val($('#datepicker2').val());
   };
 
