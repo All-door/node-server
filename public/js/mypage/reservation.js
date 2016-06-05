@@ -116,25 +116,40 @@ var Reservation = (function(){
     }
   };
 
+  var isNumber = function(s) {
+    s += ''; // 문자열로 변환
+    s = s.replace(/^\s*|\s*$/g, ''); // 좌우 공백 제거
+    if (s == '' || isNaN(s)) return false;
+    return true;
+  };
+
   var onClick_modify = function(){
     var id = $(this).attr('id');
     var password = prompt("변경할 암호를 입력해주세요.");
 
-    var url = '/api/user/reserve/'+id;
-    $.ajax({
-      url : url,
-      method : 'PUT',
-      dataType : 'json',
-      data : {
-        password : password
-      },
-      success : function(data){
-        alert('암호 변경이 완료되었습니다.')
-      },
-      error : function(reuqest,status,error){
-        location.href="/";
+    if( password.length != 0){
+      var url = '/api/user/reserve/'+id;
+      
+      if ( !isNumber(password) ){
+        alert('암호는 숫자만 가능합니다.');
+        return;
       }
-    });
+
+      $.ajax({
+        url : url,
+        method : 'PUT',
+        dataType : 'json',
+        data : {
+          password : password
+        },
+        success : function(data){
+          alert('암호 변경이 완료되었습니다.')
+        },
+        error : function(reuqest,status,error){
+          location.href="/";
+        }
+      });
+    }
   };
 
   /*
