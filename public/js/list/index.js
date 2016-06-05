@@ -2,10 +2,10 @@ var RoomList = (function(){
 
   var type = null;
   var RoomTemplate = '\
-  <div class="col-md-4 col-sm-6 col-xs-12">\
+  <div class="col-md-4 col-sm-6 col-xs-12" style="overflow: hidden;">\
       <div class="post-wrapper clearfix border-bottom">\
           <div class="hotel-wrapper">\
-              <div class="post-media" style="width : 370px; height : 185px;">\
+              <div class="post-media" style="width : 370px; height : 185px; overflow : hidden;">\
                   <a href="/room/<%= id %>"><img src="/api/images/<%= image %>" onerror="this.src=\'/upload/btn_bg_01.png\'" idth="370px" height="auto" class="img-responsive"></a>\
               </div>\
               <div class="post-title clearfix">\
