@@ -2,7 +2,7 @@ var RoomList = (function(){
 
   var type = null;
   var RoomTemplate = '\
-  <div class="col-md-4 col-sm-6 col-xs-12" style="overflow: hidden;" width="460px">\
+  <div class="col-md-4 col-sm-6 col-xs-12" style="overflow: hidden;">\
       <div class="post-wrapper clearfix border-bottom">\
           <div class="hotel-wrapper">\
               <div class="post-media" style="width : 370px; height : 185px; overflow : hidden;">\
