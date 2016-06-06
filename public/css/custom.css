@@ -1,3 +1,12 @@
+.nav-pills > li.active > a{
+    color: #fff;
+    background-color: #ffc926 !important;
+}
+.btn-default{
+    background-color: #757474 !important;
+    border-color: #757474 !important;
+}
+
 .image {
     position:relative;
     float:left; /* optional */
