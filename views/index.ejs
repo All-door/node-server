@@ -20,7 +20,14 @@
             <%- include ./partial/main_topbar.ejs %>
                 <!-- MAIN PARTIAL HEADER-->
                 <%- include ./partial/main_header.ejs %>
-                    <section class="section fullscreen background parallax" style="background-image:url('upload/parallax_04.jpg');" data-img-width="1920" data-img-height="1133" data-diff="100">
+                    <section class="section fullscreen parallax">
+                        <div id="section-background" class="background fullscreen">
+                          <div class="background fullscreen" style="background-image:url('images/background-tab_01.jpg');"></div>
+                          <div class="background fullscreen" style="background-image:url('images/background-tab_02.jpg');"></div>
+                          <div class="background fullscreen" style="background-image:url('images/background-tab_03.jpg');"></div>
+                          <div class="background fullscreen" style="background-image:url('images/background-tab_04.jpg');"></div>
+                          <div class="background fullscreen" style="background-image:url('images/background-tab_05.jpg');"></div>
+                        </div>
                         <div class="container">
                             <div class="row homeform">
                                 <div class="col-md-5 col-xs-12">
@@ -451,6 +458,7 @@
 
         <script src="js/index/topbar.js"></script>
         <script src="js/index/SearchTab.js"></script>
+        <script src="js/index/Tab.js"></script>
     </body>
 
 </html>

@@ -3,7 +3,7 @@ var Reservation = (function(){
   var ReservationTemplate = '\
   <div class="col-md-6 col-sm-12">\
     <ul class="list-group list-group-flush">\
-      <li class="list-group-item text-center" style="font-size:20px;"><%= reservation_title %></li>\
+      <li class="list-group-item text-center" style="font-size:20px; border-radius: 10px 10px 0 0 !important; background-color: #FFD966 !important;"><%= reservation_title %></li>\
       <li class="list-group-item"><%= title %></li>\
       <li class="list-group-item"><%= time %></li>\
       <li class="list-group-item"><%= content %></li>\
@@ -62,7 +62,7 @@ var Reservation = (function(){
 
         if(room.type == '숙박'){
           template += complied({
-            reservation_title : "<strong>" + (data.title ? data.title : "타이틀 없음") + "</strong>"+status,
+            reservation_title : "<strong style=\"color: #FFFFFF;\">" + (data.title ? data.title : "타이틀 없음") + "</strong>"+status,
             title : "<strong>공간 이름</strong> : " + room.title,
             time : "<strong>예약 시작 시간</strong> : " + data.start_day,
             content : "<strong>예약 종료 시간</strong> : " + data.end_day,
@@ -129,7 +129,7 @@ var Reservation = (function(){
 
     if( password.length != 0){
       var url = '/api/user/reserve/'+id;
-      
+
       if ( !isNumber(password) ){
         alert('암호는 숫자만 가능합니다.');
         return;

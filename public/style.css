@@ -1309,10 +1309,13 @@ a,
     background-repeat:no-repeat;
     background-position:50% 50%;
     background-position:50% 50%\9 !important;
+    transition: background 750ms;
+    background-size: cover;
 }
 .fullscreen {
     width:100%;
     min-height:100%;
+    padding: 0 !important;
 }
 .not-fullscreen,
 .not-fullscreen .content-a,
@@ -1325,7 +1328,7 @@ a,
 	background-color: #ffffff;
 	position: relative;
 	display: block;
-	padding:80px 0;
+	padding: 80px 0;
 	overflow: hidden;
 }
 .section-grey {

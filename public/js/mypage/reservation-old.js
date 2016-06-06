@@ -3,7 +3,7 @@ var Reservation = (function(){
   var ReservationTemplate = '\
   <div class="col-md-6 col-sm-12">\
     <ul class="list-group list-group-flush">\
-      <li class="list-group-item text-center" style="font-size:20px;"><%= reservation_title %></li>\
+      <li class="list-group-item text-center" style="font-size:20px; border-radius: 10px 10px 0 0 !important; background-color: #FFD966 !important;"><%= reservation_title %></li>\
       <li class="list-group-item"><%= title %></li>\
       <li class="list-group-item"><%= time %></li>\
       <li class="list-group-item"><%= content %></li>\
