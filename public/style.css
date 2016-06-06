@@ -1612,6 +1612,7 @@ i {
 	background: #ffffff !important;
 	background: rgb(255, 255, 255); /* The Fallback */
 	background: rgba(255, 255, 255, 0) !important;
+  font-size: 20px;
 }
 .fixedheader .navbar-nav > li > a {
 	border-color:transparent;
@@ -1620,6 +1621,8 @@ i {
 .nobg .navbar-nav > li > a i,
 .nobg .navbar-nav > li > a {
 	color:#ffffff;
+  font-size: 17px;
+  font-weight: 800;
 }
 .nobg {
     border-bottom: 1px solid rgba(255, 255, 255, .3);
