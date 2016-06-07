@@ -124,6 +124,17 @@ var RoomList = (function(){
     if( params.hasOwnProperty('type') ){
       type = decodeURI(params.type);
       type.replace('#','');
+      $('#nav-all').removeClass('active');
+      if(type == '숙박')
+        $('#nav-accomodation').addClass('active');
+      else if(type == '공부방')
+        $('#nav-studyroom').addClass('active');
+      else if(type == '회의실')
+        $('#nav-meetingroom').addClass('active');
+      else if(type == '창고')
+        $('#nav-warehouse').addClass('active');
+      else if(type == '강당')
+        $('#nav-auditorium').addClass('active');
     }
 
     getRoomListFromServer();
