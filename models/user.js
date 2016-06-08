@@ -12,7 +12,7 @@ let UserSchema = mongoose.Schema({
   password : String,
   phoneNumber : String,
   facebookId : String,
-  isAdmin : Boolean,
+  isAdmin : { type : Boolean, default : false },
   isSupply : Boolean,
   favorite_rooms : Array,
   disable : { type : Boolean, default : false }
