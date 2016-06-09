@@ -174,7 +174,7 @@ var Register = (function(){
         location.href="/";
       },
       error : function(request,status,error){
-        alert('등록된 디바이스 정보입니다. 디바이스 정보를 확인해주세요');
+        alert(request.responseJSON.message);
         $('#loader').fadeOut();
       }
     });

@@ -1,6 +1,7 @@
 'use strict'
 const Room = models.Room;
 const Reservation = models.Reservation;
+const Device = models.Device;
 const async = require('async');
 const dayList = ['일','월','화','수','목','금','토','일'];
 const enumType = ['숙박','회의실','공부방','창고','강당'];
@@ -38,26 +39,32 @@ module.exports = {
       return;
     }
 
-    Room.findOne({ device_id : device_id}).then((doc)=>{
-      if(doc === null){
-        return new Room({
-          user_id : user_id,
-          device_id : device_id,
-          title : title,
-          detail : detail,
-          type : type,
-          tag : tag,
-          day_enable : day_enable,
-          enable_start_time : enable_start_time,
-          enable_end_time : enable_end_time,
-          room_images : room_images,
-          address : address,
-          price : price,
-          capacity : capacity}).save().then((doc)=>{
-            callback(null,doc);
-          });
+    Device.findOne({ _id : device_id }).then((doc)=>{
+      if( doc == null){
+        callback("존재 하지 않는 디바이스 아이디입니다.",null);
       }else{
-        callback("중복된 디바이스 아이디 입니다.",null);
+        Room.findOne({ device_id : device_id}).then((doc)=>{
+          if(doc === null){
+            return new Room({
+              user_id : user_id,
+              device_id : device_id,
+              title : title,
+              detail : detail,
+              type : type,
+              tag : tag,
+              day_enable : day_enable,
+              enable_start_time : enable_start_time,
+              enable_end_time : enable_end_time,
+              room_images : room_images,
+              address : address,
+              price : price,
+              capacity : capacity}).save().then((doc)=>{
+                callback(null,doc);
+              });
+          }else{
+            callback("이미 사용 중인 디바이스 아이디입니다.",null);
+          }
+        });
       }
     });
   },
