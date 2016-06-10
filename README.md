@@ -22,12 +22,12 @@
 
 #### 문자 알람 설정 (청기와랩)
 
-`ALL_DOOR_SMS_SENDER=[ SMS SENDER]`
+`export ALL_DOOR_SMS_SENDER=[ SMS SENDER]`
 
-`ALL_DOOR_SMS_APP_ID=[ SMS APP ID ]`
+`export ALL_DOOR_SMS_APP_ID=[ SMS APP ID ]`
 
-`ALL_DOOR_SMS_API_KEY=[ SMS API KEY ]`
+`export ALL_DOOR_SMS_API_KEY=[ SMS API KEY ]`
 
 #### 이미지 파일 저장 위치
 
-`ALL_DOOR_IMAGE_PATH= [이미지 파일 저장 위치 ]`
+`export ALL_DOOR_IMAGE_PATH= [이미지 파일 저장 위치 ]`
