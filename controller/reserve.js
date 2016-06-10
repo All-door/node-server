@@ -1,7 +1,11 @@
 'use strict';
 const Reservation = models.Reservation;
 const PreReservation = models.PreReservation;
+const User = models.User;
 const Room = models.Room;
+const SMS = require('./sms.js');
+const PhoneNumberRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+
 const GetTodayDateString = ()=>{
   const now = new Date();
   const year = now.getFullYear();
@@ -112,6 +116,18 @@ module.exports = {
             Room
             .findOneAndUpdate({ _id : room_id },{ $inc : { reservation_count : 1 }})
             .then((doc)=>{
+              User.findOne({ _id : user_id })
+              .then((user)=>{
+                if(PhoneNumberRegex.test(user.phoneNumber)){
+                  let sms = '';
+                  if(doc.type == '숙박'){
+                    sms = '['+doc.title.substring(0,10)+'] ' + start_day.substring(5,10) +' ~ '+ end_day.substring(5,10) + ' 예약이 완료되었습니다. All-Door';
+                  }else{
+                    sms = '['+doc.title.substring(0,10)+'] ' + start_day.substring(5,10) +' ' + start_time +' ~ '+ end_time + ' 예약이 완료되었습니다. All-Door';
+                  }
+                  return SMS(user.phoneNumber.replace(/-/gi,''),sms);
+                }
+              });
               return new Reservation(reservation).save();
             }).then((doc)=>{
               callback(null,doc);
