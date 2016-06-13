@@ -102,7 +102,7 @@ var Dashboard = (function(){
           $('#dashboard-device').removeClass('panel-red');
           $('#dashboard-device').addClass('panel-green');
           $('#dashboard-device-status').html('디바이스의 상태 : Good');
-          $('#dashboard-device-time').html('최근 동기화 시간 : ' + getStringFromDate(data.data.updatedAt));
+          $('#dashboard-device-status-time').html('최근 동기화 시간 : ' + getStringFromDate(data.data.updatedAt));
         }else{
           $('#dashboard-device').removeClass('panel-green');
           $('#dashboard-device').addClass('panel-red');
