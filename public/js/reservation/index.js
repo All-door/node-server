@@ -161,7 +161,7 @@ var Reservation = (function(){
 
     setInterval(function(){
       if(count_down == 0){
-        alert('예약 대기 시간이 완료 되었습니다.');
+        alert('예약 대기 시간이 만료되었습니다. 다시 에약을 해주세요.');
         location.href="/room/"+room_id;
       }
       var min = Math.floor(count_down / 60);
