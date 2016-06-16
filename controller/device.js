@@ -173,5 +173,53 @@ module.exports={
         });
       }
     });
+  },
+  'SetOpenStatus' : (device_id,open,callback)=>{
+    callback = callback || ()=>{};
+    open = Number(open) || 0;
+
+    if( !device_id || !open ){
+      callback('입력 데이터를 확인해주세요.',null);
+      return;
+    }
+    Device.findOne({ _id : device_id })
+    .then((doc)=>{
+      if(doc == null){
+        throw new Error('존재하지 않는 디바이스ID입니다.');
+      }else{
+        return Room.findOne({ _id : device_id });
+      }
+    })
+    .then((doc)=>{
+      if(doc == null){
+        throw new Error('등록되지 않는 디바이스ID입니다.');
+      }else{
+        return redis.hget('device_info',device_id);
+      }
+    })
+    .then((doc)=>{
+      if( doc == null ){
+        throw new Error('디바이스 연결을 확인해주세요.');
+      }else{
+        doc = JSON.parse(doc);
+        redis.hset('device_info',device_id,JSON.stringify({
+          updatedAt : doc.updatedAt,
+          open : open,
+          device_id : doc.device_id,
+          battery_status : doc.battery_status
+        }));
+      }
+    })
+    .catch((e)=>{
+      switch (e.message) {
+        case '디바이스 연결을 확인해주세요.':
+        case '등록되지 않는 디바이스ID입니다.':
+        case '존재하지 않는 디바이스ID입니다.':
+          callback(e.message,null);
+          break;
+        default:
+        callback(String(e),null);
+      }
+    });
   }
 }
