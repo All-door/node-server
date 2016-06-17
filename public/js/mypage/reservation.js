@@ -52,8 +52,12 @@ var Reservation = (function(){
         }
       ],function(err,result){
         var room = result[0];
-        var complied = _.template(ReservationTemplate);
+        if(room == null){
+          callback();
+          return;
+        }
 
+        var complied = _.template(ReservationTemplate);
 
         var status = '';
         if( data.status != '예약완료'){
