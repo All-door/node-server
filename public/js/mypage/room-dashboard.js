@@ -14,7 +14,15 @@ var Dashboard = (function(){
     <td><%= totalPrice %></td>\
     <td><%= user_button %></td>\
     <td><%= cancel_button %> </td>\
-  </tr>'
+  </tr>';
+
+  var LogTemplate = '\
+  <tr>\
+    <td><%= createdAt %></td>\
+    <td><%= pass_status %></td>\
+  </tr>\
+  ';
+
   /*
   * Session Check
   */
@@ -132,6 +140,17 @@ var Dashboard = (function(){
           var date = log[0].createdAt;
           var str = getStringFromDate(date);
           $('#dashboard-log-time').html(str + ' <small>'+ log[0].pass_status +'</small>');
+
+          var logs = data.data.slice(0,5);
+          var template = '';
+          for(var i=0;i<logs.length;i++){
+            var complied = _.template(LogTemplate);
+            template += complied({
+              createdAt : getStringFromDate(logs[i].createdAt),
+              pass_status : logs[i].pass_status
+            });
+          }
+          $('#dashboard-log').html(template);
         }
       },
       error : function(request,status,error){
@@ -207,7 +226,6 @@ var Dashboard = (function(){
       url : url,
       method : 'GET',
       success : function(data){
-        console.log(data);
         var str = ' 이름 : ' + data.user.name  +' 핸드폰 번호 : '+ ( data.user.phoneNumber != '' ? data.user.phoneNumber : "000-0000-0000");
         alert(str);
         $(this).click(onClick_user);
