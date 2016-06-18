@@ -1,10 +1,12 @@
 'use strict'
 
 const Reservation = models.Reservation;
+const Device = models.Device;
 const DeviceLog = models.DeviceLog;
 const Room = models.Room;
 const Redis = require('ioredis');
 const redis = new Redis();
+const sha1 = require('sha1');
 
 const GetTodayTimeString = ()=>{
   const now = new Date();
@@ -64,7 +66,7 @@ module.exports={
           updatedAt : now,
           device_id : device_id,
           battery_status : battery_status,
-          oepn : 0
+          open : 0
         };
 
         redis
@@ -84,44 +86,51 @@ module.exports={
         .hset('device_info',device_id,JSON.stringify(status))
         .then(()=>{});
       }
-      Room
-      .findOne({ device_id : device_id })
+      Device.findOne({ _id : device_id })
       .then((doc)=>{
-        if(doc == null){
-          callback("Device isn't registered",null);
+        if( doc != null){
+          const privateKey = doc.privateKey;
+          Room
+          .findOne({ device_id : device_id })
+          .then((doc)=>{
+            if(doc == null){
+              callback("Device isn't registered",null);
+            }else{
+              let now = GetTodayTimeString();
+              let today = GetTodayDateString();
+              if( doc.type === '숙박'){
+                Reservation
+                .findOne({ room_id : doc._id })
+                .where("start_day").lte(today)
+                .where("end_day").gte(today)
+                .then((doc)=>{
+                  if(doc == null){
+                    callback(null,{ open : open });
+                  }else{
+                    callback(null,{ pw1 : sha1(privateKey+doc.password), open : open });
+                  }
+                });
+              }else{
+                Reservation
+                .findOne({ room_id : doc._id })
+                .where("start_day").lte(today)
+                .where("end_day").gte(today)
+                .where("start_time").lte(now)
+                .where("end_time").gte(now)
+                .then((doc)=>{
+                  if(doc == null){
+                    callback(null,{ open : open});
+                  }else{
+                    callback(null,{ pw1 : sha1(privateKey+doc.password), open : open });
+                  }
+                });
+              }
+            }
+          });
         }else{
-          let now = GetTodayTimeString();
-          let today = GetTodayDateString();
-          if( doc.type === '숙박'){
-            Reservation
-            .findOne({ room_id : doc._id })
-            .where("start_day").lte(today)
-            .where("end_day").gte(today)
-            .then((doc)=>{
-              if(doc == null){
-                callback(null,{ open : open });
-              }else{
-                callback(null,{ pw1 : doc.password, open : open})
-              }
-            });
-          }else{
-            Reservation
-            .findOne({ room_id : doc._id })
-            .where("start_day").lte(today)
-            .where("end_day").gte(today)
-            .where("start_time").lte(now)
-            .where("end_time").gte(now)
-            .then((doc)=>{
-              if(doc == null){
-                callback(null,{ open : open});
-              }else{
-                callback(null,{ pw1 : doc.password , open : open })
-              }
-            });
-          }
+          callback("Device ID isn't vaild",null);
         }
       });
-
     });
   },
   'GetDeviceLogs' : (offset,limit,user_id,device_id,callback)=>{

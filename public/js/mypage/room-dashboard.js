@@ -17,7 +17,7 @@ var Dashboard = (function(){
   </tr>';
 
   var LogTemplate = '\
-  <tr>\
+  <tr class="<%= color %>">\
     <td><%= createdAt %></td>\
     <td><%= pass_status %></td>\
   </tr>\
@@ -146,6 +146,7 @@ var Dashboard = (function(){
           for(var i=0;i<logs.length;i++){
             var complied = _.template(LogTemplate);
             template += complied({
+              color : (logs[i].pass_status == '인증 실패') ? 'danger' : '',
               createdAt : getStringFromDate(logs[i].createdAt),
               pass_status : logs[i].pass_status
             });
