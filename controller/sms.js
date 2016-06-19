@@ -6,9 +6,6 @@ const APIKEY = process.env.ALL_DOOR_SMS_API_KEY || "APIKEY";
 const credential = 'Basic '+new Buffer(APPID+':'+APIKEY).toString('base64');
 
 module.exports = function sendSMS(receiver,content){
-  console.log(receiver);
-  console.log(content);
-
   const body = JSON.stringify({
     "sender" : SENDER,
     "receivers" : [receiver],

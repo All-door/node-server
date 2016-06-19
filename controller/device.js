@@ -4,9 +4,14 @@ const Reservation = models.Reservation;
 const Device = models.Device;
 const DeviceLog = models.DeviceLog;
 const Room = models.Room;
+const User = models.User;
+
 const Redis = require('ioredis');
 const redis = new Redis();
 const sha1 = require('sha1');
+const sendSMS = require('./sms.js');
+const PhoneNumberRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+
 
 const GetTodayTimeString = ()=>{
   const now = new Date();
@@ -164,24 +169,57 @@ module.exports={
 
     let device_id = log.device_id;
     let pass_status = log.pass_status;
+    let user = '';
+    let room = '';
 
     if(!device_id  || !pass_status ){
       callback("Input Data Error",null);
       return;
     }
 
-    Room
-    .findOne({ device_id : device_id })
+    Room.findOne({ device_id : device_id })
     .then((doc)=>{
-      if(doc == null){
-        callback("Device isn't registered",null);
+      if( doc == null){
+        throw new Error("Device isn't registered");
       }else{
+        room = doc;
         log.room_id = doc._id;
-        new DeviceLog(log)
-        .save()
-        .then((doc)=>{
-          callback(null,doc);
-        });
+        return User.findOne({ _id : doc.user_id });
+      }
+    })
+    .then((doc)=>{
+      user = doc;
+      return redis.hget('device_pass_status',device_id);
+    })
+    .then((result)=>{
+      let count = Number(result) || 0;
+      if(pass_status == '인증 실패'){
+        if(count == 2){
+          if(PhoneNumberRegex.test(user.phoneNumber)){
+            const sms = '['+room.title.substring(0,10)+'] 공간이 3번 이상 인증 실패하였습니다. All-Door';
+            sendSMS(user.phoneNumber.replace(/-/gi,''),sms);
+          }
+          return redis.hset('device_pass_status',device_id,String(0));
+        }else{
+          return redis.hset('device_pass_status',device_id,String(count+1));
+        }
+      }else{
+        return redis.hset('device_pass_status',device_id,String(0));
+      }
+    })
+    .then((doc)=>{
+      return new DeviceLog(log).save();
+    })
+    .then((doc)=>{
+      callback(null,doc);
+    })
+    .catch((e)=>{
+      switch (e.message) {
+        case "Device isn't registered":
+          callback(e.message,null);
+          break;
+        default:
+          callback(String(e),null);
       }
     });
   },
