@@ -23,7 +23,6 @@ var Search = (function(){
                     <%= capacity %>\
                     <hr/>\
                     <a href="/room/<%= id %>" class="btn btn-default btn-default border-radius text-right">공간정보 보러가기</a>\
-                    <a href="/reservation/<%= id %>" class="btn btn-default btn-deafult border-radius text-right">예약하러 가기</a>\
                 </div>\
             </div>\
         </div>\
