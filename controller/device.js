@@ -101,6 +101,7 @@ module.exports={
               if( doc.type === '숙박'){
                 Reservation
                 .findOne({ room_id : doc._id })
+                .where('status').equals('예약완료')
                 .where("start_day").lte(today)
                 .where("end_day").gte(today)
                 .then((doc)=>{
@@ -113,6 +114,7 @@ module.exports={
               }else{
                 Reservation
                 .findOne({ room_id : doc._id })
+                .where('status').equals('예약완료')
                 .where("start_day").lte(today)
                 .where("end_day").gte(today)
                 .where("start_time").lte(now)
