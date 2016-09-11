@@ -1,7 +1,7 @@
-# All Door API/Web Server
+# All Door API/Web Server For Artik
 
 ## 설명
-새로운 공간 공유 플랫폼 **All-Door Back-EndAPI / WEB Server**입니다.
+삼성 Artik 대회 Artik 5/10을 이용한 새로운 공간 공유 플랫폼 **All-Door Back-EndAPI / WEB Server**입니다.
 
 ## 사용 라이브러리
 
