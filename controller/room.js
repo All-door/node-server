@@ -28,6 +28,7 @@ module.exports = {
       callback("데이터 정보를 확인해주세요.",null);
       return;
     }
+
     if( type == '숙박' ){
        day_enable = ['월','화','수','목','금','토','일'];
        enable_start_time = "24:00";
@@ -39,34 +40,30 @@ module.exports = {
       return;
     }
 
-    Device.findOne({ _id : device_id }).then((doc)=>{
-      if( doc == null){
-        callback("존재 하지 않는 디바이스 아이디입니다.",null);
+    Room.findOne({ device_id : device_id }).then((doc)=>{
+      if(doc === null){
+        return new Room({
+          user_id : user_id,
+          device_id : device_id,
+          title : title,
+          detail : detail,
+          type : type,
+          tag : tag,
+          day_enable : day_enable,
+          enable_start_time : enable_start_time,
+          enable_end_time : enable_end_time,
+          room_images : room_images,
+          address : address,
+          price : price,
+          capacity : capacity}).save().then((doc)=>{
+            callback(null,doc);
+          });
       }else{
-        Room.findOne({ device_id : device_id}).then((doc)=>{
-          if(doc === null){
-            return new Room({
-              user_id : user_id,
-              device_id : device_id,
-              title : title,
-              detail : detail,
-              type : type,
-              tag : tag,
-              day_enable : day_enable,
-              enable_start_time : enable_start_time,
-              enable_end_time : enable_end_time,
-              room_images : room_images,
-              address : address,
-              price : price,
-              capacity : capacity}).save().then((doc)=>{
-                callback(null,doc);
-              });
-          }else{
-            callback("이미 사용 중인 디바이스 아이디입니다.",null);
-          }
-        });
+        callback("이미 사용 중인 디바이스 아이디입니다.",null);
       }
-    });
+    }).catch((e)=>{
+      console.log(String(e));
+    });;
   },
   'UpdateRoom' : (room, callback)=>{
     callback = callback || ()=>{};

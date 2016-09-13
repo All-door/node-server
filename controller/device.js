@@ -1,14 +1,12 @@
 'use strict'
 
 const Reservation = models.Reservation;
-const Device = models.Device;
 const DeviceLog = models.DeviceLog;
 const Room = models.Room;
 const User = models.User;
 
 const Redis = require('ioredis');
 const redis = new Redis();
-const sha1 = require('sha1');
 const sendSMS = require('./sms.js');
 const PhoneNumberRegex = /^\d{3}-\d{3,4}-\d{4}$/;
 
@@ -91,51 +89,44 @@ module.exports={
         .hset('device_info',device_id,JSON.stringify(status))
         .then(()=>{});
       }
-      Device.findOne({ _id : device_id })
+
+      Room
+      .findOne({ device_id : device_id })
       .then((doc)=>{
-        if( doc != null){
-          const privateKey = doc.privateKey;
-          Room
-          .findOne({ device_id : device_id })
-          .then((doc)=>{
-            if(doc == null){
-              callback("Device isn't registered",null);
-            }else{
-              let now = GetTodayTimeString();
-              let today = GetTodayDateString();
-              if( doc.type === '숙박'){
-                Reservation
-                .findOne({ room_id : doc._id })
-                .where('status').equals('예약완료')
-                .where("start_day").lte(today)
-                .where("end_day").gte(today)
-                .then((doc)=>{
-                  if(doc == null){
-                    callback(null,{ open : open });
-                  }else{
-                    callback(null,{ pw1 : sha1(privateKey+doc.password), open : open });
-                  }
-                });
-              }else{
-                Reservation
-                .findOne({ room_id : doc._id })
-                .where('status').equals('예약완료')
-                .where("start_day").lte(today)
-                .where("end_day").gte(today)
-                .where("start_time").lte(now)
-                .where("end_time").gte(now)
-                .then((doc)=>{
-                  if(doc == null){
-                    callback(null,{ open : open});
-                  }else{
-                    callback(null,{ pw1 : sha1(privateKey+doc.password), open : open });
-                  }
-                });
-              }
-            }
-          });
+        if(doc == null){
+          callback("Device isn't registered",null);
         }else{
-          callback("Device ID isn't vaild",null);
+          let now = GetTodayTimeString();
+          let today = GetTodayDateString();
+          if( doc.type === '숙박'){
+            Reservation
+            .findOne({ room_id : doc._id })
+            .where('status').equals('예약완료')
+            .where("start_day").lte(today)
+            .where("end_day").gte(today)
+            .then((doc)=>{
+              if(doc == null){
+                callback(null,{ open : open });
+              }else{
+                callback(null,{ pw1 : doc.password, open : open });
+              }
+            });
+          }else{
+            Reservation
+            .findOne({ room_id : doc._id })
+            .where('status').equals('예약완료')
+            .where("start_day").lte(today)
+            .where("end_day").gte(today)
+            .where("start_time").lte(now)
+            .where("end_time").gte(now)
+            .then((doc)=>{
+              if(doc == null){
+                callback(null,{ open : open});
+              }else{
+                callback(null,{ pw1 : doc.password, open : open });
+              }
+            });
+          }
         }
       });
     });
