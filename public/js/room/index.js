@@ -151,12 +151,7 @@ var RoomInfo = (function(){
         return;
       }
 
-      if( checkReservation(day,start_time,end_time) == 0 ){
-        location.href="/reservation/"+room_info._id+"?day="+day+"&start_time="+start_time+"&end_time="+end_time;
-      }else{
-        alert('예약이 불가능합니다.');
-        return;
-      }
+      location.href="/reservation/"+room_info._id+"?day="+day+"&start_time="+start_time+"&end_time="+end_time;
     }else{
       var start_day = getdateStringYYYYMMDD($('#datepicker2').val(),'-');
       var end_day = getdateStringYYYYMMDD($('#datepicker3').val(),'-');
@@ -175,13 +170,7 @@ var RoomInfo = (function(){
         return;
       }
 
-      if(checkReservation_accom(start_day,end_day) == 0){
-        location.href="/reservation/"+room_info._id+"?start_day="+start_day+"&end_day="+end_day;
-      }else{
-        alert('예약이 불가능합니다.');
-        return;
-      }
-
+      location.href="/reservation/"+room_info._id+"?start_day="+start_day+"&end_day="+end_day;
     }
   };
 

@@ -6,24 +6,6 @@ var Acoomodation = (function(){
   var end_day = '';
   var count_down = 60*5 -1;
 
-  var preReserve = function(room_id){
-    $.ajax({
-      url : '/api/user/prereserve/room/'+room_id,
-      method : 'POST',
-      dataType : 'json',
-      data : {
-        start_day : start_day,
-        end_day : end_day
-      },
-      success : function(data){
-      },
-      error : function(request,status,error){
-        alert('예약이 불가능합니다.');
-        location="/room/"+room_id;
-      }
-    });
-  };
-
   var getUrlParams = function() {
     var params = {};
     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
@@ -79,7 +61,6 @@ var Acoomodation = (function(){
     start_day = params.start_day;
     end_day = params.end_day;
 
-    preReserve(room_info._id);
     $('#start_day').html(start_day);
     $('#end_day').html(end_day);
 
