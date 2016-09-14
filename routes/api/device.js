@@ -30,8 +30,10 @@ router.post('/:device_id',(req,res,next)=>{
       res.json({
         "status" : 200,
         "open" : device_setting.open || 0,
-        "pw1" : device_setting.pw1 || "none",
-        "pw2" : device_setting.pw2 || "none"
+        "pw1" : device_setting.pw1 || "None",
+        "pw2" : device_setting.pw2 || "None",
+        "ArtikDeviceID" : "None",
+        "FaceId" : "None"
       }).status(200);
     }
   });
