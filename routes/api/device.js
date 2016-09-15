@@ -32,7 +32,7 @@ router.post('/:device_id',(req,res,next)=>{
         "pw1" : device_setting.pw1 || "None",
         "pw2" : device_setting.pw2 || "None",
         "ArtikDeviceID" : "None",
-        "FaceId" : "None"
+        "FaceId" : device_setting.faceId || "None"
       }).status(200);
     }
   });

@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../../../controller/reserve');
 const User = require('../../../controller/user');
+const upload = require('../../../controller/multer');
+const fs = require('fs');
 
 /*
 * 유저의 예약정보 가지고 오기
@@ -114,7 +116,7 @@ router.delete('/:reservation_id',(req,res,next)=>{
 * 유저의 특정 공간(방) 예약하기
 * POST /api/user/reserve/room/:room_id
 */
-router.post('/room/:room_id',(req,res,next)=>{
+router.post('/room/:room_id', upload.array('face_image', 1), (req,res,next)=>{
   User.CheckSession(req,(result,user)=>{
     if(result === true){
       let body = req.body;
@@ -126,8 +128,10 @@ router.post('/room/:room_id',(req,res,next)=>{
         start_time : body.start_time,
         end_day : body.end_day,
         end_time : body.end_time,
-        password : body.password
+        password : body.password,
+        face_image_path : req.files.length !=0 ? req.files[0].path : null
       };
+
       Reservation.ReserveRoom(reservation,(err,doc)=>{
         if(err){
           response.Error(res,err);

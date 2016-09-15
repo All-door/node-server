@@ -28,6 +28,10 @@
 
 `export ALL_DOOR_SMS_API_KEY=[ SMS API KEY ]`
 
+#### Azure Face API KEY
+
+`export ALL_DOOR_FACE_API_KEY=[AZURE FACE API KEY]`
+
 #### 이미지 파일 저장 위치
 
 `export ALL_DOOR_IMAGE_PATH= [이미지 파일 저장 위치 ]`

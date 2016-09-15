@@ -34,6 +34,8 @@ let ReservationSchema = mongoose.Schema({
   password : { type : String, required : [ true, "비밀번호 정보가 필요합니다."]},
   room_title : { type : String, required : [ true, "공간 제목 정보가 필요합니다."]},
   room_type : { type : String, required : [ true, "공간 타입 정보가 필요합니다."]},
+  face_image_path : { type : String },
+  face_id : { type : String },
   address : { type : String, required : [ true, "주소 정보가 필요합니다."]},
   totalPrice : { type : Number, default : 0 }
 });

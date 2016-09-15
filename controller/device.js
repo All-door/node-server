@@ -5,6 +5,7 @@ const DeviceLog = models.DeviceLog;
 const Room = models.Room;
 const User = models.User;
 
+const FaceAPI = require('./faceapi.js')
 const Redis = require('ioredis');
 const redis = new Redis();
 const sendSMS = require('./sms.js');
@@ -75,7 +76,15 @@ module.exports={
             if(doc == null){
               callback(null,{ });
             }else{
-              callback(null,{ pw1 : doc.password });
+              if( doc.face_id == null && doc.face_image_path != null ){
+                FaceAPI.GetFaceIdByImage(doc.face_image_path, (err,faceId)=>{
+                  Reservation.update({ _id : doc._id }, { face_id : faceId }, (err)=>{
+                    callback(null,{ pw1 : doc.password, faceId : faceId });
+                  });
+                });
+              }else{
+                callback(null,{ pw1 : doc.password, faceId : doc.face_id });
+              }
             }
           });
         }else{
@@ -90,7 +99,15 @@ module.exports={
             if(doc == null){
               callback(null,{ });
             }else{
-              callback(null,{ pw1 : doc.password });
+              if( doc.face_id == null && doc.face_image_path != null ){
+                FaceAPI.GetFaceIdByImage(doc.face_image_path, (err,faceId)=>{
+                  Reservation.update({ _id : doc._id }, { face_id : faceId }, (err)=>{
+                    callback(null,{ pw1 : doc.password, faceId : faceId });
+                  });
+                });
+              }else{
+                callback(null,{ pw1 : doc.password, faceId : doc.face_id });
+              }
             }
           });
         }

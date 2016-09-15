@@ -59,9 +59,10 @@ module.exports = {
     let end_day = reservation.end_day;
     let end_time = reservation.end_time;
     let password = reservation.password;
+    reservation.face_id = null;
 
     if( !title || !user_id || !room_id || !password ){
-        callback("데이터 정보를 확인해주세요",null);
+        callback("데이터 정보를 확인해주세요", null);
         return;
     }
 
