@@ -87,17 +87,22 @@ var Acoomodation = (function(){
       alert('암호는 숫자만 가능합니다.');
       return;
     }
+
+    var face_image = $("input[name=faceimage]")[0].files[0];
+    var formData = new FormData();
+    formData.append('title', title);
+    formData.append('start_day', start_day);
+    formData.append('end_day', end_day);
+    formData.append('password', password);
+    formData.append('face_image', face_image);
+
     var url = "/api/user/reserve/room/"+room_id;
     $.ajax({
       url : url,
       method : 'POST',
-      dataType : 'json',
-      data : {
-        title : title,
-        start_day : start_day,
-        end_day : end_day,
-        password : password
-      },
+      processData : false,
+      contentType : false,
+      data : formData,
       success : function(data){
         alert('예약이 완료되었습니다.');
         location.href="/";
