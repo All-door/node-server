@@ -57,78 +57,44 @@ module.exports={
       return;
     }
 
-    redis
-    .hget('device_info',device_id)
-    .then((data)=>{
-      let now = new Date();
-      let status = {};
-      let open = 0;
-
-      if(data == null){
-        status = {
-          updatedAt : now,
-          device_id : device_id,
-          battery_status : battery_status,
-          open : 0
-        };
-
-        redis
-        .hset('device_info',device_id,JSON.stringify(status))
-        .then(()=>{});
+    Room
+    .findOne({ device_id : device_id })
+    .then((doc)=>{
+      if(doc == null){
+        callback("Device isn't registered",null);
       }else{
-        let result = JSON.parse(data);
-        open = result.open;
-        status = {
-          updatedAt : now,
-          device_id : device_id,
-          battery_status : battery_status,
-          open : open
-        };
-
-        redis
-        .hset('device_info',device_id,JSON.stringify(status))
-        .then(()=>{});
-      }
-
-      Room
-      .findOne({ device_id : device_id })
-      .then((doc)=>{
-        if(doc == null){
-          callback("Device isn't registered",null);
+        let now = GetTodayTimeString();
+        let today = GetTodayDateString();
+        if( doc.type === '숙박'){
+          Reservation
+          .findOne({ room_id : doc._id })
+          .where('status').equals('예약완료')
+          .where("start_day").lte(today)
+          .where("end_day").gte(today)
+          .then((doc)=>{
+            if(doc == null){
+              callback(null,{ });
+            }else{
+              callback(null,{ pw1 : doc.password });
+            }
+          });
         }else{
-          let now = GetTodayTimeString();
-          let today = GetTodayDateString();
-          if( doc.type === '숙박'){
-            Reservation
-            .findOne({ room_id : doc._id })
-            .where('status').equals('예약완료')
-            .where("start_day").lte(today)
-            .where("end_day").gte(today)
-            .then((doc)=>{
-              if(doc == null){
-                callback(null,{ open : open });
-              }else{
-                callback(null,{ pw1 : doc.password, open : open });
-              }
-            });
-          }else{
-            Reservation
-            .findOne({ room_id : doc._id })
-            .where('status').equals('예약완료')
-            .where("start_day").lte(today)
-            .where("end_day").gte(today)
-            .where("start_time").lte(now)
-            .where("end_time").gte(now)
-            .then((doc)=>{
-              if(doc == null){
-                callback(null,{ open : open});
-              }else{
-                callback(null,{ pw1 : doc.password, open : open });
-              }
-            });
-          }
+          Reservation
+          .findOne({ room_id : doc._id })
+          .where('status').equals('예약완료')
+          .where("start_day").lte(today)
+          .where("end_day").gte(today)
+          .where("start_time").lte(now)
+          .where("end_time").gte(now)
+          .then((doc)=>{
+            if(doc == null){
+              callback(null,{ });
+            }else{
+              callback(null,{ pw1 : doc.password });
+            }
+          });
         }
-      });
+      }
     });
   },
   'GetDeviceLogs' : (offset,limit,user_id,device_id,callback)=>{

@@ -29,7 +29,6 @@ router.post('/:device_id',(req,res,next)=>{
     }else{
       res.json({
         "status" : 200,
-        "open" : device_setting.open || 0,
         "pw1" : device_setting.pw1 || "None",
         "pw2" : device_setting.pw2 || "None",
         "ArtikDeviceID" : "None",
