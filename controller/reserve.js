@@ -257,7 +257,7 @@ module.exports = {
     Reservation.find({ user_id : user_id})
                .where('end_day').gte(today)
                .select({ password : 0 , user_id : 0})
-               .sort({ end_day : 1 })
+               .sort({ createdAt : -1, end_day : 1 })
                .skip(offset)
                .limit(limit)
                .exec(callback)
