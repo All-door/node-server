@@ -47,6 +47,7 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
       let tag = req.body.tag;
       let price = req.body.price;
       let capacity = req.body.capacity;
+      let artik_cloud_id = req.body.artik_cloud_id;
 
       let day_enable;
       try {
@@ -71,7 +72,8 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
         room_images : room_images,
         address : address,
         price : price,
-        capacity : capacity
+        capacity : capacity,
+        artik_cloud_id : artik_cloud_id
       };
       Room.InsertRoom(room,(err,doc)=>{
         if(err){

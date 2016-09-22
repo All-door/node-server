@@ -90,6 +90,7 @@ var Register = (function(){
     var address = $('#register-address').val();
     var price = Number($('#register-price').val());
     var capacity = Number($('#register-capacity').val());
+    var artik_cloud_id = $('#register-artik-deviceId').val();
     var day = getDayList();
 
     if(!name){
@@ -160,6 +161,7 @@ var Register = (function(){
     formData.append('address',address);
     formData.append('price',price);
     formData.append('capacity',capacity);
+    formData.append('artik_cloud_id',artik_cloud_id);
 
     $('#loader').show();
     $.ajax({

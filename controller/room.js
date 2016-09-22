@@ -23,6 +23,7 @@ module.exports = {
     let address = room.address;
     let price = room.price;
     let capacity = room.capacity;
+    let artik_cloud_id = room.artik_cloud_id;
 
     if( !price || !capacity || !user_id || !device_id || !title || !detail || !type || !tag || !room_images || !address || enumType.indexOf(type) == -1 || enumTag.indexOf(tag) == -1){
       callback("데이터 정보를 확인해주세요.",null);
@@ -55,7 +56,8 @@ module.exports = {
           room_images : room_images,
           address : address,
           price : price,
-          capacity : capacity}).save().then((doc)=>{
+          capacity : capacity,
+          artik_cloud_id : artik_cloud_id}).save().then((doc)=>{
             callback(null,doc);
           });
       }else{
