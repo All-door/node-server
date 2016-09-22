@@ -72,6 +72,25 @@
                                                     </div>
                                                 </div>
                                               </div>
+                                              <div id="room-status" class="col-lg-12 col-md-12">
+                                                <br/>
+                                                <h4> 공간의 상태 </h4>
+                                                <hr class="left"/>
+                                                <div class="col-lg-12 col-md-12">
+                                                  <h6 class="col-lg-4 col-md-4 text-center" style="margin-bottom:0px;">온도</h6>
+                                                  <h6 class="col-lg-4 col-md-4 text-center" style="margin-bottom:0px;">습도</h6>
+                                                  <h6 class="col-lg-4 col-md-4 text-center" style="margin-bottom:0px;">열림 상태</h6>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                  <div id="temp" style="hegiht: 100px;"></div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                  <div id="humi" style="hegiht: 100px;"></div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                  <div id="hall" style="hegiht: 100px;"></div>
+                                                </div>
+                                              </div>
                                               <div class="col-lg-12 col-md-12">
                                                 <br/>
                                                 <h4> 최근 출입 기록 </h4>
@@ -151,6 +170,10 @@
         <script src="/js/revslider.js"></script>
         <script src='/js/underscore-min.js'></script>
         <script src="/js/mypage/room-dashboard.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script src="/js/mypage/room-dashboard-chart.js"></script>
     </body>
 
 </html>

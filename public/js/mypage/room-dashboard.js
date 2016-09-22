@@ -75,6 +75,10 @@ var Dashboard = (function(){
   var Render = function(room_info){
     var title = room_info.title;
     $('#dashboard-title').html( title + ' <small>Dashboard</small>');
+
+    if(!room_info.hasOwnProperty('artik_cloud_id')){
+      $('#room-status').hide();
+    }
   };
 
   var getStringFromDate = function(date){
@@ -191,7 +195,7 @@ var Dashboard = (function(){
         title : data.title,
         totalPrice : data.totalPrice + '원',
         user_button : '<a id="'+ data.user_id +'" class="user btn btn-default">유저 정보</a>'
-      })
+      });
     });
 
     $('#dashboard-reservation').html(template);
