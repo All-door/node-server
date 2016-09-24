@@ -51,7 +51,8 @@ let RoomSchema = mongoose.Schema({
   price : { type : Number, default : 0},
   capacity : { type : Number, default : 0 },
   rates : { type : Array },
-  artik_cloud_id : { type : String }
+  artik_cloud_id : { type : String },
+  artik_cloud_access_token : { type : String }
 });
 
 module.exports = RoomSchema;

@@ -48,7 +48,8 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
       let price = req.body.price;
       let capacity = req.body.capacity;
       let artik_cloud_id = req.body.artik_cloud_id;
-
+      let artik_cloud_access_token = req.body.artik_cloud_access_token;
+      
       let day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);
@@ -73,7 +74,8 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
         address : address,
         price : price,
         capacity : capacity,
-        artik_cloud_id : artik_cloud_id
+        artik_cloud_id : artik_cloud_id,
+        artik_cloud_access_token : artik_cloud_access_token
       };
       Room.InsertRoom(room,(err,doc)=>{
         if(err){

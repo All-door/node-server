@@ -31,7 +31,8 @@ router.post('/:device_id',(req,res,next)=>{
         "status" : 200,
         "pw1" : device_setting.pw1 || "None",
         "pw2" : device_setting.pw2 || "None",
-        "ArtikDeviceID" : "None",
+        "ArtikDeviceID" : device_setting.artik_cloud_id || "None",
+        "ArtikDeviceAccessToken" : device_setting.artik_cloud_access_token || "None",
         "FaceId" : device_setting.faceId || "None"
       }).status(200);
     }

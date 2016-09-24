@@ -66,6 +66,9 @@ module.exports={
       }else{
         let now = GetTodayTimeString();
         let today = GetTodayDateString();
+        const artik_cloud_id = doc.artik_cloud_id;
+        const artik_cloud_access_token = doc.artik_cloud_access_token;
+
         if( doc.type === '숙박'){
           Reservation
           .findOne({ room_id : doc._id })
@@ -74,16 +77,16 @@ module.exports={
           .where("end_day").gte(today)
           .then((doc)=>{
             if(doc == null){
-              callback(null,{ });
+              callback(null,{artik_cloud_id : artik_cloud_id, artik_cloud_access_token : artik_cloud_access_token });
             }else{
               if( doc.face_id == null && doc.face_image_path != null ){
                 FaceAPI.GetFaceIdByImage(doc.face_image_path, (err,faceId)=>{
                   Reservation.update({ _id : doc._id }, { face_id : faceId }, (err)=>{
-                    callback(null,{ pw1 : doc.password, faceId : faceId });
+                    callback(null,{ pw1 : doc.password, artik_cloud_id : artik_cloud_id, artik_cloud_access_token : artik_cloud_access_token, faceId : faceId });
                   });
                 });
               }else{
-                callback(null,{ pw1 : doc.password, faceId : doc.face_id });
+                callback(null,{ pw1 : doc.password, artik_cloud_id : artik_cloud_id, artik_cloud_access_token : artik_cloud_access_token, faceId : doc.face_id });
               }
             }
           });
@@ -97,16 +100,16 @@ module.exports={
           .where("end_time").gte(now)
           .then((doc)=>{
             if(doc == null){
-              callback(null,{ });
+              callback(null,{artik_cloud_id : artik_cloud_id, artik_cloud_access_token : artik_cloud_access_token });
             }else{
               if( doc.face_id == null && doc.face_image_path != null ){
                 FaceAPI.GetFaceIdByImage(doc.face_image_path, (err,faceId)=>{
                   Reservation.update({ _id : doc._id }, { face_id : faceId }, (err)=>{
-                    callback(null,{ pw1 : doc.password, faceId : faceId });
+                    callback(null,{ pw1 : doc.password, artik_cloud_id : artik_cloud_id, artik_cloud_access_token : artik_cloud_access_token,faceId : faceId });
                   });
                 });
               }else{
-                callback(null,{ pw1 : doc.password, faceId : doc.face_id });
+                callback(null,{ pw1 : doc.password, artik_cloud_id : artik_cloud_id, artik_cloud_access_token : artik_cloud_access_token, faceId : doc.face_id });
               }
             }
           });

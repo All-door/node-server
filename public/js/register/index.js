@@ -91,6 +91,7 @@ var Register = (function(){
     var price = Number($('#register-price').val());
     var capacity = Number($('#register-capacity').val());
     var artik_cloud_id = $('#register-artik-deviceId').val();
+    var artik_cloud_access_token = $('#register-artik-deviceAccessToken').val();
     var day = getDayList();
 
     if(!name){
@@ -162,7 +163,7 @@ var Register = (function(){
     formData.append('price',price);
     formData.append('capacity',capacity);
     formData.append('artik_cloud_id',artik_cloud_id);
-
+    formData.append('artik_cloud_access_token',artik_cloud_access_token);
     $('#loader').show();
     $.ajax({
       url : '/api/user/room',
