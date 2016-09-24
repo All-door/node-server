@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
+const request = require('request');
 const Room = require('../../controller/room');
 const Rate = require('../../controller/rate');
 const User = require('../../controller/user');
@@ -222,6 +223,35 @@ router.post('/:room_id/rate',(req,res,next)=>{
           response.Error(res,err);
         }else{
           response.Message(res,'공간에 대한 별점 입력이 완료되었습니다.');
+        }
+      });
+    }else{
+      response.AuthFail(res);
+    }
+  });
+});
+
+router.get('/:room_id/artik', (req,res,next)=>{
+  User.CheckSession(req,(result,user)=>{
+    if(result === true){
+      let room_id = req.params.room_id;
+      Room.GetRoomByRoomId(room_id,(err,docs)=>{
+        if(err){
+          response.Error(res,err);
+        }else{
+          if( !docs.artik_cloud_id || !docs.artik_cloud_access_token ){
+            response.Error(res,err);
+            return;
+          }
+          const options = { method: 'GET',
+            url: 'https://api.artik.cloud/v1.1/messages/last',
+            qs: { sdids: docs.artik_cloud_id, count: '10' },
+            headers:
+             { authorization: 'Bearer ' + docs.artik_cloud_access_token} };
+
+          request(options, (error, response, body)=>{
+            res.json(JSON.parse(body).data);
+          });
         }
       });
     }else{

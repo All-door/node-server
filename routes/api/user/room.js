@@ -5,7 +5,7 @@ const Room = require('../../../controller/room');
 const User = require('../../../controller/user');
 const Reserve = require('../../../controller/reserve');
 const config = require('../../../config');
-const upload = require('../../../controller/multer');!
+const upload = require('../../../controller/multer');
 
 /*
 * 유저가 등록한 방 정보 가지고 오기
@@ -49,7 +49,7 @@ router.post('/',upload.array('room_image', 5),(req, res, next)=>{
       let capacity = req.body.capacity;
       let artik_cloud_id = req.body.artik_cloud_id;
       let artik_cloud_access_token = req.body.artik_cloud_access_token;
-      
+
       let day_enable;
       try {
         day_enable = JSON.parse(req.body.day_enable);

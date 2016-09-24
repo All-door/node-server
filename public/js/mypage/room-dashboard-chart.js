@@ -1,43 +1,67 @@
-new Morris.Line({
-  element: 'temp',
-  data: [
-    { temp: '26.3', humi: '10%', time: '2016-09-22 13:00:00' },
-    { temp: '26.7', humi: '55%', time: '2016-09-22 13:01:00' },
-    { temp: '27.8', humi: '100%', time: '2016-09-22 13:02:00' },
-    { temp: '25.7', humi: '60%', time: '2016-09-22 13:03:00' },
-    { temp: '26.7', humi: '90%', time: '2016-09-22 13:04:00' }
-  ],
-  xkey: 'time',
-  ykeys: ['temp'],
-  labels: ['온도']
-});
+var getRoomIdFromUrl = function(){
+  var url = location.href;
+  var arr = url.split('/');
+  var index = arr.indexOf('room')+1;
+  return arr[index];
+};
 
-new Morris.Line({
-  element: 'humi',
-  data: [
-    { temp: '26.3', humi: '10%', time: '2016-09-22 13:00:00' },
-    { temp: '26.7', humi: '55%', time: '2016-09-22 13:01:00' },
-    { temp: '27.8', humi: '100%', time: '2016-09-22 13:02:00' },
-    { temp: '25.7', humi: '60%', time: '2016-09-22 13:03:00' },
-    { temp: '26.7', humi: '90%', time: '2016-09-22 13:04:00' }
-  ],
-  xkey: 'time',
-  ykeys: ['humi'],
-  labels: ['습도']
-});
+var id = '';
+var accessToken = '';
+var room_id = getRoomIdFromUrl();
 
-new Morris.Line({
-  element: 'hall',
-  data: [
-    { hall: 1, time: '2016-09-22 13:00:00' },
-    { hall: 0, time: '2016-09-22 13:01:00' },
-    { hall: 1, time: '2016-09-22 13:02:00' },
-    { hall: 0, time: '2016-09-22 13:03:00' },
-    { hall: 0, time: '2016-09-22 13:04:00' }
-  ],
-  xkey: 'time',
-  ykeys: ['hall'],
-  labels: ['열림 상태'],
-  numLines: 2,
-  smooth: false
-});
+
+var getRoomInfoFromServer = function(room_id){
+  var url = "/api/room/"+room_id+"/artik";
+  $.ajax({
+    url : url,
+    method : 'GET',
+    success : function(data){
+      $('#temp').html('');
+      $('#humi').html('');
+      $('#hall').html('');
+
+      var mapped = _.map(data, function(data){
+        return {
+          'time' : data.cts,
+          'hall' : data.data.Hall ? 1 : 0,
+          'temp' : data.data.Temperature,
+          'humi' : data.data.Humidity
+        }
+      });
+
+      new Morris.Line({
+        element: 'temp',
+        data: mapped,
+        xkey: 'time',
+        ykeys: ['temp'],
+        labels: ['온도']
+      });
+
+      new Morris.Line({
+        element: 'humi',
+        data: mapped,
+        xkey: 'time',
+        ykeys: ['humi'],
+        labels: ['습도']
+      });
+
+      new Morris.Line({
+        element: 'hall',
+        data: mapped,
+        xkey: 'time',
+        ykeys: ['hall'],
+        labels: ['열림 상태'],
+        numLines: 2,
+        smooth: false
+      });
+
+    },
+    error : function(reqeust,status,error){
+    }
+  });
+};
+getRoomInfoFromServer(room_id);
+
+setInterval(function(){
+  getRoomInfoFromServer(room_id);
+},10* 1000);
