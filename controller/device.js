@@ -69,6 +69,30 @@ module.exports={
         const artik_cloud_id = doc.artik_cloud_id;
         const artik_cloud_access_token = doc.artik_cloud_access_token;
 
+        redis
+        .hget('device_info',device_id)
+        .then((data)=>{
+          let now = new Date();
+          let status = {};
+          if(data == null){
+            status = {
+              updatedAt : now,
+              device_id : device_id,
+            };
+            redis
+            .hset('device_info',device_id,JSON.stringify(status))
+            .then(()=>{});
+          }else{
+            let result = JSON.parse(data);
+            status = {
+              updatedAt : now,
+              device_id : device_id,
+            };
+            redis
+            .hset('device_info',device_id,JSON.stringify(status))
+            .then(()=>{});
+        }});
+
         if( doc.type === '숙박'){
           Reservation
           .findOne({ room_id : doc._id })
