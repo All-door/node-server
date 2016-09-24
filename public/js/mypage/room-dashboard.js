@@ -34,6 +34,9 @@ var Dashboard = (function(){
         user = data.user;
         room_id = getRoomIdFromUrl();
         getRoomInfoFromServer(room_id);
+        setInterval(function(){
+          getRoomInfoFromServer(room_id);
+        }, 10 * 1000);
       },
       error : function(request,status,error){
         alert('로그인이 필요한 페이지입니다.');
