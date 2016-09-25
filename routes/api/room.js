@@ -252,10 +252,10 @@ router.get('/:room_id/artik', (req,res,next)=>{
 
           request(options, (error, response, body)=>{
             const result = JSON.parse(body).data;
-            const filtered = _.filter(result, function(data) {
+            const filtered = _.filter(result, (data)=>{
               return (new Date).getTime() - data.cts < 60 * 60 * 1000;
             });
-            const mapped = _.map(filtered, function(data){
+            const mapped = _.map(filtered, (data)=>{
               return {
                 'time' : data.cts,
                 'hall' : data.data.Hall ? 1 : 0,
