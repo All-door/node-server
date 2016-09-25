@@ -5,6 +5,7 @@ const request = require('request');
 const Room = require('../../controller/room');
 const Rate = require('../../controller/rate');
 const User = require('../../controller/user');
+const _ = require('lodash');
 
 /*
 * 모든 공간(방) 정보 가지고 오기
@@ -250,7 +251,22 @@ router.get('/:room_id/artik', (req,res,next)=>{
              { authorization: 'Bearer ' + docs.artik_cloud_access_token} };
 
           request(options, (error, response, body)=>{
-            res.json(JSON.parse(body).data);
+            const result = JSON.parse(body).data;
+            const filtered = _.filter(result, function(data) {
+              return (new Date).getTime() - data.cts < 60 * 60 * 1000;
+            });
+            const mapped = _.map(filtered, function(data){
+              return {
+                'time' : data.cts,
+                'hall' : data.data.Hall ? 1 : 0,
+                'temp' : data.data.Temperature,
+                'humi' : data.data.Humidity
+              }
+            });
+            res.json({
+              "status" : 200,
+              "data" : mapped
+            });
           });
         }
       });

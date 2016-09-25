@@ -20,18 +20,9 @@ var getRoomInfoFromServer = function(room_id){
       $('#humi').html('');
       $('#hall').html('');
 
-      var mapped = _.map(data, function(data){
-        return {
-          'time' : data.cts,
-          'hall' : data.data.Hall ? 1 : 0,
-          'temp' : data.data.Temperature,
-          'humi' : data.data.Humidity
-        }
-      });
-
       new Morris.Line({
         element: 'temp',
-        data: mapped,
+        data: data.data,
         xkey: 'time',
         ykeys: ['temp'],
         labels: ['온도']
@@ -39,7 +30,7 @@ var getRoomInfoFromServer = function(room_id){
 
       new Morris.Line({
         element: 'humi',
-        data: mapped,
+        data: data.data,
         xkey: 'time',
         ykeys: ['humi'],
         labels: ['습도']
@@ -47,7 +38,7 @@ var getRoomInfoFromServer = function(room_id){
 
       new Morris.Line({
         element: 'hall',
-        data: mapped,
+        data: data.data,
         xkey: 'time',
         ykeys: ['hall'],
         labels: ['열림 상태'],
