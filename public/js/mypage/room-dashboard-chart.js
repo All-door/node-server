@@ -16,24 +16,33 @@ var getRoomInfoFromServer = function(room_id){
     url : url,
     method : 'GET',
     success : function(data){
-      $('#temp').html('');
-      $('#humi').html('');
       $('#hall').html('');
+      $('#co2').html('');
+      $('#lpg').html('');
+      $('#smoke').html('');
 
       new Morris.Line({
-        element: 'temp',
+        element: 'co2',
         data: data.data,
         xkey: 'time',
-        ykeys: ['temp'],
-        labels: ['온도']
+        ykeys: ['co2'],
+        labels: ['co2']
       });
 
       new Morris.Line({
-        element: 'humi',
+        element: 'lpg',
         data: data.data,
         xkey: 'time',
-        ykeys: ['humi'],
-        labels: ['습도']
+        ykeys: ['lpg'],
+        labels: ['lpg']
+      });
+
+      new Morris.Line({
+        element: 'smoke',
+        data: data.data,
+        xkey: 'time',
+        ykeys: ['smoke'],
+        labels: ['smoke']
       });
 
       new Morris.Line({

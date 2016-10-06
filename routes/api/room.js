@@ -259,8 +259,9 @@ router.get('/:room_id/artik', (req,res,next)=>{
               return {
                 'time' : data.cts,
                 'hall' : data.data.Hall ? 1 : 0,
-                'temp' : data.data.Temperature,
-                'humi' : data.data.Humidity
+                'smoke' : data.data.SMOKE,
+                'co2' : data.data.CO2,
+                'lpg' : data.data.LPG
               }
             });
             res.json({
