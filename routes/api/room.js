@@ -258,7 +258,7 @@ router.get('/:room_id/artik', (req,res,next)=>{
             const mapped = _.map(filtered, (data)=>{
               return {
                 'time' : data.cts,
-                'hall' : data.data.Hall ? 1 : 0,
+                'hall' : data.data.Hall ? 0 : 1,
                 'smoke' : data.data.SMOKE,
                 'co2' : data.data.CO2,
                 'lpg' : data.data.LPG
