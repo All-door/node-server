@@ -253,7 +253,7 @@ router.get('/:room_id/artik', (req,res,next)=>{
           request(options, (error, response, body)=>{
             const result = JSON.parse(body).data;
             const filtered = _.filter(result, (data)=>{
-              return (new Date).getTime() - data.cts < 60 * 60 * 1000;
+              return (new Date).getTime() - data.cts < 15 * 60 * 60 * 1000;
             });
             const mapped = _.map(filtered, (data)=>{
               return {

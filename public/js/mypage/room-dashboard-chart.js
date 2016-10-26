@@ -64,4 +64,4 @@ getRoomInfoFromServer(room_id);
 
 setInterval(function(){
   getRoomInfoFromServer(room_id);
-},10* 1000);
+}, 60 * 60* 1000);
